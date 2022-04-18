@@ -1,4 +1,3 @@
-import { Cliente } from 'src/cliente/entities/cliente.entity';
 import { ComprobanteDiario } from 'src/comprobante-diario/entities/comprobante-diario.entity';
 import { Factura } from 'src/facturas/entities/factura.entity';
 import { BaseEntity } from 'src/utils/base.entity';
@@ -17,9 +16,6 @@ export class Empresa extends BaseEntity {
 
   @Column()
   telefono: string;
-
-  @OneToMany(() => Cliente, (client) => client.empresa)
-  clientes: Cliente[];
 
   @OneToMany(
     () => ComprobanteDiario,

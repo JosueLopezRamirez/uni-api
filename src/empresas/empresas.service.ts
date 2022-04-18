@@ -18,7 +18,7 @@ export class EmpresasService {
 
   findAll() {
     return this.repository.find({
-      relations: ['clientes', 'comprobantesDiario', 'facturas'],
+      relations: ['comprobantesDiario', 'facturas'],
     });
   }
 
