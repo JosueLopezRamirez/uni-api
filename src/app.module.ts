@@ -24,7 +24,7 @@ import { FacturaItemModule } from './factura-item/factura-item.module';
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
       autoLoadEntities: true,
-      dropSchema: true,
+      // dropSchema: true,
       synchronize: true,
       logging: true,
     }),
