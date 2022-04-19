@@ -5,6 +5,12 @@ import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()
 export class ComprobanteDiario extends BaseEntity {
+  @Column({ nullable: true })
+  nombre: string;
+
+  @Column()
+  fecha: Date;
+
   @Column({ name: 'empresaId' })
   empresaId: string;
 

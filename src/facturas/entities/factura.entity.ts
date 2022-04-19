@@ -6,7 +6,7 @@ import { FacturaItem } from 'src/factura-item/entities/factura-item.entity';
 @Entity()
 export class Factura extends BaseEntity {
   @Column()
-  fechaFactura: Date;
+  fecha: Date;
 
   @Column({ name: 'empresaId' })
   empresaId: string;

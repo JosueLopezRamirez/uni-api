@@ -8,13 +8,13 @@ export class Empresa extends BaseEntity {
   @Column()
   nombre: string;
 
-  @Column()
+  @Column({ nullable: true })
   descripcion: string;
 
-  @Column()
+  @Column({ unique: true })
   ruc: string;
 
-  @Column()
+  @Column({ unique: true })
   telefono: string;
 
   @OneToMany(
