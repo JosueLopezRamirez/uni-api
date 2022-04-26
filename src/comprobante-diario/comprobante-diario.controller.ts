@@ -8,7 +8,10 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ComprobanteDiarioService } from './comprobante-diario.service';
-import { CreateComprobanteDiarioDto } from './dto/create-comprobante-diario.dto';
+import {
+  CreateComprobanteDiarioDto,
+  DetalleComprobanteDto,
+} from './dto/create-comprobante-diario.dto';
 import { UpdateComprobanteDiarioDto } from './dto/update-comprobante-diario.dto';
 
 @Controller('comprobante-diario')
@@ -18,8 +21,8 @@ export class ComprobanteDiarioController {
   ) {}
 
   @Post()
-  create(@Body() createComprobanteDiarioDto: CreateComprobanteDiarioDto) {
-    return this.comprobanteDiarioService.create(createComprobanteDiarioDto);
+  create(@Body() detalleComprobanteDiario: DetalleComprobanteDto) {
+    return this.comprobanteDiarioService.create(detalleComprobanteDiario);
   }
 
   @Get()

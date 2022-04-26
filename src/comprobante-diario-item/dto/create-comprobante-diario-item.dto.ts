@@ -5,4 +5,6 @@ export class CreateComprobanteDiarioItemDto {
   debito: number;
   haber: number;
   comprobanteDiarioId: string;
+  isNewRow?: boolean;
+  id?: string;
 }
