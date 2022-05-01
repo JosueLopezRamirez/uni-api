@@ -65,13 +65,13 @@ export class ComprobanteDiarioService {
 
   findAll() {
     return this.repository.find({
-      relations: ['empresa', 'comprobanteDiarioItem'],
+      relations: ['comprobanteDiarioItem'],
     });
   }
 
   findOne(id: string) {
     return this.repository.findOneOrFail(id, {
-      relations: ['empresa', 'comprobanteDiarioItem'],
+      relations: ['comprobanteDiarioItem'],
     });
   }
 

@@ -12,6 +12,12 @@ import { RolesModule } from './roles/roles.module';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { ComprobanteDiarioItemModule } from './comprobante-diario-item/comprobante-diario-item.module';
 import { FacturaItemModule } from './factura-item/factura-item.module';
+import { DocumentoModule } from './documento/documento.module';
+import { EstaticosModule } from './estaticos/estaticos.module';
+import { DinamicosModule } from './dinamicos/dinamicos.module';
+import { FilasModule } from './filas/filas.module';
+import { HistorialComprobanteDiarioModule } from './historial-comprobante-diario/historial-comprobante-diario.module';
+import { HistorialFacturasModule } from './historial-facturas/historial-facturas.module';
 
 @Module({
   imports: [
@@ -40,6 +46,12 @@ import { FacturaItemModule } from './factura-item/factura-item.module';
     RolesModule,
     ComprobanteDiarioItemModule,
     FacturaItemModule,
+    DocumentoModule,
+    EstaticosModule,
+    DinamicosModule,
+    FilasModule,
+    HistorialComprobanteDiarioModule,
+    HistorialFacturasModule,
   ],
   controllers: [AppController],
   providers: [AppService],

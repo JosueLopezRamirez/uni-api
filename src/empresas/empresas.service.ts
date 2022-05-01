@@ -17,9 +17,7 @@ export class EmpresasService {
   }
 
   findAll() {
-    return this.repository.find({
-      relations: ['comprobantesDiario', 'facturas'],
-    });
+    return this.repository.find();
   }
 
   findOne(id: string) {

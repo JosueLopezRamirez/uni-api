@@ -1,4 +1,5 @@
 import { ComprobanteDiario } from 'src/comprobante-diario/entities/comprobante-diario.entity';
+import { Documento } from 'src/documento/entities/documento.entity';
 import { Factura } from 'src/facturas/entities/factura.entity';
 import { BaseEntity } from 'src/utils/base.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
@@ -17,12 +18,6 @@ export class Empresa extends BaseEntity {
   @Column({ unique: true })
   telefono: string;
 
-  @OneToMany(
-    () => ComprobanteDiario,
-    (comprobantesDiario) => comprobantesDiario.empresa,
-  )
-  comprobantesDiario: ComprobanteDiario[];
-
-  @OneToMany(() => Factura, (factura) => factura.empresa)
-  facturas: Factura[];
+  @OneToMany(() => Documento, (entidad) => entidad.empresa)
+  documentos: Documento[];
 }

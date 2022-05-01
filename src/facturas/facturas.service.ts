@@ -17,11 +17,11 @@ export class FacturasService {
   }
 
   findAll() {
-    return this.repository.find({ relations: ['empresa'] });
+    return this.repository.find();
   }
 
   findOne(id: string) {
-    return this.repository.findOneOrFail(id, { relations: ['empresa'] });
+    return this.repository.findOneOrFail(id);
   }
 
   update(id: string, updateFacturaDto: UpdateFacturaDto) {
