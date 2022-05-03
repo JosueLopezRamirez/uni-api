@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { UsuarioService } from 'src/usuario/usuario.service';
 import { LoginDto } from './dto/login';
 import { JwtService } from '@nestjs/jwt';
@@ -25,9 +25,15 @@ export class AutenticacionService {
       loginDto.password,
       usuario.data.password,
     );
+    console.log('passwordCorrecta', passwordCorrecta);
     if (usuario && passwordCorrecta) {
       return this.login(usuario.data);
     }
-    return null;
+    throw new HttpException(
+      {
+        message: 'Contraseña o correo incorrectos',
+      },
+      404,
+    );
   }
 }

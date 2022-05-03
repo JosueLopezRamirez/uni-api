@@ -1,6 +1,8 @@
 import { CreateComprobanteDiarioItemDto } from 'src/comprobante-diario-item/dto/create-comprobante-diario-item.dto';
 
 export class CreateComprobanteDiarioDto {
+  nombre: string;
+  fecha: string;
   empresaId: string;
 }
 

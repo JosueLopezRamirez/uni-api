@@ -13,8 +13,8 @@ export class ComprobanteDiario extends BaseEntity {
   @Column()
   fecha: Date;
 
-  @Column({ name: 'empresaId' })
-  empresaId: string;
+  @Column({ name: 'estaticoId' })
+  estaticoId: string;
 
   @ManyToOne(() => Estatico, (entidad) => entidad.comprobantesDiario)
   estatico: Estatico;
