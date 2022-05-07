@@ -1,9 +1,12 @@
+import { CreateFacturaItemDto } from 'src/factura-item/dto/create-factura-item.dto';
+
 export class CreateFacturaDto {
+  nombre: string;
   fecha: string;
-  numeroFactura: string;
-  descripcion: string;
-  ventasExoneradas: number;
-  ventasExentas: number;
-  ventasGrabadas: number;
   empresaId: string;
+}
+
+export class DetalleFacturaDto {
+  factura: CreateFacturaDto;
+  facturaItems: CreateFacturaItemDto[];
 }

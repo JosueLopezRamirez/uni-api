@@ -4,8 +4,8 @@ import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity()
 export class FacturaItem extends BaseEntity {
-  @Column()
-  fecha: Date;
+  // @Column()
+  // fecha: Date;
 
   @Column()
   numeroFactura: string;
@@ -13,14 +13,17 @@ export class FacturaItem extends BaseEntity {
   @Column()
   descripcion: string;
 
-  @Column()
+  @Column({ nullable: true })
   ventasExoneradas: number;
 
-  @Column()
+  @Column({ nullable: true })
   ventasExentas: number;
 
-  @Column()
+  @Column({ nullable: true })
   ventasGrabadas: number;
+
+  @Column({ name: 'facturaId' })
+  facturaId: string;
 
   @ManyToOne(() => Factura, (Factura) => Factura.facturasItems)
   factura: Factura;

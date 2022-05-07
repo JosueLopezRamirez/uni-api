@@ -86,10 +86,11 @@ export class ComprobanteDiarioService {
     const connection = getConnection();
     const queryRunner = connection.createQueryRunner();
     let promises = actualizar.map((update) => {
+      const param = { id: update.id };
       delete update.id;
       return queryRunner.manager
         .getRepository(ComprobanteDiarioItem)
-        .update({ id: update.id }, update);
+        .update(param, update);
     });
     await Promise.all(promises);
   }

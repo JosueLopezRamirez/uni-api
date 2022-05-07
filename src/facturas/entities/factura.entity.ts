@@ -9,8 +9,11 @@ export class Factura extends BaseEntity {
   @Column()
   fecha: Date;
 
-  @Column({ name: 'empresaId' })
-  empresaId: string;
+  @Column()
+  nombre: string;
+
+  @Column({ name: 'estaticoId' })
+  estaticoId: string;
 
   @ManyToOne(() => Estatico, (entidad) => entidad.facturas)
   estatico: Estatico;
