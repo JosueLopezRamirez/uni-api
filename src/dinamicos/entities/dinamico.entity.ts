@@ -5,6 +5,15 @@ import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()
 export class Dinamico extends BaseEntity {
+  @Column({ name: 'documentoId' })
+  documentoId: string;
+
+  @Column()
+  nombre: string;
+
+  @Column()
+  fecha: Date;
+
   @Column()
   columnas: string;
 

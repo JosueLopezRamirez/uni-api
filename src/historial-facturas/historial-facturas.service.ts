@@ -12,15 +12,15 @@ export class HistorialFacturasService {
     return `This action returns all historialFacturas`;
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return `This action returns a #${id} historialFactura`;
   }
 
-  update(id: number, updateHistorialFacturaDto: UpdateHistorialFacturaDto) {
+  update(id: string, updateHistorialFacturaDto: UpdateHistorialFacturaDto) {
     return `This action updates a #${id} historialFactura`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} historialFactura`;
   }
 }

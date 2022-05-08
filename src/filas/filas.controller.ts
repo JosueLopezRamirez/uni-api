@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { FilasService } from './filas.service';
 import { CreateFilaDto } from './dto/create-fila.dto';
 import { UpdateFilaDto } from './dto/update-fila.dto';
@@ -19,16 +27,16 @@ export class FilasController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.filasService.findOne(+id);
+    return this.filasService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateFilaDto: UpdateFilaDto) {
-    return this.filasService.update(+id, updateFilaDto);
+    return this.filasService.update(id, updateFilaDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.filasService.remove(+id);
+    return this.filasService.remove(id);
   }
 }

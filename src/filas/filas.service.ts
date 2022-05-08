@@ -12,15 +12,15 @@ export class FilasService {
     return `This action returns all filas`;
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return `This action returns a #${id} fila`;
   }
 
-  update(id: number, updateFilaDto: UpdateFilaDto) {
+  update(id: string, updateFilaDto: UpdateFilaDto) {
     return `This action updates a #${id} fila`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} fila`;
   }
 }

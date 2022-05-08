@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { DinamicosService } from './dinamicos.service';
 import { CreateDinamicoDto } from './dto/create-dinamico.dto';
 import { UpdateDinamicoDto } from './dto/update-dinamico.dto';
@@ -19,16 +27,19 @@ export class DinamicosController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.dinamicosService.findOne(+id);
+    return this.dinamicosService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDinamicoDto: UpdateDinamicoDto) {
-    return this.dinamicosService.update(+id, updateDinamicoDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateDinamicoDto: UpdateDinamicoDto,
+  ) {
+    return this.dinamicosService.update(id, updateDinamicoDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.dinamicosService.remove(+id);
+    return this.dinamicosService.remove(id);
   }
 }

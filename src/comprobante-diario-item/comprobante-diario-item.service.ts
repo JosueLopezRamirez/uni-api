@@ -12,15 +12,18 @@ export class ComprobanteDiarioItemService {
     return `This action returns all comprobanteDiarioItem`;
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return `This action returns a #${id} comprobanteDiarioItem`;
   }
 
-  update(id: number, updateComprobanteDiarioItemDto: UpdateComprobanteDiarioItemDto) {
+  update(
+    id: string,
+    updateComprobanteDiarioItemDto: UpdateComprobanteDiarioItemDto,
+  ) {
     return `This action updates a #${id} comprobanteDiarioItem`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} comprobanteDiarioItem`;
   }
 }
