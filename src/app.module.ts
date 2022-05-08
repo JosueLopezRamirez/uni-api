@@ -18,6 +18,7 @@ import { DinamicosModule } from './dinamicos/dinamicos.module';
 import { FilasModule } from './filas/filas.module';
 import { HistorialComprobanteDiarioModule } from './historial-comprobante-diario/historial-comprobante-diario.module';
 import { HistorialFacturasModule } from './historial-facturas/historial-facturas.module';
+import { PermisosModule } from './permisos/permisos.module';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import { HistorialFacturasModule } from './historial-facturas/historial-facturas
     FilasModule,
     HistorialComprobanteDiarioModule,
     HistorialFacturasModule,
+    PermisosModule,
   ],
   controllers: [AppController],
   providers: [AppService],
