@@ -1,9 +1,17 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateHistorialFacturaDto } from './dto/create-historial-factura.dto';
 import { UpdateHistorialFacturaDto } from './dto/update-historial-factura.dto';
+import { HistorialFactura } from './entities/historial-factura.entity';
 
 @Injectable()
 export class HistorialFacturasService {
+  constructor(
+    @InjectRepository(HistorialFactura)
+    private repository: Repository<HistorialFactura>,
+  ) {}
+
   create(createHistorialFacturaDto: CreateHistorialFacturaDto) {
     return 'This action adds a new historialFactura';
   }
@@ -13,7 +21,10 @@ export class HistorialFacturasService {
   }
 
   findOne(id: string) {
-    return `This action returns a #${id} historialFactura`;
+    return this.repository.find({
+      relations: ['usuario', 'factura'],
+      where: { facturaId: id },
+    });
   }
 
   update(id: string, updateHistorialFacturaDto: UpdateHistorialFacturaDto) {

@@ -94,7 +94,7 @@ export class FacturasService {
 
   findOne(id: string) {
     return this.repository.findOneOrFail(id, {
-      relations: ['facturasItems'],
+      relations: ['facturasItems', 'estatico', 'estatico.documento'],
     });
   }
 
@@ -126,7 +126,7 @@ export class FacturasService {
       .filter((row) => row.isNewRow)
       .map((row) => ({
         ...row,
-        comprobanteDiarioId: id,
+        facturaId: id,
       }));
 
     try {
