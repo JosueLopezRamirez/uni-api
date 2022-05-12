@@ -1,11 +1,14 @@
 import { Role } from 'src/roles/entities/role.entity';
 import { BaseEntity } from 'src/utils/base.entity';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class Permiso extends BaseEntity {
-  @Column()
+  @PrimaryColumn({ nullable: false })
   pagina: string;
+
+  @Column({ name: 'rolId' })
+  rolId: string;
 
   @Column({ default: false })
   ver: boolean;
@@ -15,9 +18,6 @@ export class Permiso extends BaseEntity {
 
   @Column({ default: false })
   borrado: boolean;
-
-  @Column({ name: 'rolId' })
-  rolId: string;
 
   @ManyToOne(() => Role, (rol) => rol.permisos)
   rol: Role;
