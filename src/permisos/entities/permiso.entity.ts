@@ -4,7 +4,7 @@ import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class Permiso extends BaseEntity {
-  @PrimaryColumn({ nullable: false })
+  @Column({ nullable: false })
   pagina: string;
 
   @Column({ name: 'rolId' })
