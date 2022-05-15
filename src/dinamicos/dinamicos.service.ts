@@ -1,6 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Documento } from 'src/documento/entities/documento.entity';
+import { Estatico } from 'src/estaticos/entities/estatico.entity';
+import { getConnection, Repository } from 'typeorm';
 import { CreateDinamicoDto } from './dto/create-dinamico.dto';
 import { UpdateDinamicoDto } from './dto/update-dinamico.dto';
 import { Dinamico } from './entities/dinamico.entity';
@@ -12,16 +14,48 @@ export class DinamicosService {
     private repository: Repository<Dinamico>,
   ) {}
 
-  create(createDinamicoDto: CreateDinamicoDto) {
-    return this.repository.save(createDinamicoDto);
+  async create(createDinamicoDto: CreateDinamicoDto) {
+    const connection = getConnection();
+    const queryRunner = connection.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+    try {
+      const documentoCreado = await queryRunner.manager
+        .createQueryBuilder()
+        .insert()
+        .into(Documento)
+        .values({ empresaId: createDinamicoDto.empresaId })
+        .execute();
+      delete createDinamicoDto.empresaId;
+      const dinamico = await queryRunner.manager
+        .createQueryBuilder()
+        .insert()
+        .into(Dinamico)
+        .values({
+          documentoId: documentoCreado.identifiers[0].id,
+          ...createDinamicoDto,
+        })
+        .execute();
+      await queryRunner.commitTransaction();
+      return { id: dinamico.identifiers[0].id };
+    } catch {
+      await queryRunner.rollbackTransaction();
+      throw new HttpException('Error al salvar el documento', 404);
+    } finally {
+      await queryRunner.release();
+    }
   }
 
   findAll() {
-    return this.repository.find({ relations: ['documento'] });
+    return this.repository.find({
+      relations: ['documento', 'documento.empresa'],
+    });
   }
 
   findOne(id: string) {
-    return this.repository.findOneOrFail(id);
+    return this.repository.findOneOrFail(id, {
+      relations: ['documento', 'documento.empresa'],
+    });
   }
 
   update(id: string, updateDinamicoDto: UpdateDinamicoDto) {

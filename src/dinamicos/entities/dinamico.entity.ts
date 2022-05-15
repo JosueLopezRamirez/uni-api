@@ -15,6 +15,9 @@ export class Dinamico extends BaseEntity {
   fecha: Date;
 
   @Column()
+  esPlantilla: boolean;
+
+  @Column({ type: 'text' })
   columnas: string;
 
   @ManyToOne(() => Documento, (entidad) => entidad.documentosDinamicos)
