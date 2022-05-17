@@ -58,8 +58,30 @@ export class DinamicosService {
     });
   }
 
-  update(id: string, updateDinamicoDto: UpdateDinamicoDto) {
-    return this.repository.update(id, updateDinamicoDto);
+  async update(id: string, updateDinamicoDto: UpdateDinamicoDto) {
+    const connection = getConnection();
+    const queryRunner = connection.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+    try {
+      await queryRunner.manager
+        .createQueryBuilder()
+        .update(Dinamico)
+        .set({
+          nombre: updateDinamicoDto.nombre,
+          fecha: updateDinamicoDto.fecha,
+          // columnas: updateDinamicoDto.columnas,
+        })
+        .where('id = :id', { id })
+        .execute();
+      await queryRunner.commitTransaction();
+      return { id };
+    } catch {
+      await queryRunner.rollbackTransaction();
+      throw new HttpException('Error al salvar el documento', 404);
+    } finally {
+      await queryRunner.release();
+    }
   }
 
   remove(id: string) {

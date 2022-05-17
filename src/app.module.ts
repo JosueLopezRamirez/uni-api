@@ -19,6 +19,7 @@ import { FilasModule } from './filas/filas.module';
 import { HistorialComprobanteDiarioModule } from './historial-comprobante-diario/historial-comprobante-diario.module';
 import { HistorialFacturasModule } from './historial-facturas/historial-facturas.module';
 import { PermisosModule } from './permisos/permisos.module';
+import { PlantillasModule } from './plantillas/plantillas.module';
 
 @Module({
   imports: [
@@ -54,6 +55,7 @@ import { PermisosModule } from './permisos/permisos.module';
     HistorialComprobanteDiarioModule,
     HistorialFacturasModule,
     PermisosModule,
+    PlantillasModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -130,6 +130,7 @@ export class ComprobanteDiarioService {
           fecha: detalleComprobanteDiario.comprobante.fecha,
           nombre: detalleComprobanteDiario.comprobante.nombre,
         })
+        .where('id = :id', { id })
         .execute();
 
       const nuevas = rows

@@ -137,6 +137,7 @@ export class FacturasService {
           fecha: detalleFactura.factura.fecha,
           nombre: detalleFactura.factura.nombre,
         })
+        .where('id = :id', { id })
         .execute();
 
       await queryRunner.manager

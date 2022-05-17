@@ -1,5 +1,6 @@
 import { Documento } from 'src/documento/entities/documento.entity';
 import { Fila } from 'src/filas/entities/fila.entity';
+import { Plantilla } from 'src/plantillas/entities/plantilla.entity';
 import { BaseEntity } from 'src/utils/base.entity';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
@@ -14,14 +15,11 @@ export class Dinamico extends BaseEntity {
   @Column()
   fecha: Date;
 
-  @Column()
-  esPlantilla: boolean;
-
-  @Column({ type: 'text' })
-  columnas: string;
-
   @ManyToOne(() => Documento, (entidad) => entidad.documentosDinamicos)
   documento: Documento;
+
+  @ManyToOne(() => Plantilla, (entidad) => entidad.dinamicos)
+  plantilla: Plantilla;
 
   @OneToMany(() => Fila, (entidad) => entidad.dinamico)
   filas: Fila[];
