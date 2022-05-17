@@ -48,7 +48,7 @@ export class DinamicosService {
 
   findAll() {
     return this.repository.find({
-      relations: ['documento', 'documento.empresa'],
+      relations: ['documento', 'documento.empresa', 'plantilla'],
     });
   }
 

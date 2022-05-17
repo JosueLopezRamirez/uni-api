@@ -9,6 +9,9 @@ export class Dinamico extends BaseEntity {
   @Column({ name: 'documentoId' })
   documentoId: string;
 
+  @Column({ name: 'plantillaId' })
+  plantillaId: string;
+
   @Column()
   nombre: string;
 
