@@ -4,8 +4,11 @@ import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity()
 export class Fila extends BaseEntity {
-  @Column()
+  @Column({ type: 'text' })
   valor: string;
+
+  @Column({ name: 'dinamicoId' })
+  dinamicoId: string;
 
   @ManyToOne(() => Dinamico, (entidad) => entidad.filas)
   dinamico: Dinamico;

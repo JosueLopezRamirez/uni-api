@@ -2,6 +2,7 @@ import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Documento } from 'src/documento/entities/documento.entity';
 import { Estatico } from 'src/estaticos/entities/estatico.entity';
+import { Fila } from 'src/filas/entities/fila.entity';
 import { getConnection, Repository } from 'typeorm';
 import { CreateDinamicoDto } from './dto/create-dinamico.dto';
 import { UpdateDinamicoDto } from './dto/update-dinamico.dto';
@@ -19,23 +20,37 @@ export class DinamicosService {
     const queryRunner = connection.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
+    const { empresaId, filas, ...rest } = createDinamicoDto;
     try {
       const documentoCreado = await queryRunner.manager
         .createQueryBuilder()
         .insert()
         .into(Documento)
-        .values({ empresaId: createDinamicoDto.empresaId })
+        .values({ empresaId: empresaId })
         .execute();
-      delete createDinamicoDto.empresaId;
+
       const dinamico = await queryRunner.manager
         .createQueryBuilder()
         .insert()
         .into(Dinamico)
         .values({
           documentoId: documentoCreado.identifiers[0].id,
-          ...createDinamicoDto,
+          ...rest,
         })
         .execute();
+
+      await queryRunner.manager
+        .createQueryBuilder()
+        .insert()
+        .into(Fila)
+        .values(
+          filas.map((item) => ({
+            valor: JSON.stringify(item),
+            dinamicoId: dinamico.identifiers[0].id,
+          })),
+        )
+        .execute();
+
       await queryRunner.commitTransaction();
       return { id: dinamico.identifiers[0].id };
     } catch {
@@ -54,7 +69,7 @@ export class DinamicosService {
 
   findOne(id: string) {
     return this.repository.findOneOrFail(id, {
-      relations: ['documento', 'documento.empresa'],
+      relations: ['documento', 'documento.empresa', 'plantilla', 'filas'],
     });
   }
 
@@ -63,6 +78,20 @@ export class DinamicosService {
     const queryRunner = connection.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
+
+    const nuevas = updateDinamicoDto.filas
+      .filter((row) => row.isNewRow)
+      .map((row) => ({
+        ...row,
+        dinamicoId: id,
+      }));
+
+    const viejas = updateDinamicoDto.filas
+      .filter((row) => !row.isNewRow)
+      .map((row) => ({
+        ...row,
+        dinamicoId: id,
+      }));
     try {
       await queryRunner.manager
         .createQueryBuilder()
@@ -70,10 +99,22 @@ export class DinamicosService {
         .set({
           nombre: updateDinamicoDto.nombre,
           fecha: updateDinamicoDto.fecha,
-          // columnas: updateDinamicoDto.columnas,
         })
         .where('id = :id', { id })
         .execute();
+
+      await queryRunner.manager
+        .createQueryBuilder()
+        .insert()
+        .into(Fila)
+        .values(
+          nuevas.map((item) => ({
+            valor: JSON.stringify(item),
+            dinamicoId: id,
+          })),
+        )
+        .execute();
+      await this.bulkUpdate(viejas);
       await queryRunner.commitTransaction();
       return { id };
     } catch {
@@ -82,6 +123,19 @@ export class DinamicosService {
     } finally {
       await queryRunner.release();
     }
+  }
+
+  async bulkUpdate(actualizar: any[]) {
+    const connection = getConnection();
+    const queryRunner = connection.createQueryRunner();
+    let promises = actualizar.map((update) => {
+      const param = { id: update.id };
+      delete update.id;
+      return queryRunner.manager
+        .getRepository(Fila)
+        .update(param, { valor: JSON.stringify(update) });
+    });
+    await Promise.all(promises);
   }
 
   remove(id: string) {
