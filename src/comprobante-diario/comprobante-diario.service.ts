@@ -108,7 +108,12 @@ export class ComprobanteDiarioService {
 
   findOne(id: string) {
     return this.repository.findOneOrFail(id, {
-      relations: ['comprobanteDiarioItem', 'estatico', 'estatico.documento'],
+      relations: [
+        'comprobanteDiarioItem',
+        'estatico',
+        'estatico.documento',
+        'estatico.documento.empresa',
+      ],
     });
   }
 

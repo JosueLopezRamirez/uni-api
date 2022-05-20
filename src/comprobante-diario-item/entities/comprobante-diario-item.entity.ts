@@ -10,14 +10,11 @@ export class ComprobanteDiarioItem extends BaseEntity {
   @Column()
   descripcion: string;
 
-  @Column()
+  @Column({ nullable: true })
   parcial: number;
 
-  @Column()
+  @Column({ nullable: true })
   debito: number;
-
-  //@Column()
-  //haber: number;
 
   @Column({ name: 'comprobanteDiarioId' })
   comprobanteDiarioId: string;
