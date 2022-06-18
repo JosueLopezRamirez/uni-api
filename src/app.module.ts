@@ -20,22 +20,12 @@ import { HistorialComprobanteDiarioModule } from './historial-comprobante-diario
 import { HistorialFacturasModule } from './historial-facturas/historial-facturas.module';
 import { PermisosModule } from './permisos/permisos.module';
 import { PlantillasModule } from './plantillas/plantillas.module';
+import { typeOrmAsyncConfig } from './config/typeorm.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: process.env.DATABASE_HOST,
-      port: parseInt(process.env.DATABASE_PORT, 10),
-      username: process.env.DATABASE_USERNAME,
-      password: process.env.DATABASE_PASSWORD,
-      database: process.env.DATABASE_NAME,
-      autoLoadEntities: true,
-      // dropSchema: true,
-      synchronize: true,
-      logging: true,
-    }),
+    TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
     ThrottlerModule.forRoot({
       ttl: 60,
       limit: 10,

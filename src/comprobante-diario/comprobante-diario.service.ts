@@ -49,11 +49,14 @@ export class ComprobanteDiarioService {
           estaticoId: estatico.identifiers[0].id,
         })
         .execute();
+
+      const comprobanteId = comprobanteCreado.identifiers[0].id;
+
       const nuevas = rows
         .filter((row) => row.isNewRow)
         .map((row) => ({
           ...row,
-          comprobanteDiarioId: comprobanteCreado.identifiers[0].id,
+          comprobanteDiarioId: comprobanteId,
         }));
       await queryRunner.manager
         .createQueryBuilder()
@@ -67,12 +70,12 @@ export class ComprobanteDiarioService {
         .insert()
         .into(HistorialComprobanteDiario)
         .values({
-          comprobanteDiarioId: comprobanteCreado.identifiers[0].id,
+          comprobanteDiarioId: comprobanteId,
           usuarioId: usuarioId,
         })
         .execute();
       await queryRunner.commitTransaction();
-      return { id: comprobanteCreado.identifiers[0].id };
+      return { id: comprobanteId };
     } catch (err) {
       console.log('err', err);
       await queryRunner.rollbackTransaction();
@@ -128,6 +131,7 @@ export class ComprobanteDiarioService {
     await queryRunner.connect();
     await queryRunner.startTransaction();
     try {
+      const documento = await this.findOne(id);
       await queryRunner.manager
         .createQueryBuilder()
         .update(ComprobanteDiario)
@@ -136,6 +140,15 @@ export class ComprobanteDiarioService {
           nombre: detalleComprobanteDiario.comprobante.nombre,
         })
         .where('id = :id', { id })
+        .execute();
+
+      await queryRunner.manager
+        .createQueryBuilder()
+        .update(Documento)
+        .set({
+          empresaId: detalleComprobanteDiario.comprobante.empresaId,
+        })
+        .where('id = :id', { id: documento.estatico.documentoId })
         .execute();
 
       const nuevas = rows

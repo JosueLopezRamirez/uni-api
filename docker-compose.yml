@@ -32,6 +32,8 @@ services:
     volumes:
       - .:/app/
       - /app/node_modules
+    command: >
+      sh -c "yarn && yarn migration:run && yarn start:dev"
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     env_file:
@@ -45,15 +47,15 @@ services:
       - 80:80
     depends_on:
       - mysql
-  localstack:
-    image: localstack/localstack
-    ports:
-      - "4566-4599:4566-4599"
-    environment:
-      SERVICES: s3
-      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION}
-    volumes:
-      - ./.aws:/docker-entrypoint-initaws.d
+  # localstack:
+  #   image: localstack/localstack
+  #   ports:
+  #     - "4566-4599:4566-4599"
+  #   environment:
+  #     SERVICES: s3
+  #     AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION}
+  #   volumes:
+  #     - ./.aws:/docker-entrypoint-initaws.d
 
 volumes:
   mysqldata: {}
