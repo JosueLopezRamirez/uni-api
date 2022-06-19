@@ -14,7 +14,7 @@ export class UsuarioService {
 
   buscarPorCorreo = async (correo: string) => {
     try {
-      const data = await this.repository.findOneOrFail({
+      const data = await this.repository.findOne({
         relations: ['rol', 'rol.permisos'],
         where: {
           correo,
