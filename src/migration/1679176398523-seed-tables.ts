@@ -4,7 +4,7 @@ import { Usuario } from '../usuario/entities/usuario.entity';
 import * as bcrypt from 'bcrypt';
 import { v4 as uuidV4 } from 'uuid';
 
-export class seedTables1655260312749 implements MigrationInterface {
+export class seedTables1679176398523 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     // seed role table
     await queryRunner.manager

@@ -17,8 +17,8 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
       username: process.env.DATABASE_USERNAME,
       database: process.env.DATABASE_NAME,
       password: process.env.DATABASE_PASSWORD,
-      autoLoadEntities: true,
-      synchronize: true,
+      entities: [__dirname + '/../**/*.entity.{js,ts}'],
+      synchronize: false,
       logging: true,
     };
   },
@@ -40,6 +40,5 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
     charset: 'utf8mb4_unicode_ci',
   },
   synchronize: false,
-  logging: true,
-  namingStrategy: new SnakeNamingStrategy(),
+  logging: true
 };
