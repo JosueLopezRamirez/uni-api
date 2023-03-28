@@ -28,7 +28,8 @@
     "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js config -n src/config/typeorm.config-migrations.ts",
     "seed:run": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed -n src/config/typeorm.config-migrations.ts",
     "schema:drop": "npm run typeorm:cli schema:drop",
-    "db:refresh": "npm run schema:drop && npm run migration:run && npm run seed:run"
+    "db:refresh": "npm run schema:drop && npm run migration:run && npm run seed:run",
+    "remove:spec": "rm -rf src/**/*.spec.ts"
 
   },
   "dependencies": {
