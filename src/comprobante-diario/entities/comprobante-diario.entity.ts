@@ -1,8 +1,7 @@
-import { ComprobanteDiarioItem } from 'src/comprobante-diario-item/entities/comprobante-diario-item.entity';
-import { Empresa } from 'src/empresas/entities/empresa.entity';
-import { Estatico } from 'src/estaticos/entities/estatico.entity';
-import { HistorialComprobanteDiario } from 'src/historial-comprobante-diario/entities/historial-comprobante-diario.entity';
-import { BaseEntity } from 'src/utils/base.entity';
+import { ComprobanteDiarioItem } from '../../comprobante-diario-item/entities/comprobante-diario-item.entity';
+import { Estatico } from '../../estaticos/entities/estatico.entity';
+import { HistorialComprobanteDiario } from '../../historial-comprobante-diario/entities/historial-comprobante-diario.entity';
+import { BaseEntity } from '../../utils/base.entity';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()

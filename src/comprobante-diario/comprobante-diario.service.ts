@@ -1,12 +1,11 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ComprobanteDiarioItem } from 'src/comprobante-diario-item/entities/comprobante-diario-item.entity';
-import { Documento } from 'src/documento/entities/documento.entity';
-import { Estatico } from 'src/estaticos/entities/estatico.entity';
-import { HistorialComprobanteDiario } from 'src/historial-comprobante-diario/entities/historial-comprobante-diario.entity';
+import { ComprobanteDiarioItem } from '../comprobante-diario-item/entities/comprobante-diario-item.entity';
+import { Documento } from '../documento/entities/documento.entity';
+import { Estatico } from '../estaticos/entities/estatico.entity';
+import { HistorialComprobanteDiario } from '../historial-comprobante-diario/entities/historial-comprobante-diario.entity';
 import { getConnection, Repository } from 'typeorm';
 import { DetalleComprobanteDto } from './dto/create-comprobante-diario.dto';
-import { UpdateComprobanteDiarioDto } from './dto/update-comprobante-diario.dto';
 import { ComprobanteDiario } from './entities/comprobante-diario.entity';
 
 @Injectable()

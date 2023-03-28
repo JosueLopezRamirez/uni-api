@@ -1,7 +1,7 @@
-import { Dinamico } from 'src/dinamicos/entities/dinamico.entity';
-import { Empresa } from 'src/empresas/entities/empresa.entity';
-import { Estatico } from 'src/estaticos/entities/estatico.entity';
-import { BaseEntity } from 'src/utils/base.entity';
+import { Dinamico } from '../../dinamicos/entities/dinamico.entity';
+import { Empresa } from '../../empresas/entities/empresa.entity';
+import { Estatico } from '../../estaticos/entities/estatico.entity';
+import { BaseEntity } from '../../utils/base.entity';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()

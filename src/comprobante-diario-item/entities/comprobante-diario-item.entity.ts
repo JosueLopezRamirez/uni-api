@@ -1,5 +1,5 @@
-import { ComprobanteDiario } from 'src/comprobante-diario/entities/comprobante-diario.entity';
-import { BaseEntity } from 'src/utils/base.entity';
+import { ComprobanteDiario } from '../../comprobante-diario/entities/comprobante-diario.entity';
+import { BaseEntity } from '../../utils/base.entity';
 import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity()

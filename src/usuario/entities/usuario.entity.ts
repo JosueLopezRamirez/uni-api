@@ -1,7 +1,7 @@
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
-import { BaseEntity } from 'src/utils/base.entity';
-import { Role } from 'src/roles/entities/role.entity';
-import { HistorialComprobanteDiario } from 'src/historial-comprobante-diario/entities/historial-comprobante-diario.entity';
+import { BaseEntity } from '../../utils/base.entity';
+import { Role } from '../../roles/entities/role.entity';
+import { HistorialComprobanteDiario } from '../../historial-comprobante-diario/entities/historial-comprobante-diario.entity';
 
 @Entity()
 export class Usuario extends BaseEntity {

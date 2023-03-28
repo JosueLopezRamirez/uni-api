@@ -1,4 +1,4 @@
-import { CreateFacturaItemDto } from 'src/factura-item/dto/create-factura-item.dto';
+import { CreateFacturaItemDto } from '../../factura-item/dto/create-factura-item.dto';
 
 export class CreateFacturaDto {
   nombre: string;

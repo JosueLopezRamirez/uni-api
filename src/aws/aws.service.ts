@@ -21,7 +21,7 @@ export class AwsService {
             (err, data) => { console.log(err, data) });
     }
 
-    async uploadS3(file, name) {
+    async uploadS3(file, name): Promise<UploadDto> {
         const s3 = this.getS3();
         const s3Params = {
             Bucket: this._bucketName,
@@ -33,7 +33,7 @@ export class AwsService {
         return data;
     }
 
-    async uploadToS3(s3: S3, s3Params) {
+    async uploadToS3(s3: S3, s3Params): Promise<UploadDto> {
         return new Promise((resolve, reject) => {
             s3.upload(s3Params, (err, data) => {
                 if (err) {

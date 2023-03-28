@@ -1,7 +1,5 @@
-import { ComprobanteDiario } from 'src/comprobante-diario/entities/comprobante-diario.entity';
-import { Documento } from 'src/documento/entities/documento.entity';
-import { Factura } from 'src/facturas/entities/factura.entity';
-import { BaseEntity } from 'src/utils/base.entity';
+import { Documento } from '../../documento/entities/documento.entity';
+import { BaseEntity } from '../../utils/base.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity()

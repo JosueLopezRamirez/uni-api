@@ -1,5 +1,5 @@
-import { Dinamico } from 'src/dinamicos/entities/dinamico.entity';
-import { BaseEntity } from 'src/utils/base.entity';
+import { Dinamico } from '../../dinamicos/entities/dinamico.entity';
+import { BaseEntity } from '../../utils/base.entity';
 import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity()

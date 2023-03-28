@@ -1,6 +1,6 @@
-import { Factura } from 'src/facturas/entities/factura.entity';
-import { Usuario } from 'src/usuario/entities/usuario.entity';
-import { BaseEntity } from 'src/utils/base.entity';
+import { Factura } from '../../facturas/entities/factura.entity';
+import { Usuario } from '../../usuario/entities/usuario.entity';
+import { BaseEntity } from '../../utils/base.entity';
 import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity()

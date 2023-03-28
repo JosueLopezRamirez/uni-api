@@ -1,7 +1,7 @@
-import { Documento } from 'src/documento/entities/documento.entity';
-import { Fila } from 'src/filas/entities/fila.entity';
-import { Plantilla } from 'src/plantillas/entities/plantilla.entity';
-import { BaseEntity } from 'src/utils/base.entity';
+import { Documento } from '../../documento/entities/documento.entity';
+import { Fila } from '../../filas/entities/fila.entity';
+import { Plantilla } from '../../plantillas/entities/plantilla.entity';
+import { BaseEntity } from '../../utils/base.entity';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()

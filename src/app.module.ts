@@ -23,6 +23,7 @@ import { PlantillasModule } from './plantillas/plantillas.module';
 import { typeOrmAsyncConfig } from './config/typeorm.config';
 import { SharedModule } from './shared/shared.module';
 import { AwsModule } from './aws/aws.module';
+import { BackupsModule } from './backups/backups.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { AwsModule } from './aws/aws.module';
     PlantillasModule,
     SharedModule,
     AwsModule,
+    BackupsModule
   ],
   controllers: [AppController],
   providers: [AppService],

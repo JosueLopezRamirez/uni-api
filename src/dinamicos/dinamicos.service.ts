@@ -1,8 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Documento } from 'src/documento/entities/documento.entity';
-import { Estatico } from 'src/estaticos/entities/estatico.entity';
-import { Fila } from 'src/filas/entities/fila.entity';
+import { Documento } from '../documento/entities/documento.entity';
+import { Fila } from '../filas/entities/fila.entity';
 import { getConnection, Repository } from 'typeorm';
 import { CreateDinamicoDto } from './dto/create-dinamico.dto';
 import { UpdateDinamicoDto } from './dto/update-dinamico.dto';

@@ -3,10 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DetalleFacturaDto } from './dto/create-factura.dto';
 import { Factura } from './entities/factura.entity';
 import { getConnection, Repository } from 'typeorm';
-import { Documento } from 'src/documento/entities/documento.entity';
-import { Estatico } from 'src/estaticos/entities/estatico.entity';
-import { FacturaItem } from 'src/factura-item/entities/factura-item.entity';
-import { HistorialFactura } from 'src/historial-facturas/entities/historial-factura.entity';
+import { Documento } from '../documento/entities/documento.entity';
+import { Estatico } from '../estaticos/entities/estatico.entity';
+import { FacturaItem } from '../factura-item/entities/factura-item.entity';
+import { HistorialFactura } from '../historial-facturas/entities/historial-factura.entity';
 
 @Injectable()
 export class FacturasService {

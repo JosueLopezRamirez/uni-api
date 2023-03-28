@@ -28,7 +28,7 @@ services:
     ports:
       - '${API_PORT}:${API_PORT}'
     command: >
-      sh -c "yarn && yarn migration:run && yarn start:dev"
+      sh -c "yarn && yarn migration:run && yarn seed:run && yarn start:dev"
     depends_on:
       - mysql
     volumes:

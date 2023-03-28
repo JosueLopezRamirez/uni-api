@@ -2,12 +2,13 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { createReadStream, unlink } from 'fs';
 import mysqldump from 'mysqldump';
 import { join } from 'path';
+import { BackupsService } from '../backups/backups.service';
 import { AwsService } from '../aws/aws.service';
 
 @Injectable()
 export class SharedService {
 
-  constructor(private readonly awsService: AwsService) { }
+  constructor(private readonly awsService: AwsService, private readonly backupsService: BackupsService) { }
 
   async dbBackup() {
     const name = `dumpfile-${Date.now()}.sql`;
@@ -25,6 +26,7 @@ export class SharedService {
 
     try {
       const data = await this.awsService.uploadS3(file, name);
+      await this.backupsService.create({ name, url: data.Location })
       setTimeout(() => {
         unlink(fileLocation, (err) => {
           if (err) {
