@@ -21,6 +21,8 @@ import { HistorialFacturasModule } from './historial-facturas/historial-facturas
 import { PermisosModule } from './permisos/permisos.module';
 import { PlantillasModule } from './plantillas/plantillas.module';
 import { typeOrmAsyncConfig } from './config/typeorm.config';
+import { SharedModule } from './shared/shared.module';
+import { AwsModule } from './aws/aws.module';
 
 @Module({
   imports: [
@@ -46,6 +48,8 @@ import { typeOrmAsyncConfig } from './config/typeorm.config';
     HistorialFacturasModule,
     PermisosModule,
     PlantillasModule,
+    SharedModule,
+    AwsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
