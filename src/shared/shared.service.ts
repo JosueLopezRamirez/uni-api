@@ -34,7 +34,7 @@ export class SharedService {
           }
           console.log("Delete File successfully.");
         });
-      }, 3000)
+      }, 800);
       return data;
     } catch (error) {
       throw new HttpException("Error to backup bd", HttpStatus.UNPROCESSABLE_ENTITY);

@@ -8,12 +8,6 @@ export class Usuario extends BaseEntity {
   @Column()
   nombre: string;
 
-  @Column()
-  apellidoPaterno: string;
-
-  @Column({ nullable: true })
-  apellidoMaterno: string;
-
   @Column({ unique: true })
   correo: string;
 

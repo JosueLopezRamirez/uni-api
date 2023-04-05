@@ -4,12 +4,6 @@ export class CreateUsuarioDto {
   @IsNotEmpty()
   nombre: string;
 
-  @IsNotEmpty()
-  apellidoPaterno: string;
-
-  @IsOptional()
-  apellidoMaterno: string;
-
   @IsEmail()
   correo: string;
 

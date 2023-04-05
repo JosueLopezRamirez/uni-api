@@ -6,18 +6,26 @@ import {
   Patch,
   Param,
   Delete,
+  Res,
+  HttpStatus,
+  HttpException,
 } from '@nestjs/common';
 import { RolesService } from './roles.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
+import { Response } from 'express';
 
 @Controller('roles')
 export class RolesController {
-  constructor(private readonly rolesService: RolesService) {}
+  constructor(private readonly rolesService: RolesService) { }
 
   @Post()
-  create(@Body() createRoleDto: CreateRoleDto) {
-    return this.rolesService.create(createRoleDto);
+  async create(@Body() createRoleDto: CreateRoleDto, @Res() res: Response) {
+    const { data, error } = await this.rolesService.create(createRoleDto);
+    if (error) {
+      throw new HttpException(error.sqlMessage,HttpStatus.BAD_REQUEST);
+    }
+    return data;
   }
 
   @Get()

@@ -13,7 +13,7 @@ export class FacturasService {
   constructor(
     @InjectRepository(Factura)
     private repository: Repository<Factura>,
-  ) {}
+  ) { }
 
   async create(detalleFactura: DetalleFacturaDto, usuarioId: string) {
     const rows = detalleFactura.facturaItems;
@@ -81,15 +81,23 @@ export class FacturasService {
     }
   }
 
-  findAll() {
+  findAll(limit = 0, offset = 0) {
     const connection = getConnection();
-    return connection
+    let query = connection
       .getRepository(Factura)
       .createQueryBuilder('factura')
       .innerJoinAndSelect('factura.estatico', 'estatico')
       .innerJoinAndSelect('estatico.documento', 'documento')
       .innerJoinAndSelect('documento.empresa', 'empresa')
-      .getMany();
+
+    if (limit) {
+      query.offset(limit)
+    }
+
+    if (offset) {
+      query.limit(offset)
+    }
+    return query.getMany();
   }
 
   findOne(id: string) {

@@ -18,6 +18,7 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
       database: process.env.DATABASE_NAME,
       password: process.env.DATABASE_PASSWORD,
       entities: [__dirname + '/../**/*.entity.{js,ts}'],
+      migrations: [__dirname + '/../database/migration/*{.ts,.js}'],
       synchronize: false,
       logging: true,
     };
@@ -32,9 +33,9 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   database: process.env.DATABASE_NAME,
   password: process.env.DATABASE_PASSWORD,
   entities: [__dirname + '/../**/*.entity.{js,ts}'],
-  migrations: [__dirname + '/../migration/*{.ts,.js}'],
+  migrations: [__dirname + '/../database/migration/*{.ts,.js}'],
   cli: {
-    migrationsDir: __dirname + '/../migration',
+    migrationsDir: __dirname + '/../database/migration',
   },
   extra: {
     charset: 'utf8mb4_unicode_ci',

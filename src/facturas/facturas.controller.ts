@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Req,
+  Query,
 } from '@nestjs/common';
 import { FacturasService } from './facturas.service';
 import { CreateFacturaDto, DetalleFacturaDto } from './dto/create-factura.dto';
@@ -19,7 +20,7 @@ export class FacturasController {
   constructor(
     private readonly facturasService: FacturasService,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
   @Post()
   create(@Body() detalleFactura: DetalleFacturaDto, @Req() req: Request) {
@@ -30,8 +31,9 @@ export class FacturasController {
   }
 
   @Get()
-  findAll() {
-    return this.facturasService.findAll();
+  findAll(@Query() query) {
+    console.log({ query });
+    return this.facturasService.findAll(parseInt(query.page), parseInt(query.limit));
   }
 
   @Get(':id')

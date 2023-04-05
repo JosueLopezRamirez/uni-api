@@ -21,8 +21,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm:cli": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli -f src/config/typeorm.config-migrations.ts",
-    "migration:generate": "npm run typeorm:cli -- migration:generate -d src/migration -n",
-    "migration:create": "npm run typeorm:cli -- migration:create -d src/migration -n",
+    "migration:generate": "npm run typeorm:cli -- migration:generate -d src/database/migration -n",
+    "migration:create": "npm run typeorm:cli -- migration:create -d src/database/migration -n",
     "migration:run": "npm run typeorm:cli -- migration:run",
     "migration:revert": "npm run typeorm:cli -- migration:revert",
     "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js config -n src/config/typeorm.config-migrations.ts",
@@ -30,7 +30,6 @@
     "schema:drop": "npm run typeorm:cli schema:drop",
     "db:refresh": "npm run schema:drop && npm run migration:run && npm run seed:run",
     "remove:spec": "rm -rf src/**/*.spec.ts"
-
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
@@ -61,10 +60,11 @@
     "s3": "^4.4.0",
     "typeorm": "^0.2.45",
     "typeorm-naming-strategies": "^4.1.0",
-    "uuid": "^8.3.2",
-    "typeorm-seeding": "^1.6.1"
+    "typeorm-seeding": "^1.6.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@nestjs/cli": "^8.0.0",
     "@nestjs/schematics": "^8.0.0",
     "@nestjs/testing": "^8.0.0",

@@ -5,7 +5,7 @@ import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity('rol')
 export class Role extends BaseEntity {
-  @Column()
+  @Column({ unique: true })
   nombre: string;
 
   @OneToMany(() => Usuario, (usuario) => usuario.rol)

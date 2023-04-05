@@ -32,6 +32,11 @@ export class UsuarioController {
     return this.usuarioService.findAll(filterOptions);
   }
 
+  @Get('/')
+  find(@Body('filterOptions') filterOptions: FilterOptionsDto) {
+    return this.usuarioService.findAll(filterOptions);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usuarioService.findOne(id);

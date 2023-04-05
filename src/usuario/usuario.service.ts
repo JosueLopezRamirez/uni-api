@@ -33,7 +33,7 @@ export class UsuarioService {
   findAll(filterOptions: FilterOptionsDto) {
     return this.repository.find({
       where: filterOptions ?? {},
-      relations: ['rol'],
+      relations: ['rol']
     });
   }
 
