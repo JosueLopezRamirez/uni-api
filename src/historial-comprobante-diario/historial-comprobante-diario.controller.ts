@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { HistorialComprobanteDiarioService } from './historial-comprobante-diario.service';
 import { CreateHistorialComprobanteDiarioDto } from './dto/create-historial-comprobante-diario.dto';
@@ -15,7 +16,7 @@ import { UpdateHistorialComprobanteDiarioDto } from './dto/update-historial-comp
 export class HistorialComprobanteDiarioController {
   constructor(
     private readonly historialComprobanteDiarioService: HistorialComprobanteDiarioService,
-  ) {}
+  ) { }
 
   @Post()
   create(
@@ -33,8 +34,8 @@ export class HistorialComprobanteDiarioController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.historialComprobanteDiarioService.findOne(id);
+  findOne(@Param('id') id: string, @Query() query) {
+    return this.historialComprobanteDiarioService.findOne(id, parseInt(query.skip), parseInt(query.take));
   }
 
   @Patch(':id')

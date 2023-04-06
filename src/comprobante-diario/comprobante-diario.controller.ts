@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Req,
+  Query,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
@@ -36,8 +37,8 @@ export class ComprobanteDiarioController {
   }
 
   @Get()
-  findAll() {
-    return this.comprobanteDiarioService.findAll();
+  findAll(@Query() query) {
+    return this.comprobanteDiarioService.findAll(parseInt(query.skip), parseInt(query.take));
   }
 
   @Get(':id')

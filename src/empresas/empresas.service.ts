@@ -10,14 +10,15 @@ export class EmpresasService {
   constructor(
     @InjectRepository(Empresa)
     private repository: Repository<Empresa>,
-  ) {}
+  ) { }
 
   create(createEmpresaDto: CreateEmpresaDto) {
     return this.repository.save(createEmpresaDto);
   }
 
-  findAll() {
-    return this.repository.find();
+  async findAll(skip = 1, take = 10) {
+    const [result, count] = await this.repository.findAndCount({ take, skip: (skip - 1) * take });
+    return { data: result, count }
   }
 
   findOne(id: string) {

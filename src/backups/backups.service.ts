@@ -7,7 +7,7 @@ import { Backup } from './entities/backup.entity';
 
 @Injectable()
 export class BackupsService {
-  
+
   constructor(
     @InjectRepository(Backup)
     private repository: Repository<Backup>,
@@ -17,8 +17,12 @@ export class BackupsService {
     return this.repository.save(createBackupDto);
   }
 
-  findAll() {
-    return this.repository.find();
+  async findAll(skip = 1, take = 10) {
+    const [result, count] = await this.repository.findAndCount({
+      take,
+      skip: (skip - 1) * take
+    });
+    return { data: result, count }
   }
 
   findOne(id: number) {

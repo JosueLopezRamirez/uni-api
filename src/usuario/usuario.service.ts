@@ -10,7 +10,7 @@ export class UsuarioService {
   constructor(
     @InjectRepository(Usuario)
     private repository: Repository<Usuario>,
-  ) {}
+  ) { }
 
   buscarPorCorreo = async (correo: string) => {
     try {
@@ -30,11 +30,13 @@ export class UsuarioService {
     return this.repository.save(createUsuarioDto);
   }
 
-  findAll(filterOptions: FilterOptionsDto) {
-    return this.repository.find({
-      where: filterOptions ?? {},
-      relations: ['rol']
+  async findAll(skip = 1, take = 10) {
+    const [result, count] = await this.repository.findAndCount({
+      relations: ['rol'],
+      take,
+      skip: (skip - 1) * take
     });
+    return { data: result, count }
   }
 
   findOne(id: string) {

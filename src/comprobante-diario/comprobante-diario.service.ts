@@ -13,7 +13,7 @@ export class ComprobanteDiarioService {
   constructor(
     @InjectRepository(ComprobanteDiario)
     private repository: Repository<ComprobanteDiario>,
-  ) {}
+  ) { }
 
   async create(
     detalleComprobanteDiario: DetalleComprobanteDto,
@@ -97,15 +97,23 @@ export class ComprobanteDiarioService {
     await Promise.all(promises);
   }
 
-  findAll() {
+  async findAll(skip = 1, take = 10) {
     const connection = getConnection();
-    return connection
+    let query = connection
       .getRepository(ComprobanteDiario)
       .createQueryBuilder('comprobanteDiario')
       .innerJoinAndSelect('comprobanteDiario.estatico', 'estatico')
       .innerJoinAndSelect('estatico.documento', 'documento')
       .innerJoinAndSelect('documento.empresa', 'empresa')
-      .getMany();
+    if (take) {
+      query.take(take)
+    }
+
+    if (skip) {
+      query.skip((skip - 1) * take)
+    }
+    const [result, count] = await query.getManyAndCount();
+    return { data: result, count }
   }
 
   findOne(id: string) {

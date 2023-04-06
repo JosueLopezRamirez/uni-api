@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { BackupsService } from './backups.service';
 import { CreateBackupDto } from './dto/create-backup.dto';
 import { UpdateBackupDto } from './dto/update-backup.dto';
@@ -13,8 +13,8 @@ export class BackupsController {
   }
 
   @Get()
-  findAll() {
-    return this.backupsService.findAll();
+  findAll(@Query() query) {
+    return this.backupsService.findAll(parseInt(query.skip), parseInt(query.take));
   }
 
   @Get(':id')

@@ -32,8 +32,7 @@ export class FacturasController {
 
   @Get()
   findAll(@Query() query) {
-    console.log({ query });
-    return this.facturasService.findAll(parseInt(query.page), parseInt(query.limit));
+    return this.facturasService.findAll(parseInt(query.skip), parseInt(query.take));
   }
 
   @Get(':id')

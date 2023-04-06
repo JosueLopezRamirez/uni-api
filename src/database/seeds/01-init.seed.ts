@@ -29,38 +29,6 @@ export class InitDbSeed implements Seeder {
         await connection
             .createQueryBuilder()
             .insert()
-            .into(Permiso)
-            .values([
-                {
-                    id: v4(),
-                    rolId: '0c479969-1356-44cf-93b7-0adf9ff9332d',
-                    pagina: 'Facturas',
-                    ver: true,
-                    edicion: false,
-                    borrado: false,
-                },
-                {
-                    id: v4(),
-                    rolId: '0c479969-1356-44cf-93b7-0adf9ff9332d',
-                    pagina: 'Comprobantes de diario',
-                    ver: true,
-                    edicion: false,
-                    borrado: false,
-                },
-                {
-                    id: v4(),
-                    rolId: '0c479969-1356-44cf-93b7-0adf9ff9332d',
-                    pagina: 'Clientes',
-                    ver: true,
-                    edicion: false,
-                    borrado: false,
-                },
-            ])
-            .execute();
-
-        await connection
-            .createQueryBuilder()
-            .insert()
             .into(Usuario)
             .values([
                 {
@@ -82,7 +50,7 @@ export class InitDbSeed implements Seeder {
             ])
             .execute();
 
-        for (const item of Array(35).fill('')) {
+        for (const item of Array(75).fill('')) {
             const empresaId = v4();
             await connection
                 .createQueryBuilder()
@@ -97,7 +65,7 @@ export class InitDbSeed implements Seeder {
                 })
                 .execute();
 
-            for (const item of Array(10).fill('')) {
+            for (const item of Array(15).fill('')) {
                 const comprobanteDiarioId = v4();
                 const facturaId = v4();
                 const documentoId = v4();
@@ -140,7 +108,7 @@ export class InitDbSeed implements Seeder {
                     .insert()
                     .into(ComprobanteDiarioItem)
                     .values(
-                        Array(15)
+                        Array(45)
                             .fill('')
                             .map((item) => {
                                 const amount = parseFloat(faker.finance.amount());
@@ -173,7 +141,7 @@ export class InitDbSeed implements Seeder {
                     .insert()
                     .into(FacturaItem)
                     .values(
-                        Array(15)
+                        Array(45)
                             .fill('')
                             .map((item) => {
                                 const amount = parseFloat(faker.finance.amount());

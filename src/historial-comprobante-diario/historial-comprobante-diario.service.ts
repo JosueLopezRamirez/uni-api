@@ -10,7 +10,7 @@ export class HistorialComprobanteDiarioService {
   constructor(
     @InjectRepository(HistorialComprobanteDiario)
     private repository: Repository<HistorialComprobanteDiario>,
-  ) {}
+  ) { }
 
   create(
     createHistorialComprobanteDiarioDto: CreateHistorialComprobanteDiarioDto,
@@ -22,11 +22,14 @@ export class HistorialComprobanteDiarioService {
     return this.repository.find();
   }
 
-  findOne(id: string) {
-    return this.repository.find({
+  async findOne(id: string, skip = 1, take = 10) {
+    const [result, count] = await this.repository.findAndCount({
       relations: ['usuario', 'comprobanteDiario'],
       where: { comprobanteDiarioId: id },
+      take,
+      skip: (skip - 1) * take
     });
+    return { data: result, count }
   }
 
   update(

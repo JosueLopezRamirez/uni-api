@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto, FilterOptionsDto } from './dto/create-usuario.dto';
@@ -27,14 +28,9 @@ export class UsuarioController {
     return result;
   }
 
-  @Post('/get')
-  findAll(@Body('filterOptions') filterOptions: FilterOptionsDto) {
-    return this.usuarioService.findAll(filterOptions);
-  }
-
   @Get('/')
-  find(@Body('filterOptions') filterOptions: FilterOptionsDto) {
-    return this.usuarioService.findAll(filterOptions);
+  find(@Query() query) {
+    return this.usuarioService.findAll(parseInt(query.skip), parseInt(query.take));
   }
 
   @Get(':id')

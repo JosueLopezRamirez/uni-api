@@ -46,8 +46,6 @@ export class FacturasService {
         })
         .execute();
 
-      console.log({ identifiers: facturaCreado.identifiers });
-
       const nuevas = rows
         .filter((row) => row.isNewRow)
         .map((row) => ({
@@ -81,7 +79,7 @@ export class FacturasService {
     }
   }
 
-  findAll(limit = 0, offset = 0) {
+  async findAll(skip = 1, take = 10) {
     const connection = getConnection();
     let query = connection
       .getRepository(Factura)
@@ -90,14 +88,15 @@ export class FacturasService {
       .innerJoinAndSelect('estatico.documento', 'documento')
       .innerJoinAndSelect('documento.empresa', 'empresa')
 
-    if (limit) {
-      query.offset(limit)
+    if (take) {
+      query.take(take)
     }
 
-    if (offset) {
-      query.limit(offset)
+    if (skip) {
+      query.skip((skip - 1) * take)
     }
-    return query.getMany();
+    const [result, count] = await query.getManyAndCount();
+    return { data: result, count }
   }
 
   findOne(id: string) {

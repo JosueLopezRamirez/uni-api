@@ -10,7 +10,7 @@ export class HistorialFacturasService {
   constructor(
     @InjectRepository(HistorialFactura)
     private repository: Repository<HistorialFactura>,
-  ) {}
+  ) { }
 
   create(createHistorialFacturaDto: CreateHistorialFacturaDto) {
     return 'This action adds a new historialFactura';
@@ -20,11 +20,14 @@ export class HistorialFacturasService {
     return `This action returns all historialFacturas`;
   }
 
-  findOne(id: string) {
-    return this.repository.find({
+  async findOne(id: string, skip = 1, take = 10) {
+    const [result, count] = await this.repository.findAndCount({
       relations: ['usuario', 'factura'],
       where: { facturaId: id },
+      take,
+      skip: (skip - 1) * take
     });
+    return { data: result, count }
   }
 
   update(id: string, updateHistorialFacturaDto: UpdateHistorialFacturaDto) {
