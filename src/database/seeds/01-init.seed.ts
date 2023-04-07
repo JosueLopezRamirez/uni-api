@@ -5,7 +5,6 @@ import { faker } from '@faker-js/faker';
 import * as bcrypt from 'bcrypt';
 import { v4 as uuidV4, v4 } from 'uuid';
 import { Usuario } from '../../usuario/entities/usuario.entity';
-import { Permiso } from '../../permisos/entities/permiso.entity';
 import { Empresa } from '../../empresas/entities/empresa.entity';
 import { Documento } from '../../documento/entities/documento.entity';
 import { Estatico } from '../../estaticos/entities/estatico.entity';
@@ -50,7 +49,7 @@ export class InitDbSeed implements Seeder {
             ])
             .execute();
 
-        for (const item of Array(75).fill('')) {
+        for (const item of Array(10).fill('')) {
             const empresaId = v4();
             await connection
                 .createQueryBuilder()

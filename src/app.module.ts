@@ -18,12 +18,13 @@ import { DinamicosModule } from './dinamicos/dinamicos.module';
 import { FilasModule } from './filas/filas.module';
 import { HistorialComprobanteDiarioModule } from './historial-comprobante-diario/historial-comprobante-diario.module';
 import { HistorialFacturasModule } from './historial-facturas/historial-facturas.module';
-import { PermisosModule } from './permisos/permisos.module';
 import { PlantillasModule } from './plantillas/plantillas.module';
 import { typeOrmAsyncConfig } from './config/typeorm.config';
 import { SharedModule } from './shared/shared.module';
 import { AwsModule } from './aws/aws.module';
 import { BackupsModule } from './backups/backups.module';
+import { FeatureFlagModule } from './feature-flag/feature-flag.module';
+import { FeatureFlagUserModule } from './feature-flag-user/feature-flag-user.module';
 
 @Module({
   imports: [
@@ -47,11 +48,12 @@ import { BackupsModule } from './backups/backups.module';
     FilasModule,
     HistorialComprobanteDiarioModule,
     HistorialFacturasModule,
-    PermisosModule,
     PlantillasModule,
     SharedModule,
     AwsModule,
-    BackupsModule
+    BackupsModule,
+    FeatureFlagModule,
+    FeatureFlagUserModule
   ],
   controllers: [AppController],
   providers: [AppService],

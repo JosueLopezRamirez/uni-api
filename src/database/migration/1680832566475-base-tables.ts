@@ -1,19 +1,21 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class baseTables1679176398522 implements MigrationInterface {
-    name = 'baseTables1679176398522'
+export class baseTables1680832566475 implements MigrationInterface {
+    name = 'baseTables1680832566475'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(`CREATE TABLE \`backup\` (\`id\` varchar(36) NOT NULL, \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), \`deletedAt\` datetime(6) NULL, \`name\` varchar(255) NOT NULL, \`url\` varchar(255) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`fila\` (\`id\` varchar(36) NOT NULL, \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), \`deletedAt\` datetime(6) NULL, \`valor\` text NOT NULL, \`dinamicoId\` varchar(255) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`plantilla\` (\`id\` varchar(36) NOT NULL, \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), \`deletedAt\` datetime(6) NULL, \`nombre\` varchar(255) NOT NULL, \`columnas\` text NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`dinamico\` (\`id\` varchar(36) NOT NULL, \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), \`deletedAt\` datetime(6) NULL, \`documentoId\` varchar(255) NOT NULL, \`plantillaId\` varchar(255) NOT NULL, \`nombre\` varchar(255) NOT NULL, \`fecha\` datetime NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`empresa\` (\`id\` varchar(36) NOT NULL, \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), \`deletedAt\` datetime(6) NULL, \`nombre\` varchar(255) NOT NULL, \`descripcion\` varchar(255) NULL, \`ruc\` varchar(255) NOT NULL, \`telefono\` varchar(255) NOT NULL, UNIQUE INDEX \`IDX_dc656dc24f6986afbfe84ebf13\` (\`ruc\`), UNIQUE INDEX \`IDX_3ab4bf8bb031ef45df7165a07f\` (\`telefono\`), PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`documento\` (\`id\` varchar(36) NOT NULL, \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), \`deletedAt\` datetime(6) NULL, \`empresaId\` varchar(255) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`factura_item\` (\`id\` varchar(36) NOT NULL, \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), \`deletedAt\` datetime(6) NULL, \`numeroFactura\` varchar(255) NOT NULL, \`descripcion\` varchar(255) NOT NULL, \`ventasExoneradas\` int NULL, \`ventasExentas\` int NULL, \`ventasGrabadas\` int NULL, \`facturaId\` varchar(255) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
-        await queryRunner.query(`CREATE TABLE \`permiso\` (\`id\` varchar(36) NOT NULL, \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), \`deletedAt\` datetime(6) NULL, \`pagina\` varchar(255) NOT NULL, \`rolId\` varchar(255) NOT NULL, \`ver\` tinyint NOT NULL DEFAULT 0, \`edicion\` tinyint NOT NULL DEFAULT 0, \`borrado\` tinyint NOT NULL DEFAULT 0, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
-        await queryRunner.query(`CREATE TABLE \`rol\` (\`id\` varchar(36) NOT NULL, \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), \`deletedAt\` datetime(6) NULL, \`nombre\` varchar(255) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
+        await queryRunner.query(`CREATE TABLE \`rol\` (\`id\` varchar(36) NOT NULL, \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), \`deletedAt\` datetime(6) NULL, \`nombre\` varchar(255) NOT NULL, UNIQUE INDEX \`IDX_9792c580a992d554ee1621c5b4\` (\`nombre\`), PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`historial_comprobante_diario\` (\`id\` varchar(36) NOT NULL, \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), \`deletedAt\` datetime(6) NULL, \`comprobanteDiarioId\` varchar(255) NOT NULL, \`usuarioId\` varchar(255) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
-        await queryRunner.query(`CREATE TABLE \`usuario\` (\`id\` varchar(36) NOT NULL, \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), \`deletedAt\` datetime(6) NULL, \`nombre\` varchar(255) NOT NULL, \`apellidoPaterno\` varchar(255) NOT NULL, \`apellidoMaterno\` varchar(255) NULL, \`correo\` varchar(255) NOT NULL, \`password\` varchar(255) NOT NULL, \`rolId\` varchar(255) NOT NULL, \`activo\` tinyint NOT NULL DEFAULT 1, UNIQUE INDEX \`IDX_349ecb64acc4355db443ca17cb\` (\`correo\`), PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
+        await queryRunner.query(`CREATE TABLE \`feature_flag\` (\`id\` varchar(36) NOT NULL, \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), \`deletedAt\` datetime(6) NULL, \`name\` varchar(255) NOT NULL, \`active\` tinyint NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
+        await queryRunner.query(`CREATE TABLE \`feature_flag_user\` (\`id\` varchar(36) NOT NULL, \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), \`deletedAt\` datetime(6) NULL, \`usuarioId\` varchar(255) NOT NULL, \`featureFlagId\` varchar(255) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
+        await queryRunner.query(`CREATE TABLE \`usuario\` (\`id\` varchar(36) NOT NULL, \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), \`deletedAt\` datetime(6) NULL, \`nombre\` varchar(255) NOT NULL, \`correo\` varchar(255) NOT NULL, \`password\` varchar(255) NOT NULL, \`rolId\` varchar(255) NOT NULL, \`activo\` tinyint NOT NULL DEFAULT 1, UNIQUE INDEX \`IDX_349ecb64acc4355db443ca17cb\` (\`correo\`), PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`historial_factura\` (\`id\` varchar(36) NOT NULL, \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), \`deletedAt\` datetime(6) NULL, \`facturaId\` varchar(255) NOT NULL, \`usuarioId\` varchar(255) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`factura\` (\`id\` varchar(36) NOT NULL, \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), \`deletedAt\` datetime(6) NULL, \`fecha\` datetime NOT NULL, \`nombre\` varchar(255) NOT NULL, \`estaticoId\` varchar(255) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`estatico\` (\`id\` varchar(36) NOT NULL, \`createdAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`updatedAt\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6), \`deletedAt\` datetime(6) NULL, \`documentoId\` varchar(255) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
@@ -24,9 +26,10 @@ export class baseTables1679176398522 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE \`dinamico\` ADD CONSTRAINT \`FK_3b43f2c2e7e5f96a49715ec73da\` FOREIGN KEY (\`plantillaId\`) REFERENCES \`plantilla\`(\`id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE \`documento\` ADD CONSTRAINT \`FK_6619e8c6c8b5b1d8631ebe0f8fd\` FOREIGN KEY (\`empresaId\`) REFERENCES \`empresa\`(\`id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE \`factura_item\` ADD CONSTRAINT \`FK_6d9e4410327e605ac464697bf7e\` FOREIGN KEY (\`facturaId\`) REFERENCES \`factura\`(\`id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
-        await queryRunner.query(`ALTER TABLE \`permiso\` ADD CONSTRAINT \`FK_b55192c7fdc851e6c736eb95268\` FOREIGN KEY (\`rolId\`) REFERENCES \`rol\`(\`id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE \`historial_comprobante_diario\` ADD CONSTRAINT \`FK_d1cd116b9674b47f8cba415684d\` FOREIGN KEY (\`comprobanteDiarioId\`) REFERENCES \`comprobante_diario\`(\`id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE \`historial_comprobante_diario\` ADD CONSTRAINT \`FK_c51feb5d301aadad92ad3fba38c\` FOREIGN KEY (\`usuarioId\`) REFERENCES \`usuario\`(\`id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE \`feature_flag_user\` ADD CONSTRAINT \`FK_036abcf3897fc7c0d200b7226e5\` FOREIGN KEY (\`usuarioId\`) REFERENCES \`usuario\`(\`id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE \`feature_flag_user\` ADD CONSTRAINT \`FK_7502bd30e336c4eb5ff455ec1d2\` FOREIGN KEY (\`featureFlagId\`) REFERENCES \`feature_flag\`(\`id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE \`usuario\` ADD CONSTRAINT \`FK_611daf5befc024d9e0bd7bdf4da\` FOREIGN KEY (\`rolId\`) REFERENCES \`rol\`(\`id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE \`historial_factura\` ADD CONSTRAINT \`FK_76578223a872c0b82d97823f0d1\` FOREIGN KEY (\`facturaId\`) REFERENCES \`factura\`(\`id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE \`historial_factura\` ADD CONSTRAINT \`FK_44b850aa88ded8f766b87d69b04\` FOREIGN KEY (\`usuarioId\`) REFERENCES \`usuario\`(\`id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`);
@@ -44,9 +47,10 @@ export class baseTables1679176398522 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE \`historial_factura\` DROP FOREIGN KEY \`FK_44b850aa88ded8f766b87d69b04\``);
         await queryRunner.query(`ALTER TABLE \`historial_factura\` DROP FOREIGN KEY \`FK_76578223a872c0b82d97823f0d1\``);
         await queryRunner.query(`ALTER TABLE \`usuario\` DROP FOREIGN KEY \`FK_611daf5befc024d9e0bd7bdf4da\``);
+        await queryRunner.query(`ALTER TABLE \`feature_flag_user\` DROP FOREIGN KEY \`FK_7502bd30e336c4eb5ff455ec1d2\``);
+        await queryRunner.query(`ALTER TABLE \`feature_flag_user\` DROP FOREIGN KEY \`FK_036abcf3897fc7c0d200b7226e5\``);
         await queryRunner.query(`ALTER TABLE \`historial_comprobante_diario\` DROP FOREIGN KEY \`FK_c51feb5d301aadad92ad3fba38c\``);
         await queryRunner.query(`ALTER TABLE \`historial_comprobante_diario\` DROP FOREIGN KEY \`FK_d1cd116b9674b47f8cba415684d\``);
-        await queryRunner.query(`ALTER TABLE \`permiso\` DROP FOREIGN KEY \`FK_b55192c7fdc851e6c736eb95268\``);
         await queryRunner.query(`ALTER TABLE \`factura_item\` DROP FOREIGN KEY \`FK_6d9e4410327e605ac464697bf7e\``);
         await queryRunner.query(`ALTER TABLE \`documento\` DROP FOREIGN KEY \`FK_6619e8c6c8b5b1d8631ebe0f8fd\``);
         await queryRunner.query(`ALTER TABLE \`dinamico\` DROP FOREIGN KEY \`FK_3b43f2c2e7e5f96a49715ec73da\``);
@@ -59,9 +63,11 @@ export class baseTables1679176398522 implements MigrationInterface {
         await queryRunner.query(`DROP TABLE \`historial_factura\``);
         await queryRunner.query(`DROP INDEX \`IDX_349ecb64acc4355db443ca17cb\` ON \`usuario\``);
         await queryRunner.query(`DROP TABLE \`usuario\``);
+        await queryRunner.query(`DROP TABLE \`feature_flag_user\``);
+        await queryRunner.query(`DROP TABLE \`feature_flag\``);
         await queryRunner.query(`DROP TABLE \`historial_comprobante_diario\``);
+        await queryRunner.query(`DROP INDEX \`IDX_9792c580a992d554ee1621c5b4\` ON \`rol\``);
         await queryRunner.query(`DROP TABLE \`rol\``);
-        await queryRunner.query(`DROP TABLE \`permiso\``);
         await queryRunner.query(`DROP TABLE \`factura_item\``);
         await queryRunner.query(`DROP TABLE \`documento\``);
         await queryRunner.query(`DROP INDEX \`IDX_3ab4bf8bb031ef45df7165a07f\` ON \`empresa\``);
@@ -70,6 +76,7 @@ export class baseTables1679176398522 implements MigrationInterface {
         await queryRunner.query(`DROP TABLE \`dinamico\``);
         await queryRunner.query(`DROP TABLE \`plantilla\``);
         await queryRunner.query(`DROP TABLE \`fila\``);
+        await queryRunner.query(`DROP TABLE \`backup\``);
     }
 
 }

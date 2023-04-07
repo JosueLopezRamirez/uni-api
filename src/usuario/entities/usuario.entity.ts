@@ -2,6 +2,7 @@ import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../utils/base.entity';
 import { Role } from '../../roles/entities/role.entity';
 import { HistorialComprobanteDiario } from '../../historial-comprobante-diario/entities/historial-comprobante-diario.entity';
+import { FeatureFlagUser } from '../../feature-flag-user/entities/feature-flag-user.entity';
 
 @Entity()
 export class Usuario extends BaseEntity {
@@ -25,4 +26,7 @@ export class Usuario extends BaseEntity {
 
   @OneToMany(() => HistorialComprobanteDiario, (entidad) => entidad.usuario)
   historial: HistorialComprobanteDiario[];
+
+  @OneToMany(() => FeatureFlagUser, (entidad) => entidad.usuario)
+  featureFlagUser: FeatureFlagUser[]
 }
