@@ -4,7 +4,4 @@ export class CreateFeatureFlagDto {
     @IsString()
     @IsNotEmpty()
     name:string;
-
-    @IsBoolean()
-    active: boolean;
 }

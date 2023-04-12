@@ -3,6 +3,7 @@ import { BaseEntity } from '../../utils/base.entity';
 import { Role } from '../../roles/entities/role.entity';
 import { HistorialComprobanteDiario } from '../../historial-comprobante-diario/entities/historial-comprobante-diario.entity';
 import { FeatureFlagUser } from '../../feature-flag-user/entities/feature-flag-user.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class Usuario extends BaseEntity {
@@ -13,6 +14,7 @@ export class Usuario extends BaseEntity {
   correo: string;
 
   @Column()
+  @Exclude()
   password: string;
 
   @Column({ name: 'rolId' })

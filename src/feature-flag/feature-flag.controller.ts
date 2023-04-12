@@ -1,11 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { FeatureFlagService } from './feature-flag.service';
 import { CreateFeatureFlagDto } from './dto/create-feature-flag.dto';
 import { UpdateFeatureFlagDto } from './dto/update-feature-flag.dto';
 
 @Controller('feature-flag')
 export class FeatureFlagController {
-  constructor(private readonly featureFlagService: FeatureFlagService) {}
+  constructor(private readonly featureFlagService: FeatureFlagService) { }
 
   @Post()
   create(@Body() createFeatureFlagDto: CreateFeatureFlagDto) {

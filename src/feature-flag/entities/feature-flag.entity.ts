@@ -5,11 +5,8 @@ import { FeatureFlagUser } from "../../feature-flag-user/entities/feature-flag-u
 @Entity()
 export class FeatureFlag extends BaseEntity {
 
-    @Column()
+    @Column({ unique: true })
     name: string;
-
-    @Column()
-    active: boolean;
 
     @OneToMany(() => FeatureFlagUser, (entidad) => entidad.featureFlag)
     featureFlagUser: FeatureFlagUser[]

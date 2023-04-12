@@ -12,6 +12,8 @@ import { ComprobanteDiario } from '../../comprobante-diario/entities/comprobante
 import { ComprobanteDiarioItem } from '../../comprobante-diario-item/entities/comprobante-diario-item.entity';
 import { Factura } from '../../facturas/entities/factura.entity';
 import { FacturaItem } from '../../factura-item/entities/factura-item.entity';
+import { FeatureFlag } from '../../feature-flag/entities/feature-flag.entity';
+import { FeatureFlagUser } from '../../feature-flag-user/entities/feature-flag-user.entity';
 
 export class InitDbSeed implements Seeder {
     public async run(factory: Factory, connection: Connection): Promise<void> {
@@ -39,13 +41,61 @@ export class InitDbSeed implements Seeder {
                     activo: true,
                 },
                 {
-                    id: uuidV4(),
+                    id: "915e2e99-7c70-4761-a407-75f4e733195f",
                     nombre: 'Fernanda',
                     rolId: '0c479969-1356-44cf-93b7-0adf9ff9332d',
                     correo: 'fernanda@gmail.com',
-                    password: bcrypt.hashSync('fernanda123', 10),
+                    password: bcrypt.hashSync('123456', 10),
                     activo: true,
                 },
+                {
+                    id: "713debe4-737a-457d-b06c-d88dcdd505d5",
+                    nombre: 'Luis',
+                    rolId: '0c479969-1356-44cf-93b7-0adf9ff9332d',
+                    correo: 'luis@gmail.com',
+                    password: bcrypt.hashSync('123456', 10),
+                    activo: true,
+                },
+            ])
+            .execute();
+
+        await connection
+            .createQueryBuilder()
+            .insert()
+            .into(FeatureFlag)
+            .values([
+                { id: "ec968710-290f-4054-b31b-dc3478a8ec56", name: "Modulo clientes" },
+                { id: "5881dd7e-870a-4078-9699-869f05c7e153", name: "Visualizar clientes" },
+                { id: "403488fe-2ab4-4781-bbfc-2829cc019811", name: "Crear clientes" },
+                { id: "15982359-8228-4328-a483-5f61727f32bc", name: "Editar clientes" },
+                { id: "f5cf4a65-8244-440b-82f6-daf7d7ffa816", name: "Borrar clientes" },
+                { id: "4678f211-508c-4731-8da6-10f3acca120d", name: "Historial clientes" },
+
+                { id: uuidV4(), name: "Modulo comprobantes" },
+                { id: uuidV4(), name: "Visualizar comprobantes" },
+                { id: uuidV4(), name: "Crear comprobantes" },
+                { id: uuidV4(), name: "Editar comprobantes" },
+                { id: uuidV4(), name: "Borrar comprobantes" },
+                { id: uuidV4(), name: "Historial comprobantes" },
+
+                { id: uuidV4(), name: "Modulo facturas" },
+                { id: uuidV4(), name: "Visualizar facturas" },
+                { id: uuidV4(), name: "Crear facturas" },
+                { id: uuidV4(), name: "Editar facturas" },
+                { id: uuidV4(), name: "Borrar facturas" },
+                { id: uuidV4(), name: "Historial facturas" },
+            ])
+            .execute();
+
+        await connection
+            .createQueryBuilder()
+            .insert()
+            .into(FeatureFlagUser)
+            .values([
+                { featureFlagId: "ec968710-290f-4054-b31b-dc3478a8ec56", usuarioId: "915e2e99-7c70-4761-a407-75f4e733195f" },
+                { featureFlagId: "403488fe-2ab4-4781-bbfc-2829cc019811", usuarioId: "915e2e99-7c70-4761-a407-75f4e733195f" },
+                { featureFlagId: "ec968710-290f-4054-b31b-dc3478a8ec56", usuarioId: "713debe4-737a-457d-b06c-d88dcdd505d5" },
+                { featureFlagId: "5881dd7e-870a-4078-9699-869f05c7e153", usuarioId: "713debe4-737a-457d-b06c-d88dcdd505d5" },
             ])
             .execute();
 
@@ -71,24 +121,24 @@ export class InitDbSeed implements Seeder {
                 const estaticoId = v4();
 
                 await connection
-                .createQueryBuilder()
-                .insert()
-                .into(Documento)
-                .values({
-                    empresaId,
-                    id: documentoId,
-                })
-                .execute();
+                    .createQueryBuilder()
+                    .insert()
+                    .into(Documento)
+                    .values({
+                        empresaId,
+                        id: documentoId,
+                    })
+                    .execute();
 
-            await connection
-                .createQueryBuilder()
-                .insert()
-                .into(Estatico)
-                .values({
-                    id: estaticoId,
-                    documentoId,
-                })
-                .execute();
+                await connection
+                    .createQueryBuilder()
+                    .insert()
+                    .into(Estatico)
+                    .values({
+                        id: estaticoId,
+                        documentoId,
+                    })
+                    .execute();
 
                 await connection
                     .createQueryBuilder()

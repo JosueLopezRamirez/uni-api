@@ -17,7 +17,7 @@ export class FeatureFlagService {
     return this.repository.save(createFeatureFlagDto);
   }
 
-  findAll() {
+  async findAll() {
     return this.repository.find();
   }
 

@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { FeatureFlagUserService } from './feature-flag-user.service';
 import { FeatureFlagUserController } from './feature-flag-user.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { FeatureFlag } from '../feature-flag/entities/feature-flag.entity';
+import { FeatureFlagUser } from './entities/feature-flag-user.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([FeatureFlag])],
+  imports: [TypeOrmModule.forFeature([FeatureFlagUser])],
   controllers: [FeatureFlagUserController],
   providers: [FeatureFlagUserService]
 })
