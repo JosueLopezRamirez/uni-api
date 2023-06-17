@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { SharedService } from './shared.service';
 
 @Controller('shared')
@@ -8,5 +8,10 @@ export class SharedController {
   @Get("/db-backup")
   dbBackup() {
     return this.sharedService.dbBackup();
+  }
+
+  @Get("/db-restore/:id")
+  dbRestore(@Param('id') id: string) {
+    return this.sharedService.dbRestore(id);
   }
 }

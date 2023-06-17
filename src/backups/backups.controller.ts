@@ -19,16 +19,16 @@ export class BackupsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.backupsService.findOne(+id);
+    return this.backupsService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateBackupDto: UpdateBackupDto) {
-    return this.backupsService.update(+id, updateBackupDto);
+    return this.backupsService.update(id, updateBackupDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.backupsService.remove(+id);
+    return this.backupsService.remove(id);
   }
 }

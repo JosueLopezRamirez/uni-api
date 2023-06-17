@@ -99,7 +99,7 @@ export class InitDbSeed implements Seeder {
             ])
             .execute();
 
-        for (const item of Array(10).fill('')) {
+        for (const item of Array(3).fill('')) {
             const empresaId = v4();
             await connection
                 .createQueryBuilder()
@@ -114,7 +114,7 @@ export class InitDbSeed implements Seeder {
                 })
                 .execute();
 
-            for (const item of Array(15).fill('')) {
+            for (const item of Array(3).fill('')) {
                 const comprobanteDiarioId = v4();
                 const facturaId = v4();
                 const documentoId = v4();
@@ -157,7 +157,7 @@ export class InitDbSeed implements Seeder {
                     .insert()
                     .into(ComprobanteDiarioItem)
                     .values(
-                        Array(45)
+                        Array(5)
                             .fill('')
                             .map((item) => {
                                 const amount = parseFloat(faker.finance.amount());
@@ -190,7 +190,7 @@ export class InitDbSeed implements Seeder {
                     .insert()
                     .into(FacturaItem)
                     .values(
-                        Array(45)
+                        Array(5)
                             .fill('')
                             .map((item) => {
                                 const amount = parseFloat(faker.finance.amount());

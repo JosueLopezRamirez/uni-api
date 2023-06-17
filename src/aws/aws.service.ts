@@ -21,6 +21,12 @@ export class AwsService {
             (err, data) => { console.log(err, data) });
     }
 
+    async getFromS3(fileName: string) {
+        return this._s3.getObject(
+            { Bucket: this._bucketName, Key: fileName },
+        ).createReadStream();
+    }
+
     async uploadS3(file, name): Promise<UploadDto> {
         const s3 = this.getS3();
         const s3Params = {

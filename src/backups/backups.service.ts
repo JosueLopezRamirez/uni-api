@@ -25,15 +25,15 @@ export class BackupsService {
     return { data: result, count }
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return this.repository.findOneOrFail(id);
   }
 
-  update(id: number, updateBackupDto: UpdateBackupDto) {
+  update(id: string, updateBackupDto: UpdateBackupDto) {
     return this.repository.update(id, updateBackupDto);
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return this.repository.softDelete(id);
   }
 }
