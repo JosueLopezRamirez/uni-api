@@ -12,13 +12,13 @@
 
 CREATE TABLE IF NOT EXISTS `backup` (
   `id` varchar(36) NOT NULL,
-  `createdAt` datetime(6) NOT NULL DEFAULT current_timestamp(6),
-  `updatedAt` datetime(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `createdAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updatedAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   `deletedAt` datetime(6) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 # ------------------------------------------------------------
 # SCHEMA DUMP FOR TABLE: comprobante_diario
@@ -26,16 +26,16 @@ CREATE TABLE IF NOT EXISTS `backup` (
 
 CREATE TABLE IF NOT EXISTS `comprobante_diario` (
   `id` varchar(36) NOT NULL,
-  `createdAt` datetime(6) NOT NULL DEFAULT current_timestamp(6),
-  `updatedAt` datetime(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `createdAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updatedAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   `deletedAt` datetime(6) DEFAULT NULL,
   `nombre` varchar(255) DEFAULT NULL,
   `fecha` datetime NOT NULL,
   `estaticoId` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_27a2b029dab57295d56f24fcd13` (`estaticoId`),
-  CONSTRAINT `FK_27a2b029dab57295d56f24fcd13` FOREIGN KEY (`estaticoId`) REFERENCES `estatico` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+  CONSTRAINT `FK_27a2b029dab57295d56f24fcd13` FOREIGN KEY (`estaticoId`) REFERENCES `estatico` (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 # ------------------------------------------------------------
 # SCHEMA DUMP FOR TABLE: comprobante_diario_item
@@ -43,18 +43,18 @@ CREATE TABLE IF NOT EXISTS `comprobante_diario` (
 
 CREATE TABLE IF NOT EXISTS `comprobante_diario_item` (
   `id` varchar(36) NOT NULL,
-  `createdAt` datetime(6) NOT NULL DEFAULT current_timestamp(6),
-  `updatedAt` datetime(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `createdAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updatedAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   `deletedAt` datetime(6) DEFAULT NULL,
   `numeroCuenta` varchar(255) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
-  `parcial` int(11) DEFAULT NULL,
-  `debito` int(11) DEFAULT NULL,
+  `parcial` int DEFAULT NULL,
+  `debito` int DEFAULT NULL,
   `comprobanteDiarioId` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_9ed0af5c5fa600cb2ff64d4d69c` (`comprobanteDiarioId`),
-  CONSTRAINT `FK_9ed0af5c5fa600cb2ff64d4d69c` FOREIGN KEY (`comprobanteDiarioId`) REFERENCES `comprobante_diario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+  CONSTRAINT `FK_9ed0af5c5fa600cb2ff64d4d69c` FOREIGN KEY (`comprobanteDiarioId`) REFERENCES `comprobante_diario` (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 # ------------------------------------------------------------
 # SCHEMA DUMP FOR TABLE: dinamico
@@ -62,8 +62,8 @@ CREATE TABLE IF NOT EXISTS `comprobante_diario_item` (
 
 CREATE TABLE IF NOT EXISTS `dinamico` (
   `id` varchar(36) NOT NULL,
-  `createdAt` datetime(6) NOT NULL DEFAULT current_timestamp(6),
-  `updatedAt` datetime(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `createdAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updatedAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   `deletedAt` datetime(6) DEFAULT NULL,
   `documentoId` varchar(255) NOT NULL,
   `plantillaId` varchar(255) NOT NULL,
@@ -72,9 +72,9 @@ CREATE TABLE IF NOT EXISTS `dinamico` (
   PRIMARY KEY (`id`),
   KEY `FK_5814e80f47010559b5a5bd345e4` (`documentoId`),
   KEY `FK_3b43f2c2e7e5f96a49715ec73da` (`plantillaId`),
-  CONSTRAINT `FK_3b43f2c2e7e5f96a49715ec73da` FOREIGN KEY (`plantillaId`) REFERENCES `plantilla` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_5814e80f47010559b5a5bd345e4` FOREIGN KEY (`documentoId`) REFERENCES `documento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+  CONSTRAINT `FK_3b43f2c2e7e5f96a49715ec73da` FOREIGN KEY (`plantillaId`) REFERENCES `plantilla` (`id`),
+  CONSTRAINT `FK_5814e80f47010559b5a5bd345e4` FOREIGN KEY (`documentoId`) REFERENCES `documento` (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 # ------------------------------------------------------------
 # SCHEMA DUMP FOR TABLE: documento
@@ -82,14 +82,14 @@ CREATE TABLE IF NOT EXISTS `dinamico` (
 
 CREATE TABLE IF NOT EXISTS `documento` (
   `id` varchar(36) NOT NULL,
-  `createdAt` datetime(6) NOT NULL DEFAULT current_timestamp(6),
-  `updatedAt` datetime(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `createdAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updatedAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   `deletedAt` datetime(6) DEFAULT NULL,
   `empresaId` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_6619e8c6c8b5b1d8631ebe0f8fd` (`empresaId`),
-  CONSTRAINT `FK_6619e8c6c8b5b1d8631ebe0f8fd` FOREIGN KEY (`empresaId`) REFERENCES `empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+  CONSTRAINT `FK_6619e8c6c8b5b1d8631ebe0f8fd` FOREIGN KEY (`empresaId`) REFERENCES `empresa` (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 # ------------------------------------------------------------
 # SCHEMA DUMP FOR TABLE: empresa
@@ -97,8 +97,8 @@ CREATE TABLE IF NOT EXISTS `documento` (
 
 CREATE TABLE IF NOT EXISTS `empresa` (
   `id` varchar(36) NOT NULL,
-  `createdAt` datetime(6) NOT NULL DEFAULT current_timestamp(6),
-  `updatedAt` datetime(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `createdAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updatedAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   `deletedAt` datetime(6) DEFAULT NULL,
   `nombre` varchar(255) NOT NULL,
   `descripcion` varchar(255) DEFAULT NULL,
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `empresa` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `IDX_dc656dc24f6986afbfe84ebf13` (`ruc`),
   UNIQUE KEY `IDX_3ab4bf8bb031ef45df7165a07f` (`telefono`)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 # ------------------------------------------------------------
 # SCHEMA DUMP FOR TABLE: estatico
@@ -115,14 +115,14 @@ CREATE TABLE IF NOT EXISTS `empresa` (
 
 CREATE TABLE IF NOT EXISTS `estatico` (
   `id` varchar(36) NOT NULL,
-  `createdAt` datetime(6) NOT NULL DEFAULT current_timestamp(6),
-  `updatedAt` datetime(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `createdAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updatedAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   `deletedAt` datetime(6) DEFAULT NULL,
   `documentoId` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_aa97ce017059b3cc024bba8db34` (`documentoId`),
-  CONSTRAINT `FK_aa97ce017059b3cc024bba8db34` FOREIGN KEY (`documentoId`) REFERENCES `documento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+  CONSTRAINT `FK_aa97ce017059b3cc024bba8db34` FOREIGN KEY (`documentoId`) REFERENCES `documento` (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 # ------------------------------------------------------------
 # SCHEMA DUMP FOR TABLE: factura
@@ -130,16 +130,16 @@ CREATE TABLE IF NOT EXISTS `estatico` (
 
 CREATE TABLE IF NOT EXISTS `factura` (
   `id` varchar(36) NOT NULL,
-  `createdAt` datetime(6) NOT NULL DEFAULT current_timestamp(6),
-  `updatedAt` datetime(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `createdAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updatedAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   `deletedAt` datetime(6) DEFAULT NULL,
   `fecha` datetime NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `estaticoId` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_17ba7d1cdb3124bd7848961aa84` (`estaticoId`),
-  CONSTRAINT `FK_17ba7d1cdb3124bd7848961aa84` FOREIGN KEY (`estaticoId`) REFERENCES `estatico` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+  CONSTRAINT `FK_17ba7d1cdb3124bd7848961aa84` FOREIGN KEY (`estaticoId`) REFERENCES `estatico` (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 # ------------------------------------------------------------
 # SCHEMA DUMP FOR TABLE: factura_item
@@ -147,19 +147,19 @@ CREATE TABLE IF NOT EXISTS `factura` (
 
 CREATE TABLE IF NOT EXISTS `factura_item` (
   `id` varchar(36) NOT NULL,
-  `createdAt` datetime(6) NOT NULL DEFAULT current_timestamp(6),
-  `updatedAt` datetime(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `createdAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updatedAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   `deletedAt` datetime(6) DEFAULT NULL,
   `numeroFactura` varchar(255) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
-  `ventasExoneradas` int(11) DEFAULT NULL,
-  `ventasExentas` int(11) DEFAULT NULL,
-  `ventasGrabadas` int(11) DEFAULT NULL,
+  `ventasExoneradas` int DEFAULT NULL,
+  `ventasExentas` int DEFAULT NULL,
+  `ventasGrabadas` int DEFAULT NULL,
   `facturaId` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_6d9e4410327e605ac464697bf7e` (`facturaId`),
-  CONSTRAINT `FK_6d9e4410327e605ac464697bf7e` FOREIGN KEY (`facturaId`) REFERENCES `factura` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+  CONSTRAINT `FK_6d9e4410327e605ac464697bf7e` FOREIGN KEY (`facturaId`) REFERENCES `factura` (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 # ------------------------------------------------------------
 # SCHEMA DUMP FOR TABLE: feature_flag
@@ -167,13 +167,13 @@ CREATE TABLE IF NOT EXISTS `factura_item` (
 
 CREATE TABLE IF NOT EXISTS `feature_flag` (
   `id` varchar(36) NOT NULL,
-  `createdAt` datetime(6) NOT NULL DEFAULT current_timestamp(6),
-  `updatedAt` datetime(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `createdAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updatedAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   `deletedAt` datetime(6) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `IDX_0cb1810eca363db1e0bf13c3cf` (`name`)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 # ------------------------------------------------------------
 # SCHEMA DUMP FOR TABLE: feature_flag_user
@@ -181,17 +181,17 @@ CREATE TABLE IF NOT EXISTS `feature_flag` (
 
 CREATE TABLE IF NOT EXISTS `feature_flag_user` (
   `id` varchar(36) NOT NULL,
-  `createdAt` datetime(6) NOT NULL DEFAULT current_timestamp(6),
-  `updatedAt` datetime(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `createdAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updatedAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   `deletedAt` datetime(6) DEFAULT NULL,
   `usuarioId` varchar(255) NOT NULL,
   `featureFlagId` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_036abcf3897fc7c0d200b7226e5` (`usuarioId`),
   KEY `FK_7502bd30e336c4eb5ff455ec1d2` (`featureFlagId`),
-  CONSTRAINT `FK_036abcf3897fc7c0d200b7226e5` FOREIGN KEY (`usuarioId`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_7502bd30e336c4eb5ff455ec1d2` FOREIGN KEY (`featureFlagId`) REFERENCES `feature_flag` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+  CONSTRAINT `FK_036abcf3897fc7c0d200b7226e5` FOREIGN KEY (`usuarioId`) REFERENCES `usuario` (`id`),
+  CONSTRAINT `FK_7502bd30e336c4eb5ff455ec1d2` FOREIGN KEY (`featureFlagId`) REFERENCES `feature_flag` (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 # ------------------------------------------------------------
 # SCHEMA DUMP FOR TABLE: fila
@@ -199,15 +199,15 @@ CREATE TABLE IF NOT EXISTS `feature_flag_user` (
 
 CREATE TABLE IF NOT EXISTS `fila` (
   `id` varchar(36) NOT NULL,
-  `createdAt` datetime(6) NOT NULL DEFAULT current_timestamp(6),
-  `updatedAt` datetime(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `createdAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updatedAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   `deletedAt` datetime(6) DEFAULT NULL,
   `valor` text NOT NULL,
   `dinamicoId` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_e652922dc09c550f4888ee4f09d` (`dinamicoId`),
-  CONSTRAINT `FK_e652922dc09c550f4888ee4f09d` FOREIGN KEY (`dinamicoId`) REFERENCES `dinamico` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+  CONSTRAINT `FK_e652922dc09c550f4888ee4f09d` FOREIGN KEY (`dinamicoId`) REFERENCES `dinamico` (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 # ------------------------------------------------------------
 # SCHEMA DUMP FOR TABLE: historial_comprobante_diario
@@ -215,17 +215,17 @@ CREATE TABLE IF NOT EXISTS `fila` (
 
 CREATE TABLE IF NOT EXISTS `historial_comprobante_diario` (
   `id` varchar(36) NOT NULL,
-  `createdAt` datetime(6) NOT NULL DEFAULT current_timestamp(6),
-  `updatedAt` datetime(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `createdAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updatedAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   `deletedAt` datetime(6) DEFAULT NULL,
   `comprobanteDiarioId` varchar(255) NOT NULL,
   `usuarioId` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_d1cd116b9674b47f8cba415684d` (`comprobanteDiarioId`),
   KEY `FK_c51feb5d301aadad92ad3fba38c` (`usuarioId`),
-  CONSTRAINT `FK_c51feb5d301aadad92ad3fba38c` FOREIGN KEY (`usuarioId`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_d1cd116b9674b47f8cba415684d` FOREIGN KEY (`comprobanteDiarioId`) REFERENCES `comprobante_diario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+  CONSTRAINT `FK_c51feb5d301aadad92ad3fba38c` FOREIGN KEY (`usuarioId`) REFERENCES `usuario` (`id`),
+  CONSTRAINT `FK_d1cd116b9674b47f8cba415684d` FOREIGN KEY (`comprobanteDiarioId`) REFERENCES `comprobante_diario` (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 # ------------------------------------------------------------
 # SCHEMA DUMP FOR TABLE: historial_factura
@@ -233,28 +233,28 @@ CREATE TABLE IF NOT EXISTS `historial_comprobante_diario` (
 
 CREATE TABLE IF NOT EXISTS `historial_factura` (
   `id` varchar(36) NOT NULL,
-  `createdAt` datetime(6) NOT NULL DEFAULT current_timestamp(6),
-  `updatedAt` datetime(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `createdAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updatedAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   `deletedAt` datetime(6) DEFAULT NULL,
   `facturaId` varchar(255) NOT NULL,
   `usuarioId` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_76578223a872c0b82d97823f0d1` (`facturaId`),
   KEY `FK_44b850aa88ded8f766b87d69b04` (`usuarioId`),
-  CONSTRAINT `FK_44b850aa88ded8f766b87d69b04` FOREIGN KEY (`usuarioId`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_76578223a872c0b82d97823f0d1` FOREIGN KEY (`facturaId`) REFERENCES `factura` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+  CONSTRAINT `FK_44b850aa88ded8f766b87d69b04` FOREIGN KEY (`usuarioId`) REFERENCES `usuario` (`id`),
+  CONSTRAINT `FK_76578223a872c0b82d97823f0d1` FOREIGN KEY (`facturaId`) REFERENCES `factura` (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 # ------------------------------------------------------------
 # SCHEMA DUMP FOR TABLE: migrations
 # ------------------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS `migrations` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `timestamp` bigint(20) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `timestamp` bigint NOT NULL,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 3 DEFAULT CHARSET = utf8mb4;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 # ------------------------------------------------------------
 # SCHEMA DUMP FOR TABLE: plantilla
@@ -262,13 +262,13 @@ CREATE TABLE IF NOT EXISTS `migrations` (
 
 CREATE TABLE IF NOT EXISTS `plantilla` (
   `id` varchar(36) NOT NULL,
-  `createdAt` datetime(6) NOT NULL DEFAULT current_timestamp(6),
-  `updatedAt` datetime(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `createdAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updatedAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   `deletedAt` datetime(6) DEFAULT NULL,
   `nombre` varchar(255) NOT NULL,
   `columnas` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 # ------------------------------------------------------------
 # SCHEMA DUMP FOR TABLE: rol
@@ -276,13 +276,13 @@ CREATE TABLE IF NOT EXISTS `plantilla` (
 
 CREATE TABLE IF NOT EXISTS `rol` (
   `id` varchar(36) NOT NULL,
-  `createdAt` datetime(6) NOT NULL DEFAULT current_timestamp(6),
-  `updatedAt` datetime(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `createdAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updatedAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   `deletedAt` datetime(6) DEFAULT NULL,
   `nombre` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `IDX_9792c580a992d554ee1621c5b4` (`nombre`)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 # ------------------------------------------------------------
 # SCHEMA DUMP FOR TABLE: usuario
@@ -290,24 +290,258 @@ CREATE TABLE IF NOT EXISTS `rol` (
 
 CREATE TABLE IF NOT EXISTS `usuario` (
   `id` varchar(36) NOT NULL,
-  `createdAt` datetime(6) NOT NULL DEFAULT current_timestamp(6),
-  `updatedAt` datetime(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `createdAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updatedAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   `deletedAt` datetime(6) DEFAULT NULL,
   `nombre` varchar(255) NOT NULL,
   `correo` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `rolId` varchar(255) NOT NULL,
-  `activo` tinyint(4) NOT NULL DEFAULT 1,
+  `activo` tinyint NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `IDX_349ecb64acc4355db443ca17cb` (`correo`),
   KEY `FK_611daf5befc024d9e0bd7bdf4da` (`rolId`),
-  CONSTRAINT `FK_611daf5befc024d9e0bd7bdf4da` FOREIGN KEY (`rolId`) REFERENCES `rol` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+  CONSTRAINT `FK_611daf5befc024d9e0bd7bdf4da` FOREIGN KEY (`rolId`) REFERENCES `rol` (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 # ------------------------------------------------------------
 # DATA DUMP FOR TABLE: backup
 # ------------------------------------------------------------
 
+INSERT INTO
+  `backup` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `name`,
+    `url`
+  )
+VALUES
+  (
+    '0fa71414-f771-4e42-be58-c80a6b1136f0',
+    '2023-06-17 16:35:02.586646',
+    '2023-06-17 16:35:02.586646',
+    NULL,
+    'dumpfile-1687041302368.sql',
+    'http://localhost:4566/bucket/dumpfile-1687041302368.sql'
+  );
+INSERT INTO
+  `backup` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `name`,
+    `url`
+  )
+VALUES
+  (
+    '2e36c6b0-a0cf-4a58-9a7e-c00632225f36',
+    '2023-06-17 16:34:57.261874',
+    '2023-06-17 16:34:57.261874',
+    NULL,
+    'dumpfile-1687041297018.sql',
+    'http://localhost:4566/bucket/dumpfile-1687041297018.sql'
+  );
+INSERT INTO
+  `backup` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `name`,
+    `url`
+  )
+VALUES
+  (
+    '385537e5-53fa-4a60-86f2-73981d31cd5c',
+    '2023-06-17 16:34:35.989840',
+    '2023-06-17 16:34:35.989840',
+    NULL,
+    'dumpfile-1687041275699.sql',
+    'http://localhost:4566/bucket/dumpfile-1687041275699.sql'
+  );
+INSERT INTO
+  `backup` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `name`,
+    `url`
+  )
+VALUES
+  (
+    '5fe954cd-8b31-401d-a024-8a8e5df8a9e6',
+    '2023-06-17 16:34:53.980157',
+    '2023-06-17 16:34:53.980157',
+    NULL,
+    'dumpfile-1687041293705.sql',
+    'http://localhost:4566/bucket/dumpfile-1687041293705.sql'
+  );
+INSERT INTO
+  `backup` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `name`,
+    `url`
+  )
+VALUES
+  (
+    '7526c776-652b-40bf-a8b2-902d87e0dd58',
+    '2023-06-17 16:35:03.816409',
+    '2023-06-17 16:35:03.816409',
+    NULL,
+    'dumpfile-1687041303551.sql',
+    'http://localhost:4566/bucket/dumpfile-1687041303551.sql'
+  );
+INSERT INTO
+  `backup` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `name`,
+    `url`
+  )
+VALUES
+  (
+    '7d20349b-a65e-4a84-8218-fb5ffa7c1b93',
+    '2023-06-17 16:35:07.123162',
+    '2023-06-17 16:35:07.123162',
+    NULL,
+    'dumpfile-1687041306848.sql',
+    'http://localhost:4566/bucket/dumpfile-1687041306848.sql'
+  );
+INSERT INTO
+  `backup` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `name`,
+    `url`
+  )
+VALUES
+  (
+    '9f3d547d-cda8-44f5-b1ae-86c906330bf5',
+    '2023-06-17 16:35:08.954898',
+    '2023-06-17 16:35:08.954898',
+    NULL,
+    'dumpfile-1687041308734.sql',
+    'http://localhost:4566/bucket/dumpfile-1687041308734.sql'
+  );
+INSERT INTO
+  `backup` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `name`,
+    `url`
+  )
+VALUES
+  (
+    'a369e233-de8c-497c-a158-356a120aa080',
+    '2023-06-17 16:34:59.326500',
+    '2023-06-17 16:34:59.326500',
+    NULL,
+    'dumpfile-1687041299069.sql',
+    'http://localhost:4566/bucket/dumpfile-1687041299069.sql'
+  );
+INSERT INTO
+  `backup` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `name`,
+    `url`
+  )
+VALUES
+  (
+    'a935a533-c063-4699-bdd6-c7845b94de80',
+    '2023-06-17 16:34:54.995823',
+    '2023-06-17 16:34:54.995823',
+    NULL,
+    'dumpfile-1687041294742.sql',
+    'http://localhost:4566/bucket/dumpfile-1687041294742.sql'
+  );
+INSERT INTO
+  `backup` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `name`,
+    `url`
+  )
+VALUES
+  (
+    'bd245e3f-65ff-4cca-ab75-51648a1d62af',
+    '2023-06-17 16:34:32.615213',
+    '2023-06-17 16:34:32.615213',
+    NULL,
+    'dumpfile-1687041272299.sql',
+    'http://localhost:4566/bucket/dumpfile-1687041272299.sql'
+  );
+INSERT INTO
+  `backup` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `name`,
+    `url`
+  )
+VALUES
+  (
+    'd7f688c2-744c-47d6-9132-59d9a9549843',
+    '2023-06-17 16:34:37.476512',
+    '2023-06-17 16:34:37.476512',
+    NULL,
+    'dumpfile-1687041277203.sql',
+    'http://localhost:4566/bucket/dumpfile-1687041277203.sql'
+  );
+INSERT INTO
+  `backup` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `name`,
+    `url`
+  )
+VALUES
+  (
+    'f126c978-80c8-4504-aa4e-9537ba17f7c9',
+    '2023-06-17 16:34:39.713297',
+    '2023-06-17 16:34:39.713297',
+    NULL,
+    'dumpfile-1687041279455.sql',
+    'http://localhost:4566/bucket/dumpfile-1687041279455.sql'
+  );
+INSERT INTO
+  `backup` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `name`,
+    `url`
+  )
+VALUES
+  (
+    'f2ca05d2-57a6-4ce6-ad7a-68c049815cfe',
+    '2023-06-17 16:34:34.578555',
+    '2023-06-17 16:34:34.578555',
+    NULL,
+    'dumpfile-1687041274244.sql',
+    'http://localhost:4566/bucket/dumpfile-1687041274244.sql'
+  );
 
 # ------------------------------------------------------------
 # DATA DUMP FOR TABLE: comprobante_diario
@@ -325,33 +559,13 @@ INSERT INTO
   )
 VALUES
   (
-    '0fcb1417-18b6-41df-abce-a0d0de3b8b9d',
-    '2023-06-17 00:27:43.872124',
-    '2023-06-17 00:27:43.872124',
-    NULL,
-    'Home Loan Account',
-    '2023-02-21 05:54:43',
-    'fe41b082-3248-4780-a482-e087fd3cf51c'
-  );
-INSERT INTO
-  `comprobante_diario` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `nombre`,
-    `fecha`,
-    `estaticoId`
-  )
-VALUES
-  (
-    '1783fdd2-303a-42b6-92c1-fb10677a3d8d',
-    '2023-06-17 00:27:44.130661',
-    '2023-06-17 00:27:44.130661',
+    '007e5819-5d62-4106-aaa9-fe3436470934',
+    '2023-06-17 16:31:51.814051',
+    '2023-06-17 16:31:51.814051',
     NULL,
     'Credit Card Account',
-    '2022-07-10 08:29:24',
-    'a9623274-da6b-42e5-a64d-c70bf27bbf93'
+    '2023-02-02 02:25:33',
+    '3fc46eea-81b6-491c-b24f-0c2e13653b2d'
   );
 INSERT INTO
   `comprobante_diario` (
@@ -365,13 +579,13 @@ INSERT INTO
   )
 VALUES
   (
-    '1ede4e76-4c46-4eae-8420-349b6ec0e7f6',
-    '2023-06-17 00:27:44.405181',
-    '2023-06-17 00:27:44.405181',
+    '3f31af9c-823d-44e0-bc3c-8400e2d97590',
+    '2023-06-17 16:31:52.063816',
+    '2023-06-17 16:31:52.063816',
     NULL,
     'Credit Card Account',
-    '2022-09-13 05:36:07',
-    'cc489f9b-936a-437d-973e-1d6a7075b354'
+    '2022-07-08 17:09:46',
+    '1fa045c3-14c6-458b-8774-af47f76e6e4a'
   );
 INSERT INTO
   `comprobante_diario` (
@@ -385,13 +599,13 @@ INSERT INTO
   )
 VALUES
   (
-    '3086833c-be03-424e-ae2f-71f1bb5400d1',
-    '2023-06-17 00:27:44.234655',
-    '2023-06-17 00:27:44.234655',
+    '42c6ba15-21e1-41ad-844b-04eb6a749de0',
+    '2023-06-17 16:31:52.135263',
+    '2023-06-17 16:31:52.135263',
     NULL,
     'Credit Card Account',
-    '2023-02-13 05:07:32',
-    '2396d101-54b3-4b1b-a7b1-e199498e3fd1'
+    '2022-11-13 00:00:04',
+    '2f7827fb-56d0-45ef-b632-e92142bdf991'
   );
 INSERT INTO
   `comprobante_diario` (
@@ -405,13 +619,33 @@ INSERT INTO
   )
 VALUES
   (
-    '40cb6e89-7e56-42bf-9612-e0010d371014',
-    '2023-06-17 00:27:44.031363',
-    '2023-06-17 00:27:44.031363',
+    '701c6234-2be7-4c35-822a-5e30812e1cd1',
+    '2023-06-17 16:31:51.884607',
+    '2023-06-17 16:31:51.884607',
+    NULL,
+    'Auto Loan Account',
+    '2022-12-06 23:19:19',
+    '45185f32-7491-40ae-8f79-985864aa0a19'
+  );
+INSERT INTO
+  `comprobante_diario` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `nombre`,
+    `fecha`,
+    `estaticoId`
+  )
+VALUES
+  (
+    '81f32d1a-447b-41bd-bcaa-a0c51cb1dcc2',
+    '2023-06-17 16:31:52.381709',
+    '2023-06-17 16:31:52.381709',
     NULL,
     'Money Market Account',
-    '2022-11-01 14:21:53',
-    'd3de92e6-19a4-479b-88c0-85e806b8f641'
+    '2022-07-15 06:45:24',
+    '70a70a13-5bb1-4510-88ee-421c554a9cc5'
   );
 INSERT INTO
   `comprobante_diario` (
@@ -425,13 +659,13 @@ INSERT INTO
   )
 VALUES
   (
-    'c1cdc7c2-378c-4ea9-8505-cd594bfab425',
-    '2023-06-17 00:27:43.947098',
-    '2023-06-17 00:27:43.947098',
+    'a9a028c0-2b2b-43d7-8c59-2ed00f179c6d',
+    '2023-06-17 16:31:52.234858',
+    '2023-06-17 16:31:52.234858',
     NULL,
-    'Personal Loan Account',
-    '2023-03-17 14:51:14',
-    '4de36e77-03d0-4b66-b550-ca3468850990'
+    'Home Loan Account',
+    '2023-04-28 22:54:38',
+    'aa78a1d4-0f3a-4c69-a32a-5a6e428d76cc'
   );
 INSERT INTO
   `comprobante_diario` (
@@ -445,13 +679,13 @@ INSERT INTO
   )
 VALUES
   (
-    'd220da0b-ab77-48a8-8a95-4cd34ce842eb',
-    '2023-06-17 00:27:44.468573',
-    '2023-06-17 00:27:44.468573',
+    'df8b1740-0f3c-4e66-a0b3-622f0388afb4',
+    '2023-06-17 16:31:51.724116',
+    '2023-06-17 16:31:51.724116',
     NULL,
-    'Savings Account',
-    '2022-11-06 04:38:49',
-    '31b60a1a-ddbc-4ff0-8df4-ae1747c39159'
+    'Credit Card Account',
+    '2022-08-11 19:45:34',
+    '65976b4d-a804-4a58-b11d-9ecd47aca19c'
   );
 INSERT INTO
   `comprobante_diario` (
@@ -465,13 +699,13 @@ INSERT INTO
   )
 VALUES
   (
-    'd8c807c5-8645-402d-8a3f-874988e18826',
-    '2023-06-17 00:27:44.321135',
-    '2023-06-17 00:27:44.321135',
+    'e23400e5-0426-42c0-a7c2-d30cddd6fd0a',
+    '2023-06-17 16:31:52.306463',
+    '2023-06-17 16:31:52.306463',
     NULL,
-    'Personal Loan Account',
-    '2022-10-21 12:04:31',
-    '3f8c9f3c-2673-40c9-9cf4-7e0b8b6c2403'
+    'Credit Card Account',
+    '2023-04-08 07:46:25',
+    'c92115a1-79e3-42b1-bced-d87d03df385d'
   );
 INSERT INTO
   `comprobante_diario` (
@@ -485,13 +719,13 @@ INSERT INTO
   )
 VALUES
   (
-    'eeaeba51-6fb8-4cdd-8225-ed17b8391dfe',
-    '2023-06-17 00:27:43.754106',
-    '2023-06-17 00:27:43.754106',
+    'f1e586eb-8b17-46ae-8e09-67d834629a12',
+    '2023-06-17 16:31:51.984745',
+    '2023-06-17 16:31:51.984745',
     NULL,
     'Investment Account',
-    '2023-01-22 10:15:41',
-    'e73cb9ac-04f7-4a66-9f89-ce93fe511a6e'
+    '2023-01-01 04:59:10',
+    'c25c1f9f-825f-44e1-8545-35f48db4950e'
   );
 
 # ------------------------------------------------------------
@@ -512,15 +746,15 @@ INSERT INTO
   )
 VALUES
   (
-    '0236ddc1-a634-45b8-8722-1334a42b28bd',
-    '2023-06-17 00:27:44.481452',
-    '2023-06-17 00:27:44.481452',
+    '0400b0ca-31f9-41e1-85d3-1ef55425090f',
+    '2023-06-17 16:31:51.999053',
+    '2023-06-17 16:31:51.999053',
     NULL,
-    '57195780',
-    'invoice transaction at Lockman, Schulist and Wehner using card ending with ***(...4534) for SDG 673.23 in account ***31576356',
-    995,
-    995,
-    'd220da0b-ab77-48a8-8a95-4cd34ce842eb'
+    '58593578',
+    'withdrawal transaction at Stiedemann Inc using card ending with ***(...1655) for MXN 227.59 in account ***10136017',
+    497,
+    497,
+    'f1e586eb-8b17-46ae-8e09-67d834629a12'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -536,15 +770,15 @@ INSERT INTO
   )
 VALUES
   (
-    '02fbb50e-59cc-4533-a7ff-72390ad9e54a',
-    '2023-06-17 00:27:44.481452',
-    '2023-06-17 00:27:44.481452',
+    '0e8d6d56-4f62-4713-9261-125ca21a1b52',
+    '2023-06-17 16:31:51.911213',
+    '2023-06-17 16:31:51.911213',
     NULL,
-    '24544748',
-    'payment transaction at Parisian, Lang and Spinka using card ending with ***(...3517) for CDF 10.10 in account ***86164111',
-    35,
-    35,
-    'd220da0b-ab77-48a8-8a95-4cd34ce842eb'
+    '49734480',
+    'withdrawal transaction at Ruecker and Sons using card ending with ***(...4836) for RSD 606.43 in account ***47215564',
+    410,
+    410,
+    '701c6234-2be7-4c35-822a-5e30812e1cd1'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -560,15 +794,15 @@ INSERT INTO
   )
 VALUES
   (
-    '0b371bce-e8f3-4434-bc1b-4cdac8b9a52b',
-    '2023-06-17 00:27:43.772897',
-    '2023-06-17 00:27:43.772897',
+    '183b2c1a-6a92-46ec-99b2-05cced09822e',
+    '2023-06-17 16:31:52.322933',
+    '2023-06-17 16:31:52.322933',
     NULL,
-    '48082697',
-    'payment transaction at Franecki - Witting using card ending with ***(...9564) for BOB 232.09 in account ***31253940',
-    591,
-    591,
-    'eeaeba51-6fb8-4cdd-8225-ed17b8391dfe'
+    '12664238',
+    'withdrawal transaction at Kovacek - Turner using card ending with ***(...5049) for OMR 872.99 in account ***11304661',
+    369,
+    369,
+    'e23400e5-0426-42c0-a7c2-d30cddd6fd0a'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -584,15 +818,15 @@ INSERT INTO
   )
 VALUES
   (
-    '10606c58-52f2-4d87-897f-c19555760423',
-    '2023-06-17 00:27:44.150605',
-    '2023-06-17 00:27:44.150605',
+    '1c8f9c44-61ea-4212-abd0-397a2087fbec',
+    '2023-06-17 16:31:51.743530',
+    '2023-06-17 16:31:51.743530',
     NULL,
-    '64015699',
-    'withdrawal transaction at Herzog and Sons using card ending with ***(...0542) for CNY 149.61 in account ***76538179',
-    511,
-    511,
-    '1783fdd2-303a-42b6-92c1-fb10677a3d8d'
+    '43411989',
+    'payment transaction at Huel, Borer and Murazik using card ending with ***(...5402) for PHP 339.99 in account ***19891092',
+    756,
+    756,
+    'df8b1740-0f3c-4e66-a0b3-622f0388afb4'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -608,15 +842,15 @@ INSERT INTO
   )
 VALUES
   (
-    '223b2479-a934-4b9d-87ea-490c34ee7533',
-    '2023-06-17 00:27:43.961718',
-    '2023-06-17 00:27:43.961718',
+    '2fed9c8c-e9bd-44d4-bc12-f331ee8a57a4',
+    '2023-06-17 16:31:51.999053',
+    '2023-06-17 16:31:51.999053',
     NULL,
-    '59637316',
-    'withdrawal transaction at Kunze - Heathcote using card ending with ***(...7595) for PLN 306.41 in account ***90522296',
-    124,
-    124,
-    'c1cdc7c2-378c-4ea9-8505-cd594bfab425'
+    '18874061',
+    'payment transaction at Anderson - Russel using card ending with ***(...7318) for CZK 644.51 in account ***14908910',
+    650,
+    650,
+    'f1e586eb-8b17-46ae-8e09-67d834629a12'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -632,15 +866,15 @@ INSERT INTO
   )
 VALUES
   (
-    '25c4d5a6-93a6-4319-a5d6-e723f56b2ec4',
-    '2023-06-17 00:27:44.337541',
-    '2023-06-17 00:27:44.337541',
+    '3274c365-c904-439a-a006-9590c2ea09c5',
+    '2023-06-17 16:31:51.743530',
+    '2023-06-17 16:31:51.743530',
     NULL,
-    '64158882',
-    'payment transaction at Goyette - Lowe using card ending with ***(...7629) for XAU 459.95 in account ***29276464',
-    102,
-    102,
-    'd8c807c5-8645-402d-8a3f-874988e18826'
+    '02968938',
+    'invoice transaction at Feeney, Konopelski and Stanton using card ending with ***(...8008) for LVL 795.66 in account ***80491029',
+    678,
+    678,
+    'df8b1740-0f3c-4e66-a0b3-622f0388afb4'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -656,15 +890,15 @@ INSERT INTO
   )
 VALUES
   (
-    '2635da3e-153e-4f1a-9243-5e2e7f8661e2',
-    '2023-06-17 00:27:43.772897',
-    '2023-06-17 00:27:43.772897',
+    '5330770a-bc3b-40d7-b6c7-022aef8964e8',
+    '2023-06-17 16:31:52.150034',
+    '2023-06-17 16:31:52.150034',
     NULL,
-    '20110517',
-    'withdrawal transaction at Schuppe, Bosco and O\'Keefe using card ending with ***(...2053) for NGN 755.18 in account ***58381307',
-    454,
-    454,
-    'eeaeba51-6fb8-4cdd-8225-ed17b8391dfe'
+    '06684182',
+    'deposit transaction at Grady - Koelpin using card ending with ***(...0769) for FJD 822.32 in account ***00803423',
+    399,
+    399,
+    '42c6ba15-21e1-41ad-844b-04eb6a749de0'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -680,15 +914,15 @@ INSERT INTO
   )
 VALUES
   (
-    '2d568c6d-f171-43f4-bac7-6e656a655269',
-    '2023-06-17 00:27:43.772897',
-    '2023-06-17 00:27:43.772897',
+    '5543be05-44d8-45d6-a5db-331842f91b46',
+    '2023-06-17 16:31:51.827548',
+    '2023-06-17 16:31:51.827548',
     NULL,
-    '56321640',
-    'deposit transaction at King and Sons using card ending with ***(...5810) for MVR 638.25 in account ***01191287',
-    550,
-    550,
-    'eeaeba51-6fb8-4cdd-8225-ed17b8391dfe'
+    '39560424',
+    'payment transaction at Hessel, Braun and Leffler using card ending with ***(...9177) for KYD 210.55 in account ***94685079',
+    690,
+    690,
+    '007e5819-5d62-4106-aaa9-fe3436470934'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -704,15 +938,15 @@ INSERT INTO
   )
 VALUES
   (
-    '34b7f29a-0b65-4c11-a233-449a861e79ff',
-    '2023-06-17 00:27:44.053588',
-    '2023-06-17 00:27:44.053588',
+    '565907e9-ba98-43a5-83a1-86f4acd84be0',
+    '2023-06-17 16:31:52.322933',
+    '2023-06-17 16:31:52.322933',
     NULL,
-    '94443045',
-    'withdrawal transaction at Wisozk - Bergstrom using card ending with ***(...6231) for SGD 451.00 in account ***44031888',
-    655,
-    655,
-    '40cb6e89-7e56-42bf-9612-e0010d371014'
+    '86881318',
+    'payment transaction at Glover LLC using card ending with ***(...6931) for BGN 260.94 in account ***33552339',
+    331,
+    331,
+    'e23400e5-0426-42c0-a7c2-d30cddd6fd0a'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -728,15 +962,15 @@ INSERT INTO
   )
 VALUES
   (
-    '35fb2ef4-9b79-4490-9614-b6eb8291282c',
-    '2023-06-17 00:27:44.053588',
-    '2023-06-17 00:27:44.053588',
+    '59f890b5-9494-4387-a212-8d9cad2b622d',
+    '2023-06-17 16:31:52.150034',
+    '2023-06-17 16:31:52.150034',
     NULL,
-    '66331282',
-    'invoice transaction at Lindgren - Miller using card ending with ***(...1890) for SZL 919.04 in account ***15558957',
-    252,
-    252,
-    '40cb6e89-7e56-42bf-9612-e0010d371014'
+    '35361179',
+    'deposit transaction at Kreiger, Ward and Walsh using card ending with ***(...7015) for ZMW 777.62 in account ***16565373',
+    308,
+    308,
+    '42c6ba15-21e1-41ad-844b-04eb6a749de0'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -752,15 +986,15 @@ INSERT INTO
   )
 VALUES
   (
-    '3e7f48fc-5d85-492c-b6f2-b2d62389431c',
-    '2023-06-17 00:27:44.337541',
-    '2023-06-17 00:27:44.337541',
+    '5d61977d-4fcd-47d6-b7cd-0962dfb3a269',
+    '2023-06-17 16:31:52.396613',
+    '2023-06-17 16:31:52.396613',
     NULL,
-    '43298064',
-    'invoice transaction at Goodwin - Bins using card ending with ***(...8093) for LTL 388.38 in account ***57851808',
-    212,
-    212,
-    'd8c807c5-8645-402d-8a3f-874988e18826'
+    '48348991',
+    'deposit transaction at Becker Group using card ending with ***(...3096) for AED 677.98 in account ***82701741',
+    671,
+    671,
+    '81f32d1a-447b-41bd-bcaa-a0c51cb1dcc2'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -776,15 +1010,471 @@ INSERT INTO
   )
 VALUES
   (
-    '4967bc6f-bc28-4d73-a04c-1853ad3bbbd1',
-    '2023-06-17 00:27:43.886843',
-    '2023-06-17 00:27:43.886843',
+    '72aac99d-a016-4a00-a325-9d0177ab2515',
+    '2023-06-17 16:31:52.396613',
+    '2023-06-17 16:31:52.396613',
     NULL,
-    '47881709',
-    'deposit transaction at VonRueden Group using card ending with ***(...6090) for NPR 41.06 in account ***97314135',
+    '99532097',
+    'deposit transaction at Hilll - McLaughlin using card ending with ***(...1207) for EEK 529.06 in account ***28897348',
+    298,
+    298,
+    '81f32d1a-447b-41bd-bcaa-a0c51cb1dcc2'
+  );
+INSERT INTO
+  `comprobante_diario_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroCuenta`,
+    `descripcion`,
+    `parcial`,
+    `debito`,
+    `comprobanteDiarioId`
+  )
+VALUES
+  (
+    '75617cb2-e597-4f4d-8d73-762354a1cb2a',
+    '2023-06-17 16:31:51.911213',
+    '2023-06-17 16:31:51.911213',
+    NULL,
+    '80167960',
+    'payment transaction at Harber LLC using card ending with ***(...1381) for ISK 450.99 in account ***25881033',
+    915,
+    915,
+    '701c6234-2be7-4c35-822a-5e30812e1cd1'
+  );
+INSERT INTO
+  `comprobante_diario_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroCuenta`,
+    `descripcion`,
+    `parcial`,
+    `debito`,
+    `comprobanteDiarioId`
+  )
+VALUES
+  (
+    '787d6a53-d4fb-4a1d-ac7d-4344862e8574',
+    '2023-06-17 16:31:52.396613',
+    '2023-06-17 16:31:52.396613',
+    NULL,
+    '76349805',
+    'invoice transaction at Smith - Becker using card ending with ***(...3379) for PLN 963.69 in account ***48261370',
+    475,
+    475,
+    '81f32d1a-447b-41bd-bcaa-a0c51cb1dcc2'
+  );
+INSERT INTO
+  `comprobante_diario_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroCuenta`,
+    `descripcion`,
+    `parcial`,
+    `debito`,
+    `comprobanteDiarioId`
+  )
+VALUES
+  (
+    '7c2d6a9d-4131-4b4f-a58f-b87cd88ea693',
+    '2023-06-17 16:31:51.827548',
+    '2023-06-17 16:31:51.827548',
+    NULL,
+    '36469728',
+    'payment transaction at McCullough Group using card ending with ***(...1646) for STN 811.37 in account ***30277337',
+    756,
+    756,
+    '007e5819-5d62-4106-aaa9-fe3436470934'
+  );
+INSERT INTO
+  `comprobante_diario_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroCuenta`,
+    `descripcion`,
+    `parcial`,
+    `debito`,
+    `comprobanteDiarioId`
+  )
+VALUES
+  (
+    '804cbd89-913c-433b-9835-5af608cde7ad',
+    '2023-06-17 16:31:52.322933',
+    '2023-06-17 16:31:52.322933',
+    NULL,
+    '07310384',
+    'payment transaction at Bahringer Inc using card ending with ***(...9489) for JPY 641.45 in account ***37290083',
+    425,
+    425,
+    'e23400e5-0426-42c0-a7c2-d30cddd6fd0a'
+  );
+INSERT INTO
+  `comprobante_diario_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroCuenta`,
+    `descripcion`,
+    `parcial`,
+    `debito`,
+    `comprobanteDiarioId`
+  )
+VALUES
+  (
+    '838b9243-dd64-48c9-aa21-c1ee9207c5cc',
+    '2023-06-17 16:31:51.743530',
+    '2023-06-17 16:31:51.743530',
+    NULL,
+    '51995084',
+    'payment transaction at Medhurst and Sons using card ending with ***(...4361) for SRD 570.88 in account ***18569599',
+    82,
+    82,
+    'df8b1740-0f3c-4e66-a0b3-622f0388afb4'
+  );
+INSERT INTO
+  `comprobante_diario_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroCuenta`,
+    `descripcion`,
+    `parcial`,
+    `debito`,
+    `comprobanteDiarioId`
+  )
+VALUES
+  (
+    '884b8b5e-7f20-47f1-ba65-1df808b628fa',
+    '2023-06-17 16:31:52.077107',
+    '2023-06-17 16:31:52.077107',
+    NULL,
+    '30052390',
+    'deposit transaction at Schneider - Monahan using card ending with ***(...9361) for RUB 553.27 in account ***08162820',
+    327,
+    327,
+    '3f31af9c-823d-44e0-bc3c-8400e2d97590'
+  );
+INSERT INTO
+  `comprobante_diario_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroCuenta`,
+    `descripcion`,
+    `parcial`,
+    `debito`,
+    `comprobanteDiarioId`
+  )
+VALUES
+  (
+    '9135616a-b837-4500-8328-3ef2085045b5',
+    '2023-06-17 16:31:52.077107',
+    '2023-06-17 16:31:52.077107',
+    NULL,
+    '31372121',
+    'invoice transaction at Cummings Group using card ending with ***(...6337) for MGA 803.69 in account ***65361872',
+    280,
+    280,
+    '3f31af9c-823d-44e0-bc3c-8400e2d97590'
+  );
+INSERT INTO
+  `comprobante_diario_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroCuenta`,
+    `descripcion`,
+    `parcial`,
+    `debito`,
+    `comprobanteDiarioId`
+  )
+VALUES
+  (
+    '99dd341b-2a11-4ef5-a588-af2e277b0e37',
+    '2023-06-17 16:31:52.247561',
+    '2023-06-17 16:31:52.247561',
+    NULL,
+    '09854890',
+    'withdrawal transaction at Baumbach Inc using card ending with ***(...9866) for XPT 826.80 in account ***71039356',
+    699,
+    699,
+    'a9a028c0-2b2b-43d7-8c59-2ed00f179c6d'
+  );
+INSERT INTO
+  `comprobante_diario_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroCuenta`,
+    `descripcion`,
+    `parcial`,
+    `debito`,
+    `comprobanteDiarioId`
+  )
+VALUES
+  (
+    '9ca478dd-c0d2-4d19-b850-42c9813406b2',
+    '2023-06-17 16:31:52.247561',
+    '2023-06-17 16:31:52.247561',
+    NULL,
+    '18045275',
+    'invoice transaction at O\'Conner Group using card ending with ***(...4473) for SLL 499.98 in account ***36975581',
+    372,
+    372,
+    'a9a028c0-2b2b-43d7-8c59-2ed00f179c6d'
+  );
+INSERT INTO
+  `comprobante_diario_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroCuenta`,
+    `descripcion`,
+    `parcial`,
+    `debito`,
+    `comprobanteDiarioId`
+  )
+VALUES
+  (
+    'a3949b3f-31c7-4698-92f1-9666b402c8b3',
+    '2023-06-17 16:31:52.077107',
+    '2023-06-17 16:31:52.077107',
+    NULL,
+    '67809112',
+    'invoice transaction at Waters, Swift and Fahey using card ending with ***(...1348) for XAG 298.68 in account ***61841506',
+    886,
+    886,
+    '3f31af9c-823d-44e0-bc3c-8400e2d97590'
+  );
+INSERT INTO
+  `comprobante_diario_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroCuenta`,
+    `descripcion`,
+    `parcial`,
+    `debito`,
+    `comprobanteDiarioId`
+  )
+VALUES
+  (
+    'a4210b92-e16f-42ab-ba64-be34b051fe04',
+    '2023-06-17 16:31:52.150034',
+    '2023-06-17 16:31:52.150034',
+    NULL,
+    '93445145',
+    'payment transaction at Kemmer, Boyer and Reichel using card ending with ***(...7895) for PLN 386.33 in account ***27645356',
+    656,
+    656,
+    '42c6ba15-21e1-41ad-844b-04eb6a749de0'
+  );
+INSERT INTO
+  `comprobante_diario_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroCuenta`,
+    `descripcion`,
+    `parcial`,
+    `debito`,
+    `comprobanteDiarioId`
+  )
+VALUES
+  (
+    'a4bba501-18bf-41ad-99a3-8861deedc3a6',
+    '2023-06-17 16:31:51.999053',
+    '2023-06-17 16:31:51.999053',
+    NULL,
+    '52748419',
+    'deposit transaction at Batz, Reichel and Bahringer using card ending with ***(...5632) for XDR 87.40 in account ***67723556',
+    755,
+    755,
+    'f1e586eb-8b17-46ae-8e09-67d834629a12'
+  );
+INSERT INTO
+  `comprobante_diario_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroCuenta`,
+    `descripcion`,
+    `parcial`,
+    `debito`,
+    `comprobanteDiarioId`
+  )
+VALUES
+  (
+    'b1260cd0-5be8-4f8d-9d10-43a5198f93a6',
+    '2023-06-17 16:31:52.077107',
+    '2023-06-17 16:31:52.077107',
+    NULL,
+    '06077234',
+    'withdrawal transaction at Veum - Corwin using card ending with ***(...5307) for MKD 360.10 in account ***65871516',
+    257,
+    257,
+    '3f31af9c-823d-44e0-bc3c-8400e2d97590'
+  );
+INSERT INTO
+  `comprobante_diario_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroCuenta`,
+    `descripcion`,
+    `parcial`,
+    `debito`,
+    `comprobanteDiarioId`
+  )
+VALUES
+  (
+    'b3ec030a-9ae0-4b99-9f66-a8aaa4a1c26f',
+    '2023-06-17 16:31:52.247561',
+    '2023-06-17 16:31:52.247561',
+    NULL,
+    '09381854',
+    'withdrawal transaction at Berge Inc using card ending with ***(...3596) for SZL 874.46 in account ***70297287',
+    573,
+    573,
+    'a9a028c0-2b2b-43d7-8c59-2ed00f179c6d'
+  );
+INSERT INTO
+  `comprobante_diario_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroCuenta`,
+    `descripcion`,
+    `parcial`,
+    `debito`,
+    `comprobanteDiarioId`
+  )
+VALUES
+  (
+    'b8e539a9-481a-4ab0-a4d0-772712a81ba2',
+    '2023-06-17 16:31:51.911213',
+    '2023-06-17 16:31:51.911213',
+    NULL,
+    '41465918',
+    'invoice transaction at Metz, Lind and Ward using card ending with ***(...4291) for JMD 796.06 in account ***00217118',
+    11,
+    11,
+    '701c6234-2be7-4c35-822a-5e30812e1cd1'
+  );
+INSERT INTO
+  `comprobante_diario_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroCuenta`,
+    `descripcion`,
+    `parcial`,
+    `debito`,
+    `comprobanteDiarioId`
+  )
+VALUES
+  (
+    'bd6b263c-b76e-4176-8c7a-e4b728744389',
+    '2023-06-17 16:31:51.827548',
+    '2023-06-17 16:31:51.827548',
+    NULL,
+    '94743220',
+    'invoice transaction at Walter Inc using card ending with ***(...9361) for SHP 611.81 in account ***34466577',
+    926,
+    926,
+    '007e5819-5d62-4106-aaa9-fe3436470934'
+  );
+INSERT INTO
+  `comprobante_diario_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroCuenta`,
+    `descripcion`,
+    `parcial`,
+    `debito`,
+    `comprobanteDiarioId`
+  )
+VALUES
+  (
+    'be2feafd-84b1-41c9-a953-2bdafb053d92',
+    '2023-06-17 16:31:52.150034',
+    '2023-06-17 16:31:52.150034',
+    NULL,
+    '83815267',
+    'withdrawal transaction at Effertz LLC using card ending with ***(...9403) for USD 662.35 in account ***48620621',
+    15,
+    15,
+    '42c6ba15-21e1-41ad-844b-04eb6a749de0'
+  );
+INSERT INTO
+  `comprobante_diario_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroCuenta`,
+    `descripcion`,
+    `parcial`,
+    `debito`,
+    `comprobanteDiarioId`
+  )
+VALUES
+  (
+    'c0fa34a0-08e7-436a-bb86-d948c1146ff5',
+    '2023-06-17 16:31:52.396613',
+    '2023-06-17 16:31:52.396613',
+    NULL,
+    '92067354',
+    'withdrawal transaction at Macejkovic and Sons using card ending with ***(...3730) for ARS 25.90 in account ***42686047',
+    764,
+    764,
+    '81f32d1a-447b-41bd-bcaa-a0c51cb1dcc2'
+  );
+INSERT INTO
+  `comprobante_diario_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroCuenta`,
+    `descripcion`,
+    `parcial`,
+    `debito`,
+    `comprobanteDiarioId`
+  )
+VALUES
+  (
+    'c790f727-919a-452e-b840-b408bcf1473b',
+    '2023-06-17 16:31:52.247561',
+    '2023-06-17 16:31:52.247561',
+    NULL,
+    '45565177',
+    'invoice transaction at Mante - Crona using card ending with ***(...5494) for MRO 8.69 in account ***56225909',
     279,
     279,
-    '0fcb1417-18b6-41df-abce-a0d0de3b8b9d'
+    'a9a028c0-2b2b-43d7-8c59-2ed00f179c6d'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -800,15 +1490,15 @@ INSERT INTO
   )
 VALUES
   (
-    '527b4a17-d276-45ab-b081-32dc2b62e2a7',
-    '2023-06-17 00:27:43.886843',
-    '2023-06-17 00:27:43.886843',
+    'cbb4c6df-ce41-461e-aaae-4b2d36527543',
+    '2023-06-17 16:31:52.077107',
+    '2023-06-17 16:31:52.077107',
     NULL,
-    '41434851',
-    'withdrawal transaction at Stroman - Gottlieb using card ending with ***(...4990) for BMD 880.62 in account ***66693279',
-    610,
-    610,
-    '0fcb1417-18b6-41df-abce-a0d0de3b8b9d'
+    '02832893',
+    'withdrawal transaction at Monahan and Sons using card ending with ***(...9598) for ETB 217.29 in account ***71945522',
+    179,
+    179,
+    '3f31af9c-823d-44e0-bc3c-8400e2d97590'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -824,15 +1514,15 @@ INSERT INTO
   )
 VALUES
   (
-    '5354d516-3baf-4b82-a4c2-170dc48c73d6',
-    '2023-06-17 00:27:44.417831',
-    '2023-06-17 00:27:44.417831',
+    'cc0dee71-57b7-4371-bacd-7f80425969fa',
+    '2023-06-17 16:31:51.911213',
+    '2023-06-17 16:31:51.911213',
     NULL,
-    '70791858',
-    'payment transaction at Haag, Padberg and Keebler using card ending with ***(...6492) for GBP 730.71 in account ***00318586',
-    912,
-    912,
-    '1ede4e76-4c46-4eae-8420-349b6ec0e7f6'
+    '79453446',
+    'deposit transaction at Nicolas, Rodriguez and McCullough using card ending with ***(...2321) for UGX 932.94 in account ***83508319',
+    118,
+    118,
+    '701c6234-2be7-4c35-822a-5e30812e1cd1'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -848,15 +1538,15 @@ INSERT INTO
   )
 VALUES
   (
-    '5900d08d-8e01-4c05-b655-b5f694cdbc99',
-    '2023-06-17 00:27:43.886843',
-    '2023-06-17 00:27:43.886843',
+    'd275d13d-3969-4700-b306-34aad9051861',
+    '2023-06-17 16:31:51.743530',
+    '2023-06-17 16:31:51.743530',
     NULL,
-    '96213842',
-    'invoice transaction at Ortiz Inc using card ending with ***(...4536) for LYD 78.75 in account ***83616434',
-    517,
-    517,
-    '0fcb1417-18b6-41df-abce-a0d0de3b8b9d'
+    '16123133',
+    'invoice transaction at Runolfsdottir - Ruecker using card ending with ***(...5271) for ZMW 453.23 in account ***69593184',
+    352,
+    352,
+    'df8b1740-0f3c-4e66-a0b3-622f0388afb4'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -872,15 +1562,15 @@ INSERT INTO
   )
 VALUES
   (
-    '60033508-9731-40cf-90cd-430b8b480214',
-    '2023-06-17 00:27:43.961718',
-    '2023-06-17 00:27:43.961718',
+    'db84c557-aacc-4614-9cd0-534e129413b3',
+    '2023-06-17 16:31:52.247561',
+    '2023-06-17 16:31:52.247561',
     NULL,
-    '34194754',
-    'deposit transaction at Wuckert - Brakus using card ending with ***(...8504) for THB 257.70 in account ***83945471',
-    31,
-    31,
-    'c1cdc7c2-378c-4ea9-8505-cd594bfab425'
+    '09732623',
+    'deposit transaction at Kirlin - Bartoletti using card ending with ***(...7118) for DKK 263.74 in account ***95707515',
+    638,
+    638,
+    'a9a028c0-2b2b-43d7-8c59-2ed00f179c6d'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -896,15 +1586,15 @@ INSERT INTO
   )
 VALUES
   (
-    '64d15666-8adb-4f34-9476-9d0a9bbb1191',
-    '2023-06-17 00:27:43.772897',
-    '2023-06-17 00:27:43.772897',
+    'dce34a3b-afc5-4a78-80e0-49726a3e978c',
+    '2023-06-17 16:31:52.396613',
+    '2023-06-17 16:31:52.396613',
     NULL,
-    '21431020',
-    'withdrawal transaction at Ziemann - Rutherford using card ending with ***(...8858) for SRD 845.49 in account ***00615906',
-    140,
-    140,
-    'eeaeba51-6fb8-4cdd-8225-ed17b8391dfe'
+    '94649515',
+    'withdrawal transaction at Bayer - Goyette using card ending with ***(...5606) for JMD 775.31 in account ***31059752',
+    807,
+    807,
+    '81f32d1a-447b-41bd-bcaa-a0c51cb1dcc2'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -920,15 +1610,15 @@ INSERT INTO
   )
 VALUES
   (
-    '695662ca-a520-4775-ab90-2448de0c9b6f',
-    '2023-06-17 00:27:44.053588',
-    '2023-06-17 00:27:44.053588',
+    'dde22c3a-b040-48ee-8e95-c92bc5981da9',
+    '2023-06-17 16:31:51.827548',
+    '2023-06-17 16:31:51.827548',
     NULL,
-    '51790724',
-    'payment transaction at Larson - Mosciski using card ending with ***(...8487) for RWF 473.69 in account ***99488910',
-    797,
-    797,
-    '40cb6e89-7e56-42bf-9612-e0010d371014'
+    '22643965',
+    'invoice transaction at Steuber, Kulas and Hudson using card ending with ***(...3004) for QAR 923.64 in account ***98931886',
+    843,
+    843,
+    '007e5819-5d62-4106-aaa9-fe3436470934'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -944,15 +1634,15 @@ INSERT INTO
   )
 VALUES
   (
-    '6f433da4-bb9e-4ece-8e41-d36c25f2da17',
-    '2023-06-17 00:27:43.886843',
-    '2023-06-17 00:27:43.886843',
+    'e030830d-ac6d-4375-8b52-b3a297d8f19e',
+    '2023-06-17 16:31:51.743530',
+    '2023-06-17 16:31:51.743530',
     NULL,
-    '76016135',
-    'payment transaction at Rosenbaum - Ward using card ending with ***(...4440) for PHP 381.84 in account ***03191112',
-    282,
-    282,
-    '0fcb1417-18b6-41df-abce-a0d0de3b8b9d'
+    '17559975',
+    'withdrawal transaction at Veum LLC using card ending with ***(...0994) for PLN 961.75 in account ***07698707',
+    511,
+    511,
+    'df8b1740-0f3c-4e66-a0b3-622f0388afb4'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -968,15 +1658,15 @@ INSERT INTO
   )
 VALUES
   (
-    '7176d9d7-6705-4d0f-916d-6bcc7df207eb',
-    '2023-06-17 00:27:43.961718',
-    '2023-06-17 00:27:43.961718',
+    'e46eab35-7c07-4146-a580-6a4f7ff56fbc',
+    '2023-06-17 16:31:51.827548',
+    '2023-06-17 16:31:51.827548',
     NULL,
-    '02992502',
-    'withdrawal transaction at Hahn - Romaguera using card ending with ***(...2304) for MXN 958.78 in account ***65836259',
-    910,
-    910,
-    'c1cdc7c2-378c-4ea9-8505-cd594bfab425'
+    '24980934',
+    'invoice transaction at Feil - Mertz using card ending with ***(...0132) for TRY 587.27 in account ***65013427',
+    523,
+    523,
+    '007e5819-5d62-4106-aaa9-fe3436470934'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -992,15 +1682,15 @@ INSERT INTO
   )
 VALUES
   (
-    '799034a1-d871-4d67-abd8-8a58f230b041',
-    '2023-06-17 00:27:43.961718',
-    '2023-06-17 00:27:43.961718',
+    'e97bd012-7649-4aba-867b-b7e7f6d3f929',
+    '2023-06-17 16:31:52.322933',
+    '2023-06-17 16:31:52.322933',
     NULL,
-    '41513857',
-    'deposit transaction at Collier - Stark using card ending with ***(...3395) for PEN 435.65 in account ***71721721',
-    144,
-    144,
-    'c1cdc7c2-378c-4ea9-8505-cd594bfab425'
+    '93592790',
+    'deposit transaction at Hartmann Group using card ending with ***(...4280) for AZN 649.99 in account ***94845310',
+    444,
+    444,
+    'e23400e5-0426-42c0-a7c2-d30cddd6fd0a'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -1016,15 +1706,15 @@ INSERT INTO
   )
 VALUES
   (
-    '7f38b2a4-0124-47b8-b35d-dab283440446',
-    '2023-06-17 00:27:44.481452',
-    '2023-06-17 00:27:44.481452',
+    'ecc77d20-dee5-44a5-96cd-a62c09b57cf9',
+    '2023-06-17 16:31:51.999053',
+    '2023-06-17 16:31:51.999053',
     NULL,
-    '81025839',
-    'payment transaction at Rice - Stehr using card ending with ***(...0498) for XAF 715.17 in account ***04085809',
-    479,
-    479,
-    'd220da0b-ab77-48a8-8a95-4cd34ce842eb'
+    '95173304',
+    'withdrawal transaction at Glover Inc using card ending with ***(...3781) for MDL 858.52 in account ***01873811',
+    179,
+    179,
+    'f1e586eb-8b17-46ae-8e09-67d834629a12'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -1040,15 +1730,15 @@ INSERT INTO
   )
 VALUES
   (
-    '8276ed99-0ce8-43fe-92fe-8b18dd366ce9',
-    '2023-06-17 00:27:44.417831',
-    '2023-06-17 00:27:44.417831',
+    'eefaf844-769b-49b5-a48c-e00f30882f0b',
+    '2023-06-17 16:31:52.150034',
+    '2023-06-17 16:31:52.150034',
     NULL,
-    '78474483',
-    'payment transaction at Padberg and Sons using card ending with ***(...0847) for SZL 401.77 in account ***08950626',
-    189,
-    189,
-    '1ede4e76-4c46-4eae-8420-349b6ec0e7f6'
+    '37803613',
+    'withdrawal transaction at Gutmann LLC using card ending with ***(...1553) for BRL 660.62 in account ***32115708',
+    128,
+    128,
+    '42c6ba15-21e1-41ad-844b-04eb6a749de0'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -1064,15 +1754,15 @@ INSERT INTO
   )
 VALUES
   (
-    '83785f3c-81b0-49d6-ab36-fbce6e6d602b',
-    '2023-06-17 00:27:44.481452',
-    '2023-06-17 00:27:44.481452',
+    'f7770b98-349f-46b7-a5b2-114c58a56706',
+    '2023-06-17 16:31:52.322933',
+    '2023-06-17 16:31:52.322933',
     NULL,
-    '08758880',
-    'withdrawal transaction at Konopelski, Monahan and Gutmann using card ending with ***(...6295) for LBP 467.34 in account ***90488854',
-    197,
-    197,
-    'd220da0b-ab77-48a8-8a95-4cd34ce842eb'
+    '47930782',
+    'deposit transaction at Bernier - Kling using card ending with ***(...4867) for RSD 817.57 in account ***82867330',
+    682,
+    682,
+    'e23400e5-0426-42c0-a7c2-d30cddd6fd0a'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -1088,15 +1778,15 @@ INSERT INTO
   )
 VALUES
   (
-    '851a581a-b976-4ecc-ace0-aa24e066097c',
-    '2023-06-17 00:27:44.337541',
-    '2023-06-17 00:27:44.337541',
+    'f7d8a4f4-a15b-4fa2-9a96-b162068fabb8',
+    '2023-06-17 16:31:51.999053',
+    '2023-06-17 16:31:51.999053',
     NULL,
-    '03003161',
-    'deposit transaction at Glover Inc using card ending with ***(...0807) for BRL 530.28 in account ***25923889',
-    360,
-    360,
-    'd8c807c5-8645-402d-8a3f-874988e18826'
+    '78700659',
+    'invoice transaction at Cole LLC using card ending with ***(...7629) for LYD 589.59 in account ***45460782',
+    386,
+    386,
+    'f1e586eb-8b17-46ae-8e09-67d834629a12'
   );
 INSERT INTO
   `comprobante_diario_item` (
@@ -1112,471 +1802,15 @@ INSERT INTO
   )
 VALUES
   (
-    '8d70410b-71f5-4318-b957-afca4ef0c0c2',
-    '2023-06-17 00:27:43.772897',
-    '2023-06-17 00:27:43.772897',
+    'fbeb2288-70d3-4cd4-ab75-1ac7de274376',
+    '2023-06-17 16:31:51.911213',
+    '2023-06-17 16:31:51.911213',
     NULL,
-    '16673948',
-    'invoice transaction at Hoppe, Wuckert and Waters using card ending with ***(...1194) for MDL 375.86 in account ***83060544',
-    741,
-    741,
-    'eeaeba51-6fb8-4cdd-8225-ed17b8391dfe'
-  );
-INSERT INTO
-  `comprobante_diario_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroCuenta`,
-    `descripcion`,
-    `parcial`,
-    `debito`,
-    `comprobanteDiarioId`
-  )
-VALUES
-  (
-    '92d292c7-c257-402f-aa0e-bf4e528504f8',
-    '2023-06-17 00:27:44.053588',
-    '2023-06-17 00:27:44.053588',
-    NULL,
-    '18132637',
-    'invoice transaction at Romaguera, Kuphal and Wehner using card ending with ***(...8924) for CAD 913.96 in account ***84211028',
-    367,
-    367,
-    '40cb6e89-7e56-42bf-9612-e0010d371014'
-  );
-INSERT INTO
-  `comprobante_diario_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroCuenta`,
-    `descripcion`,
-    `parcial`,
-    `debito`,
-    `comprobanteDiarioId`
-  )
-VALUES
-  (
-    '99624532-fea2-4a4f-8bfa-14988cc67110',
-    '2023-06-17 00:27:43.961718',
-    '2023-06-17 00:27:43.961718',
-    NULL,
-    '14787577',
-    'payment transaction at Hackett - Jenkins using card ending with ***(...6279) for PYG 891.57 in account ***64736067',
-    637,
-    637,
-    'c1cdc7c2-378c-4ea9-8505-cd594bfab425'
-  );
-INSERT INTO
-  `comprobante_diario_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroCuenta`,
-    `descripcion`,
-    `parcial`,
-    `debito`,
-    `comprobanteDiarioId`
-  )
-VALUES
-  (
-    '9f52783c-0f6f-45d9-85a6-dfa64aff01a4',
-    '2023-06-17 00:27:44.150605',
-    '2023-06-17 00:27:44.150605',
-    NULL,
-    '89573790',
-    'withdrawal transaction at Wunsch, Roob and Littel using card ending with ***(...0474) for GIP 161.13 in account ***18250353',
-    533,
-    533,
-    '1783fdd2-303a-42b6-92c1-fb10677a3d8d'
-  );
-INSERT INTO
-  `comprobante_diario_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroCuenta`,
-    `descripcion`,
-    `parcial`,
-    `debito`,
-    `comprobanteDiarioId`
-  )
-VALUES
-  (
-    'aeb0c403-5d99-4c76-8509-4b78f19c32e7',
-    '2023-06-17 00:27:44.150605',
-    '2023-06-17 00:27:44.150605',
-    NULL,
-    '15511682',
-    'withdrawal transaction at Roob, Brekke and Romaguera using card ending with ***(...1614) for CZK 661.64 in account ***22393236',
-    347,
-    347,
-    '1783fdd2-303a-42b6-92c1-fb10677a3d8d'
-  );
-INSERT INTO
-  `comprobante_diario_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroCuenta`,
-    `descripcion`,
-    `parcial`,
-    `debito`,
-    `comprobanteDiarioId`
-  )
-VALUES
-  (
-    'b25154a0-661d-49ad-945e-9c2222e0fc22',
-    '2023-06-17 00:27:44.417831',
-    '2023-06-17 00:27:44.417831',
-    NULL,
-    '90899911',
-    'payment transaction at Mayer - Turcotte using card ending with ***(...1722) for AMD 701.38 in account ***43661794',
-    932,
-    932,
-    '1ede4e76-4c46-4eae-8420-349b6ec0e7f6'
-  );
-INSERT INTO
-  `comprobante_diario_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroCuenta`,
-    `descripcion`,
-    `parcial`,
-    `debito`,
-    `comprobanteDiarioId`
-  )
-VALUES
-  (
-    'b90c79d7-d382-4f9d-9823-70b5840bf3c2',
-    '2023-06-17 00:27:43.886843',
-    '2023-06-17 00:27:43.886843',
-    NULL,
-    '76490263',
-    'deposit transaction at Konopelski, Morissette and Beahan using card ending with ***(...5270) for BWP 389.21 in account ***70460383',
-    585,
-    585,
-    '0fcb1417-18b6-41df-abce-a0d0de3b8b9d'
-  );
-INSERT INTO
-  `comprobante_diario_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroCuenta`,
-    `descripcion`,
-    `parcial`,
-    `debito`,
-    `comprobanteDiarioId`
-  )
-VALUES
-  (
-    'b90d36e3-f99a-4a8c-b6cb-274ccaa3e37e',
-    '2023-06-17 00:27:44.150605',
-    '2023-06-17 00:27:44.150605',
-    NULL,
-    '00804025',
-    'invoice transaction at Boehm - Kihn using card ending with ***(...9393) for AWG 232.68 in account ***57070281',
-    620,
-    620,
-    '1783fdd2-303a-42b6-92c1-fb10677a3d8d'
-  );
-INSERT INTO
-  `comprobante_diario_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroCuenta`,
-    `descripcion`,
-    `parcial`,
-    `debito`,
-    `comprobanteDiarioId`
-  )
-VALUES
-  (
-    'c2d8e3a1-b469-4407-894e-7fd52c28f1c4',
-    '2023-06-17 00:27:44.150605',
-    '2023-06-17 00:27:44.150605',
-    NULL,
-    '88538536',
-    'withdrawal transaction at Farrell - Kuphal using card ending with ***(...5696) for GNF 501.32 in account ***07246536',
-    869,
-    869,
-    '1783fdd2-303a-42b6-92c1-fb10677a3d8d'
-  );
-INSERT INTO
-  `comprobante_diario_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroCuenta`,
-    `descripcion`,
-    `parcial`,
-    `debito`,
-    `comprobanteDiarioId`
-  )
-VALUES
-  (
-    'ca5a15ab-7393-430d-8cf2-e851cf84e9de',
-    '2023-06-17 00:27:44.250735',
-    '2023-06-17 00:27:44.250735',
-    NULL,
-    '16933118',
-    'deposit transaction at Weber, Halvorson and Reynolds using card ending with ***(...1362) for BYN 948.10 in account ***66367286',
-    335,
-    335,
-    '3086833c-be03-424e-ae2f-71f1bb5400d1'
-  );
-INSERT INTO
-  `comprobante_diario_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroCuenta`,
-    `descripcion`,
-    `parcial`,
-    `debito`,
-    `comprobanteDiarioId`
-  )
-VALUES
-  (
-    'ccd7bea1-1804-49a6-849e-192129ce89cb',
-    '2023-06-17 00:27:44.250735',
-    '2023-06-17 00:27:44.250735',
-    NULL,
-    '44331913',
-    'payment transaction at Grady LLC using card ending with ***(...3710) for MXN 134.42 in account ***07211156',
-    560,
-    560,
-    '3086833c-be03-424e-ae2f-71f1bb5400d1'
-  );
-INSERT INTO
-  `comprobante_diario_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroCuenta`,
-    `descripcion`,
-    `parcial`,
-    `debito`,
-    `comprobanteDiarioId`
-  )
-VALUES
-  (
-    'cf0210db-fb07-4643-932d-12e0c2b832bd',
-    '2023-06-17 00:27:44.337541',
-    '2023-06-17 00:27:44.337541',
-    NULL,
-    '18082369',
-    'payment transaction at Wilderman Inc using card ending with ***(...8334) for HNL 664.20 in account ***57770320',
-    933,
-    933,
-    'd8c807c5-8645-402d-8a3f-874988e18826'
-  );
-INSERT INTO
-  `comprobante_diario_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroCuenta`,
-    `descripcion`,
-    `parcial`,
-    `debito`,
-    `comprobanteDiarioId`
-  )
-VALUES
-  (
-    'd3dc5749-c99f-4d8f-927e-c783a71d6bc5',
-    '2023-06-17 00:27:44.250735',
-    '2023-06-17 00:27:44.250735',
-    NULL,
-    '19637791',
-    'withdrawal transaction at Schimmel, White and Johns using card ending with ***(...6113) for HNL 944.66 in account ***02139033',
-    208,
-    208,
-    '3086833c-be03-424e-ae2f-71f1bb5400d1'
-  );
-INSERT INTO
-  `comprobante_diario_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroCuenta`,
-    `descripcion`,
-    `parcial`,
-    `debito`,
-    `comprobanteDiarioId`
-  )
-VALUES
-  (
-    'd807c407-2d6b-4273-b4c9-8685e1ddc8b7',
-    '2023-06-17 00:27:44.417831',
-    '2023-06-17 00:27:44.417831',
-    NULL,
-    '50615511',
-    'invoice transaction at Toy, Romaguera and Gerlach using card ending with ***(...5423) for SHP 810.71 in account ***08203225',
-    214,
-    214,
-    '1ede4e76-4c46-4eae-8420-349b6ec0e7f6'
-  );
-INSERT INTO
-  `comprobante_diario_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroCuenta`,
-    `descripcion`,
-    `parcial`,
-    `debito`,
-    `comprobanteDiarioId`
-  )
-VALUES
-  (
-    'dae609fe-8b04-4229-a4bf-870bdb5b6721',
-    '2023-06-17 00:27:44.417831',
-    '2023-06-17 00:27:44.417831',
-    NULL,
-    '70381769',
-    'payment transaction at Nitzsche, Glover and Thiel using card ending with ***(...1730) for VND 785.35 in account ***41527705',
-    361,
-    361,
-    '1ede4e76-4c46-4eae-8420-349b6ec0e7f6'
-  );
-INSERT INTO
-  `comprobante_diario_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroCuenta`,
-    `descripcion`,
-    `parcial`,
-    `debito`,
-    `comprobanteDiarioId`
-  )
-VALUES
-  (
-    'dbcfce24-b73e-476d-a342-a0403f18e75f',
-    '2023-06-17 00:27:44.250735',
-    '2023-06-17 00:27:44.250735',
-    NULL,
-    '33991946',
-    'payment transaction at Witting - Sawayn using card ending with ***(...7856) for SHP 612.21 in account ***59250868',
-    458,
-    458,
-    '3086833c-be03-424e-ae2f-71f1bb5400d1'
-  );
-INSERT INTO
-  `comprobante_diario_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroCuenta`,
-    `descripcion`,
-    `parcial`,
-    `debito`,
-    `comprobanteDiarioId`
-  )
-VALUES
-  (
-    'eb96981f-b7b6-473c-9350-c6ce46c5ca8f',
-    '2023-06-17 00:27:44.250735',
-    '2023-06-17 00:27:44.250735',
-    NULL,
-    '82214744',
-    'payment transaction at Collins, Harris and Lynch using card ending with ***(...9700) for MDL 316.62 in account ***91652027',
-    580,
-    580,
-    '3086833c-be03-424e-ae2f-71f1bb5400d1'
-  );
-INSERT INTO
-  `comprobante_diario_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroCuenta`,
-    `descripcion`,
-    `parcial`,
-    `debito`,
-    `comprobanteDiarioId`
-  )
-VALUES
-  (
-    'f209f624-4834-4945-b301-c9b5691e419b',
-    '2023-06-17 00:27:44.481452',
-    '2023-06-17 00:27:44.481452',
-    NULL,
-    '07631130',
-    'payment transaction at Konopelski - Bayer using card ending with ***(...8566) for AED 93.11 in account ***04892297',
-    616,
-    616,
-    'd220da0b-ab77-48a8-8a95-4cd34ce842eb'
-  );
-INSERT INTO
-  `comprobante_diario_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroCuenta`,
-    `descripcion`,
-    `parcial`,
-    `debito`,
-    `comprobanteDiarioId`
-  )
-VALUES
-  (
-    'f287a811-d98a-4437-aa5d-e805bb65819d',
-    '2023-06-17 00:27:44.053588',
-    '2023-06-17 00:27:44.053588',
-    NULL,
-    '51240073',
-    'deposit transaction at Miller, Little and Mayer using card ending with ***(...6676) for AOA 572.21 in account ***07123580',
-    23,
-    23,
-    '40cb6e89-7e56-42bf-9612-e0010d371014'
-  );
-INSERT INTO
-  `comprobante_diario_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroCuenta`,
-    `descripcion`,
-    `parcial`,
-    `debito`,
-    `comprobanteDiarioId`
-  )
-VALUES
-  (
-    'f43b09e3-9156-44a0-b52e-ee5526d2a72f',
-    '2023-06-17 00:27:44.337541',
-    '2023-06-17 00:27:44.337541',
-    NULL,
-    '71616045',
-    'invoice transaction at Crooks, Rutherford and Mueller using card ending with ***(...4748) for ZAR 269.46 in account ***68192911',
-    876,
-    876,
-    'd8c807c5-8645-402d-8a3f-874988e18826'
+    '91366018',
+    'invoice transaction at Hermiston - Bashirian using card ending with ***(...5873) for GBP 306.82 in account ***65230253',
+    137,
+    137,
+    '701c6234-2be7-4c35-822a-5e30812e1cd1'
   );
 
 # ------------------------------------------------------------
@@ -1598,11 +1832,11 @@ INSERT INTO
   )
 VALUES
   (
-    '11fd6e0a-3efa-4cec-bf9d-33aeadb65db3',
-    '2023-06-17 00:27:44.105909',
-    '2023-06-17 00:27:44.105909',
+    '069f89f8-74d9-495d-bf5a-2904a02f0c0b',
+    '2023-06-17 16:31:51.867052',
+    '2023-06-17 16:31:51.867052',
     NULL,
-    '43c065e3-1b0d-40a7-9b1f-898ce49efd20'
+    'f058dffd-7c31-413d-a95a-f304ab57590c'
   );
 INSERT INTO
   `documento` (
@@ -1614,11 +1848,11 @@ INSERT INTO
   )
 VALUES
   (
-    '161abf41-4dc6-4e11-ae48-d3e5b7954824',
-    '2023-06-17 00:27:44.301831',
-    '2023-06-17 00:27:44.301831',
+    '1fafb0d9-e888-4852-8012-9dd9e6f005d4',
+    '2023-06-17 16:31:51.963456',
+    '2023-06-17 16:31:51.963456',
     NULL,
-    '889d0663-084f-49c1-9e96-6430c9de9a8d'
+    '680fd0ce-0c10-4c93-80f6-7b5cb0f9f864'
   );
 INSERT INTO
   `documento` (
@@ -1630,11 +1864,11 @@ INSERT INTO
   )
 VALUES
   (
-    '36235540-aea3-4f53-983e-5e48f861533a',
-    '2023-06-17 00:27:44.011479',
-    '2023-06-17 00:27:44.011479',
+    '293a1160-c03f-4699-b5ca-1700cfe60622',
+    '2023-06-17 16:31:52.115801',
+    '2023-06-17 16:31:52.115801',
     NULL,
-    '43c065e3-1b0d-40a7-9b1f-898ce49efd20'
+    '680fd0ce-0c10-4c93-80f6-7b5cb0f9f864'
   );
 INSERT INTO
   `documento` (
@@ -1646,11 +1880,11 @@ INSERT INTO
   )
 VALUES
   (
-    '58ee87f7-c1cc-4300-ad01-85a9ba729f69',
-    '2023-06-17 00:27:43.852008',
-    '2023-06-17 00:27:43.852008',
+    '378e9fcf-0136-4460-b0ff-8a2c64d45752',
+    '2023-06-17 16:31:52.288448',
+    '2023-06-17 16:31:52.288448',
     NULL,
-    '784a264e-5ed4-4036-8ab5-82bcc7b1400f'
+    'b1ddbbbf-649d-4359-ba8c-1e80bac2b7bc'
   );
 INSERT INTO
   `documento` (
@@ -1662,11 +1896,11 @@ INSERT INTO
   )
 VALUES
   (
-    '65b1004e-7149-403e-acff-5c2ffee77571',
-    '2023-06-17 00:27:44.202713',
-    '2023-06-17 00:27:44.202713',
+    '3bbc0fdb-34b7-498e-8770-2a536a3293ab',
+    '2023-06-17 16:31:51.793753',
+    '2023-06-17 16:31:51.793753',
     NULL,
-    '43c065e3-1b0d-40a7-9b1f-898ce49efd20'
+    'f058dffd-7c31-413d-a95a-f304ab57590c'
   );
 INSERT INTO
   `documento` (
@@ -1678,11 +1912,11 @@ INSERT INTO
   )
 VALUES
   (
-    '98ab361a-c6dc-4bd0-82f2-d1affb33f5bf',
-    '2023-06-17 00:27:44.451829',
-    '2023-06-17 00:27:44.451829',
+    '3f72b70d-316c-4126-b578-790052c38078',
+    '2023-06-17 16:31:52.364920',
+    '2023-06-17 16:31:52.364920',
     NULL,
-    '889d0663-084f-49c1-9e96-6430c9de9a8d'
+    'b1ddbbbf-649d-4359-ba8c-1e80bac2b7bc'
   );
 INSERT INTO
   `documento` (
@@ -1694,11 +1928,11 @@ INSERT INTO
   )
 VALUES
   (
-    '9f30aca9-be55-4ace-9e22-96455d7e9261',
-    '2023-06-17 00:27:44.385919',
-    '2023-06-17 00:27:44.385919',
+    '65fb4b18-24ed-4d0c-b753-4fee295dfbe2',
+    '2023-06-17 16:31:52.212111',
+    '2023-06-17 16:31:52.212111',
     NULL,
-    '889d0663-084f-49c1-9e96-6430c9de9a8d'
+    'b1ddbbbf-649d-4359-ba8c-1e80bac2b7bc'
   );
 INSERT INTO
   `documento` (
@@ -1710,11 +1944,11 @@ INSERT INTO
   )
 VALUES
   (
-    'c421b454-9e98-4781-bcee-be240bae30c9',
-    '2023-06-17 00:27:43.728139',
-    '2023-06-17 00:27:43.728139',
+    '9be530ed-61d2-429a-82d8-0691038ee152',
+    '2023-06-17 16:31:52.038234',
+    '2023-06-17 16:31:52.038234',
     NULL,
-    '784a264e-5ed4-4036-8ab5-82bcc7b1400f'
+    '680fd0ce-0c10-4c93-80f6-7b5cb0f9f864'
   );
 INSERT INTO
   `documento` (
@@ -1726,11 +1960,11 @@ INSERT INTO
   )
 VALUES
   (
-    'e47bfa8a-fdc9-446e-9bf2-fcd4c51bf9d8',
-    '2023-06-17 00:27:43.924942',
-    '2023-06-17 00:27:43.924942',
+    'e354895e-1cf3-4421-a0f8-0a4ca0149929',
+    '2023-06-17 16:31:51.698634',
+    '2023-06-17 16:31:51.698634',
     NULL,
-    '784a264e-5ed4-4036-8ab5-82bcc7b1400f'
+    'f058dffd-7c31-413d-a95a-f304ab57590c'
   );
 
 # ------------------------------------------------------------
@@ -1750,14 +1984,14 @@ INSERT INTO
   )
 VALUES
   (
-    '43c065e3-1b0d-40a7-9b1f-898ce49efd20',
-    '2023-06-17 00:27:44.001192',
-    '2023-06-17 00:27:44.001192',
+    '680fd0ce-0c10-4c93-80f6-7b5cb0f9f864',
+    '2023-06-17 16:31:51.954068',
+    '2023-06-17 16:31:51.954068',
     NULL,
-    'Rohan - Abbott',
-    'dedicated',
-    '4166174326497',
-    '932.925.7778'
+    'Shanahan, White and Schmidt',
+    'multimedia',
+    '8443328491860',
+    '953-998-9497'
   );
 INSERT INTO
   `empresa` (
@@ -1772,14 +2006,14 @@ INSERT INTO
   )
 VALUES
   (
-    '784a264e-5ed4-4036-8ab5-82bcc7b1400f',
-    '2023-06-17 00:27:43.714051',
-    '2023-06-17 00:27:43.714051',
+    'b1ddbbbf-649d-4359-ba8c-1e80bac2b7bc',
+    '2023-06-17 16:31:52.196269',
+    '2023-06-17 16:31:52.196269',
     NULL,
-    'Hirthe - Reichert',
-    'zero administration',
-    '8941748604164',
-    '(712) 353-5194 x40284'
+    'Bradtke Group',
+    'optimal',
+    '1834569416187',
+    '1-490-333-6180 x609'
   );
 INSERT INTO
   `empresa` (
@@ -1794,14 +2028,14 @@ INSERT INTO
   )
 VALUES
   (
-    '889d0663-084f-49c1-9e96-6430c9de9a8d',
-    '2023-06-17 00:27:44.293427',
-    '2023-06-17 00:27:44.293427',
+    'f058dffd-7c31-413d-a95a-f304ab57590c',
+    '2023-06-17 16:31:51.685586',
+    '2023-06-17 16:31:51.685586',
     NULL,
-    'Kautzer - Witting',
-    'even-keeled',
-    '5785889475913',
-    '(402) 873-2061 x4041'
+    'Powlowski - Carter',
+    'content-based',
+    '1187443566832',
+    '424-221-2153 x82804'
   );
 
 # ------------------------------------------------------------
@@ -1818,11 +2052,11 @@ INSERT INTO
   )
 VALUES
   (
-    '2396d101-54b3-4b1b-a7b1-e199498e3fd1',
-    '2023-06-17 00:27:44.217374',
-    '2023-06-17 00:27:44.217374',
+    '1fa045c3-14c6-458b-8774-af47f76e6e4a',
+    '2023-06-17 16:31:52.055431',
+    '2023-06-17 16:31:52.055431',
     NULL,
-    '65b1004e-7149-403e-acff-5c2ffee77571'
+    '9be530ed-61d2-429a-82d8-0691038ee152'
   );
 INSERT INTO
   `estatico` (
@@ -1834,11 +2068,11 @@ INSERT INTO
   )
 VALUES
   (
-    '31b60a1a-ddbc-4ff0-8df4-ae1747c39159',
-    '2023-06-17 00:27:44.462195',
-    '2023-06-17 00:27:44.462195',
+    '2f7827fb-56d0-45ef-b632-e92142bdf991',
+    '2023-06-17 16:31:52.125295',
+    '2023-06-17 16:31:52.125295',
     NULL,
-    '98ab361a-c6dc-4bd0-82f2-d1affb33f5bf'
+    '293a1160-c03f-4699-b5ca-1700cfe60622'
   );
 INSERT INTO
   `estatico` (
@@ -1850,11 +2084,11 @@ INSERT INTO
   )
 VALUES
   (
-    '3f8c9f3c-2673-40c9-9cf4-7e0b8b6c2403',
-    '2023-06-17 00:27:44.312712',
-    '2023-06-17 00:27:44.312712',
+    '3fc46eea-81b6-491c-b24f-0c2e13653b2d',
+    '2023-06-17 16:31:51.803239',
+    '2023-06-17 16:31:51.803239',
     NULL,
-    '161abf41-4dc6-4e11-ae48-d3e5b7954824'
+    '3bbc0fdb-34b7-498e-8770-2a536a3293ab'
   );
 INSERT INTO
   `estatico` (
@@ -1866,11 +2100,11 @@ INSERT INTO
   )
 VALUES
   (
-    '4de36e77-03d0-4b66-b550-ca3468850990',
-    '2023-06-17 00:27:43.934612',
-    '2023-06-17 00:27:43.934612',
+    '45185f32-7491-40ae-8f79-985864aa0a19',
+    '2023-06-17 16:31:51.876136',
+    '2023-06-17 16:31:51.876136',
     NULL,
-    'e47bfa8a-fdc9-446e-9bf2-fcd4c51bf9d8'
+    '069f89f8-74d9-495d-bf5a-2904a02f0c0b'
   );
 INSERT INTO
   `estatico` (
@@ -1882,11 +2116,11 @@ INSERT INTO
   )
 VALUES
   (
-    'a9623274-da6b-42e5-a64d-c70bf27bbf93',
-    '2023-06-17 00:27:44.118384',
-    '2023-06-17 00:27:44.118384',
+    '65976b4d-a804-4a58-b11d-9ecd47aca19c',
+    '2023-06-17 16:31:51.711061',
+    '2023-06-17 16:31:51.711061',
     NULL,
-    '11fd6e0a-3efa-4cec-bf9d-33aeadb65db3'
+    'e354895e-1cf3-4421-a0f8-0a4ca0149929'
   );
 INSERT INTO
   `estatico` (
@@ -1898,11 +2132,11 @@ INSERT INTO
   )
 VALUES
   (
-    'cc489f9b-936a-437d-973e-1d6a7075b354',
-    '2023-06-17 00:27:44.397276',
-    '2023-06-17 00:27:44.397276',
+    '70a70a13-5bb1-4510-88ee-421c554a9cc5',
+    '2023-06-17 16:31:52.372820',
+    '2023-06-17 16:31:52.372820',
     NULL,
-    '9f30aca9-be55-4ace-9e22-96455d7e9261'
+    '3f72b70d-316c-4126-b578-790052c38078'
   );
 INSERT INTO
   `estatico` (
@@ -1914,11 +2148,11 @@ INSERT INTO
   )
 VALUES
   (
-    'd3de92e6-19a4-479b-88c0-85e806b8f641',
-    '2023-06-17 00:27:44.019902',
-    '2023-06-17 00:27:44.019902',
+    'aa78a1d4-0f3a-4c69-a32a-5a6e428d76cc',
+    '2023-06-17 16:31:52.221514',
+    '2023-06-17 16:31:52.221514',
     NULL,
-    '36235540-aea3-4f53-983e-5e48f861533a'
+    '65fb4b18-24ed-4d0c-b753-4fee295dfbe2'
   );
 INSERT INTO
   `estatico` (
@@ -1930,11 +2164,11 @@ INSERT INTO
   )
 VALUES
   (
-    'e73cb9ac-04f7-4a66-9f89-ce93fe511a6e',
-    '2023-06-17 00:27:43.739036',
-    '2023-06-17 00:27:43.739036',
+    'c25c1f9f-825f-44e1-8545-35f48db4950e',
+    '2023-06-17 16:31:51.974034',
+    '2023-06-17 16:31:51.974034',
     NULL,
-    'c421b454-9e98-4781-bcee-be240bae30c9'
+    '1fafb0d9-e888-4852-8012-9dd9e6f005d4'
   );
 INSERT INTO
   `estatico` (
@@ -1946,11 +2180,11 @@ INSERT INTO
   )
 VALUES
   (
-    'fe41b082-3248-4780-a482-e087fd3cf51c',
-    '2023-06-17 00:27:43.864816',
-    '2023-06-17 00:27:43.864816',
+    'c92115a1-79e3-42b1-bced-d87d03df385d',
+    '2023-06-17 16:31:52.297452',
+    '2023-06-17 16:31:52.297452',
     NULL,
-    '58ee87f7-c1cc-4300-ad01-85a9ba729f69'
+    '378e9fcf-0136-4460-b0ff-8a2c64d45752'
   );
 
 # ------------------------------------------------------------
@@ -1969,53 +2203,13 @@ INSERT INTO
   )
 VALUES
   (
-    '1f2bb94c-a3e7-4bfa-87e3-e06e953539b7',
-    '2023-06-17 00:27:44.070246',
-    '2023-06-17 00:27:44.070246',
+    '0be39f86-d96b-47d5-abf0-f420f57b22bb',
+    '2023-06-17 16:31:52.337063',
+    '2023-06-17 16:31:52.337063',
     NULL,
-    '2023-04-09 17:40:57',
-    'Credit Card Account',
-    'd3de92e6-19a4-479b-88c0-85e806b8f641'
-  );
-INSERT INTO
-  `factura` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `fecha`,
-    `nombre`,
-    `estaticoId`
-  )
-VALUES
-  (
-    '2d0ef741-d783-4aff-b0ca-0a2f7c2c63c8',
-    '2023-06-17 00:27:44.489411',
-    '2023-06-17 00:27:44.489411',
-    NULL,
-    '2022-07-24 16:24:50',
-    'Personal Loan Account',
-    '31b60a1a-ddbc-4ff0-8df4-ae1747c39159'
-  );
-INSERT INTO
-  `factura` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `fecha`,
-    `nombre`,
-    `estaticoId`
-  )
-VALUES
-  (
-    '4a7c98e7-667b-4352-9085-b79f034aa08c',
-    '2023-06-17 00:27:43.976571',
-    '2023-06-17 00:27:43.976571',
-    NULL,
-    '2023-06-05 12:42:38',
+    '2022-08-06 11:09:51',
     'Savings Account',
-    '4de36e77-03d0-4b66-b550-ca3468850990'
+    'c92115a1-79e3-42b1-bced-d87d03df385d'
   );
 INSERT INTO
   `factura` (
@@ -2029,13 +2223,13 @@ INSERT INTO
   )
 VALUES
   (
-    '7cc6cd3f-7d7a-4c4a-b4a4-7c4fa63a0386',
-    '2023-06-17 00:27:43.816065',
-    '2023-06-17 00:27:43.816065',
+    '56328160-dfeb-40bf-a497-1c39e63e2740',
+    '2023-06-17 16:31:52.015703',
+    '2023-06-17 16:31:52.015703',
     NULL,
-    '2022-09-18 21:00:12',
+    '2023-01-09 11:21:37',
     'Personal Loan Account',
-    'e73cb9ac-04f7-4a66-9f89-ce93fe511a6e'
+    'c25c1f9f-825f-44e1-8545-35f48db4950e'
   );
 INSERT INTO
   `factura` (
@@ -2049,53 +2243,13 @@ INSERT INTO
   )
 VALUES
   (
-    '7ffafadb-fa14-4d43-ac8b-73cddbbfa2da',
-    '2023-06-17 00:27:44.167486',
-    '2023-06-17 00:27:44.167486',
+    '7948add7-6264-42ef-b1ff-6e76b1fdea24',
+    '2023-06-17 16:31:51.837777',
+    '2023-06-17 16:31:51.837777',
     NULL,
-    '2022-07-26 13:10:09',
-    'Checking Account',
-    'a9623274-da6b-42e5-a64d-c70bf27bbf93'
-  );
-INSERT INTO
-  `factura` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `fecha`,
-    `nombre`,
-    `estaticoId`
-  )
-VALUES
-  (
-    '9fcbd30e-c0ab-4b41-9f7c-3531d99b400d',
-    '2023-06-17 00:27:44.431619',
-    '2023-06-17 00:27:44.431619',
-    NULL,
-    '2022-11-05 09:52:49',
-    'Credit Card Account',
-    'cc489f9b-936a-437d-973e-1d6a7075b354'
-  );
-INSERT INTO
-  `factura` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `fecha`,
-    `nombre`,
-    `estaticoId`
-  )
-VALUES
-  (
-    'd18395d0-274d-4e79-9a24-ed5e2a05baaa',
-    '2023-06-17 00:27:44.266936',
-    '2023-06-17 00:27:44.266936',
-    NULL,
-    '2023-05-22 08:17:32',
+    '2022-08-09 02:15:28',
     'Home Loan Account',
-    '2396d101-54b3-4b1b-a7b1-e199498e3fd1'
+    '3fc46eea-81b6-491c-b24f-0c2e13653b2d'
   );
 INSERT INTO
   `factura` (
@@ -2109,33 +2263,113 @@ INSERT INTO
   )
 VALUES
   (
-    'e4c8ac4c-bf88-4f60-80b7-61ed4ce84b86',
-    '2023-06-17 00:27:44.354919',
-    '2023-06-17 00:27:44.354919',
+    '7f596153-c187-4592-b6f0-e9021670479d',
+    '2023-06-17 16:31:52.261711',
+    '2023-06-17 16:31:52.261711',
     NULL,
-    '2022-08-01 10:36:09',
-    'Money Market Account',
-    '3f8c9f3c-2673-40c9-9cf4-7e0b8b6c2403'
-  );
-INSERT INTO
-  `factura` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `fecha`,
-    `nombre`,
-    `estaticoId`
-  )
-VALUES
-  (
-    'eef346e1-3709-4539-8ace-409257114784',
-    '2023-06-17 00:27:43.899953',
-    '2023-06-17 00:27:43.899953',
-    NULL,
-    '2022-12-06 10:17:49',
+    '2023-01-23 10:02:02',
     'Checking Account',
-    'fe41b082-3248-4780-a482-e087fd3cf51c'
+    'aa78a1d4-0f3a-4c69-a32a-5a6e428d76cc'
+  );
+INSERT INTO
+  `factura` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `fecha`,
+    `nombre`,
+    `estaticoId`
+  )
+VALUES
+  (
+    '8f81231d-00d5-426b-8c1a-058b5e52d61f',
+    '2023-06-17 16:31:52.089350',
+    '2023-06-17 16:31:52.089350',
+    NULL,
+    '2022-06-22 22:27:50',
+    'Savings Account',
+    '1fa045c3-14c6-458b-8774-af47f76e6e4a'
+  );
+INSERT INTO
+  `factura` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `fecha`,
+    `nombre`,
+    `estaticoId`
+  )
+VALUES
+  (
+    '9b9105c7-efbd-49ef-b6c7-ff5b8668a914',
+    '2023-06-17 16:31:51.759399',
+    '2023-06-17 16:31:51.759399',
+    NULL,
+    '2022-08-09 21:25:36',
+    'Money Market Account',
+    '65976b4d-a804-4a58-b11d-9ecd47aca19c'
+  );
+INSERT INTO
+  `factura` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `fecha`,
+    `nombre`,
+    `estaticoId`
+  )
+VALUES
+  (
+    'd34a045b-5146-4d6f-abd6-cfff53bc1dbd',
+    '2023-06-17 16:31:52.161885',
+    '2023-06-17 16:31:52.161885',
+    NULL,
+    '2022-08-23 20:46:44',
+    'Personal Loan Account',
+    '2f7827fb-56d0-45ef-b632-e92142bdf991'
+  );
+INSERT INTO
+  `factura` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `fecha`,
+    `nombre`,
+    `estaticoId`
+  )
+VALUES
+  (
+    'e45eec31-79f5-42fa-beb3-6f3fc5ad7761',
+    '2023-06-17 16:31:52.407408',
+    '2023-06-17 16:31:52.407408',
+    NULL,
+    '2023-04-16 00:11:37',
+    'Credit Card Account',
+    '70a70a13-5bb1-4510-88ee-421c554a9cc5'
+  );
+INSERT INTO
+  `factura` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `fecha`,
+    `nombre`,
+    `estaticoId`
+  )
+VALUES
+  (
+    'f670428d-f785-4b4a-a41c-84c23200a7b2',
+    '2023-06-17 16:31:51.922460',
+    '2023-06-17 16:31:51.922460',
+    NULL,
+    '2023-06-09 05:36:55',
+    'Home Loan Account',
+    '45185f32-7491-40ae-8f79-985864aa0a19'
   );
 
 # ------------------------------------------------------------
@@ -2157,16 +2391,16 @@ INSERT INTO
   )
 VALUES
   (
-    '00bae374-38b3-44af-b474-7bf494c0be88',
-    '2023-06-17 00:27:44.371228',
-    '2023-06-17 00:27:44.371228',
+    '01aadb98-81b5-42b8-bc4f-2fb996f61a4a',
+    '2023-06-17 16:31:51.777176',
+    '2023-06-17 16:31:51.777176',
     NULL,
-    '16768433',
-    'payment transaction at Hamill, Boehm and Effertz using card ending with ***(...9019) for GHS 307.79 in account ***47833865',
-    216,
-    216,
-    216,
-    'e4c8ac4c-bf88-4f60-80b7-61ed4ce84b86'
+    '06797119',
+    'invoice transaction at Deckow - Pfannerstill using card ending with ***(...0807) for MUR 264.51 in account ***65131994',
+    971,
+    971,
+    971,
+    '9b9105c7-efbd-49ef-b6c7-ff5b8668a914'
   );
 INSERT INTO
   `factura_item` (
@@ -2183,16 +2417,16 @@ INSERT INTO
   )
 VALUES
   (
-    '00d39027-324a-4b76-bf6f-250e92316436',
-    '2023-06-17 00:27:44.183224',
-    '2023-06-17 00:27:44.183224',
+    '02f0c6ba-2ad1-4d59-a28b-5e2e2ef56b4e',
+    '2023-06-17 16:31:52.180277',
+    '2023-06-17 16:31:52.180277',
     NULL,
-    '58648548',
-    'invoice transaction at Rau - Stiedemann using card ending with ***(...1587) for IQD 383.96 in account ***39254579',
-    878,
-    878,
-    878,
-    '7ffafadb-fa14-4d43-ac8b-73cddbbfa2da'
+    '70087276',
+    'payment transaction at Greenfelder, Medhurst and Corwin using card ending with ***(...8862) for MRO 140.57 in account ***51147211',
+    507,
+    507,
+    507,
+    'd34a045b-5146-4d6f-abd6-cfff53bc1dbd'
   );
 INSERT INTO
   `factura_item` (
@@ -2209,16 +2443,16 @@ INSERT INTO
   )
 VALUES
   (
-    '05aa6a50-d668-4b5e-8afa-6e4852f281e3',
-    '2023-06-17 00:27:44.183224',
-    '2023-06-17 00:27:44.183224',
+    '328968c0-c728-48f2-bae4-b1a3d594bb90',
+    '2023-06-17 16:31:52.420399',
+    '2023-06-17 16:31:52.420399',
     NULL,
-    '97537644',
-    'withdrawal transaction at Dooley - Becker using card ending with ***(...9524) for XAF 933.49 in account ***83207426',
-    264,
-    264,
-    264,
-    '7ffafadb-fa14-4d43-ac8b-73cddbbfa2da'
+    '54538802',
+    'payment transaction at Dickens, Borer and Lindgren using card ending with ***(...9037) for SEK 431.56 in account ***25862076',
+    632,
+    632,
+    632,
+    'e45eec31-79f5-42fa-beb3-6f3fc5ad7761'
   );
 INSERT INTO
   `factura_item` (
@@ -2235,16 +2469,16 @@ INSERT INTO
   )
 VALUES
   (
-    '08fc03c9-bd79-492a-9ae4-18fd86c85fd7',
-    '2023-06-17 00:27:44.500937',
-    '2023-06-17 00:27:44.500937',
+    '36877a11-80cb-41c4-9614-7c3298f5fd03',
+    '2023-06-17 16:31:51.853691',
+    '2023-06-17 16:31:51.853691',
     NULL,
-    '62568557',
-    'withdrawal transaction at Bogisich, Bernhard and Dare using card ending with ***(...4100) for IDR 571.33 in account ***32333779',
-    855,
-    855,
-    855,
-    '2d0ef741-d783-4aff-b0ca-0a2f7c2c63c8'
+    '90366231',
+    'payment transaction at Lakin - Pfannerstill using card ending with ***(...7954) for TRY 920.84 in account ***68832420',
+    722,
+    722,
+    722,
+    '7948add7-6264-42ef-b1ff-6e76b1fdea24'
   );
 INSERT INTO
   `factura_item` (
@@ -2261,16 +2495,16 @@ INSERT INTO
   )
 VALUES
   (
-    '11e778c7-0268-4109-983c-f48e477c813c',
-    '2023-06-17 00:27:44.439697',
-    '2023-06-17 00:27:44.439697',
+    '43f9dad1-483e-4cb3-aafb-4dc27a650450',
+    '2023-06-17 16:31:52.420399',
+    '2023-06-17 16:31:52.420399',
     NULL,
-    '41721022',
-    'payment transaction at Ratke Group using card ending with ***(...3499) for XCD 442.50 in account ***27449490',
-    429,
-    429,
-    429,
-    '9fcbd30e-c0ab-4b41-9f7c-3531d99b400d'
+    '43182533',
+    'invoice transaction at Thiel Group using card ending with ***(...7003) for TOP 983.45 in account ***01633934',
+    303,
+    303,
+    303,
+    'e45eec31-79f5-42fa-beb3-6f3fc5ad7761'
   );
 INSERT INTO
   `factura_item` (
@@ -2287,16 +2521,16 @@ INSERT INTO
   )
 VALUES
   (
-    '11e9f978-b246-49a0-bcaf-6cdab4b40631',
-    '2023-06-17 00:27:43.987089',
-    '2023-06-17 00:27:43.987089',
+    '49591b4c-f4f0-46f1-b0b8-3d029c470bea',
+    '2023-06-17 16:31:52.352975',
+    '2023-06-17 16:31:52.352975',
     NULL,
-    '25780746',
-    'deposit transaction at Nikolaus, Connelly and Barrows using card ending with ***(...8120) for TRY 140.77 in account ***01733926',
-    911,
-    911,
-    911,
-    '4a7c98e7-667b-4352-9085-b79f034aa08c'
+    '00068838',
+    'invoice transaction at Kertzmann - Emmerich using card ending with ***(...3606) for OMR 850.25 in account ***82489829',
+    364,
+    364,
+    364,
+    '0be39f86-d96b-47d5-abf0-f420f57b22bb'
   );
 INSERT INTO
   `factura_item` (
@@ -2313,16 +2547,16 @@ INSERT INTO
   )
 VALUES
   (
-    '1d484bff-9a40-4206-badb-8290570ee4f0',
-    '2023-06-17 00:27:44.371228',
-    '2023-06-17 00:27:44.371228',
+    '50e1bb90-a9a3-4559-8230-e0e63410dc01',
+    '2023-06-17 16:31:52.180277',
+    '2023-06-17 16:31:52.180277',
     NULL,
-    '81703372',
-    'invoice transaction at Collins LLC using card ending with ***(...1922) for DOP 347.56 in account ***14934151',
-    612,
-    612,
-    612,
-    'e4c8ac4c-bf88-4f60-80b7-61ed4ce84b86'
+    '06112912',
+    'withdrawal transaction at Goyette - Jones using card ending with ***(...0892) for OMR 966.21 in account ***13089985',
+    283,
+    283,
+    283,
+    'd34a045b-5146-4d6f-abd6-cfff53bc1dbd'
   );
 INSERT INTO
   `factura_item` (
@@ -2339,16 +2573,16 @@ INSERT INTO
   )
 VALUES
   (
-    '2894cecc-60ad-4974-8c9a-2b12fbdf233e',
-    '2023-06-17 00:27:44.281593',
-    '2023-06-17 00:27:44.281593',
+    '548ce6df-4f28-4077-91c8-a857805fdfe2',
+    '2023-06-17 16:31:51.853691',
+    '2023-06-17 16:31:51.853691',
     NULL,
-    '84265529',
-    'payment transaction at Collins, Streich and Predovic using card ending with ***(...9401) for JOD 477.69 in account ***57845144',
-    505,
-    505,
-    505,
-    'd18395d0-274d-4e79-9a24-ed5e2a05baaa'
+    '25109320',
+    'invoice transaction at Aufderhar - Muller using card ending with ***(...4979) for BZD 214.49 in account ***50371145',
+    779,
+    779,
+    779,
+    '7948add7-6264-42ef-b1ff-6e76b1fdea24'
   );
 INSERT INTO
   `factura_item` (
@@ -2365,16 +2599,16 @@ INSERT INTO
   )
 VALUES
   (
-    '28eafebf-1c4b-488f-bda8-57906236ccc0',
-    '2023-06-17 00:27:44.439697',
-    '2023-06-17 00:27:44.439697',
+    '555c8a68-33a7-4984-be68-0fd17b316939',
+    '2023-06-17 16:31:52.352975',
+    '2023-06-17 16:31:52.352975',
     NULL,
-    '69315936',
-    'invoice transaction at Lind Group using card ending with ***(...4534) for ZAR 320.09 in account ***84513754',
-    189,
-    189,
-    189,
-    '9fcbd30e-c0ab-4b41-9f7c-3531d99b400d'
+    '85524960',
+    'payment transaction at Kuvalis, Skiles and Bogan using card ending with ***(...4450) for IQD 351.83 in account ***92453508',
+    716,
+    716,
+    716,
+    '0be39f86-d96b-47d5-abf0-f420f57b22bb'
   );
 INSERT INTO
   `factura_item` (
@@ -2391,16 +2625,16 @@ INSERT INTO
   )
 VALUES
   (
-    '2df8712a-b637-47b4-b3af-95751c3d028e',
-    '2023-06-17 00:27:44.439697',
-    '2023-06-17 00:27:44.439697',
+    '56f8b8a2-3416-4cec-9c1c-a0a7449e20f1',
+    '2023-06-17 16:31:52.277281',
+    '2023-06-17 16:31:52.277281',
     NULL,
-    '13552261',
-    'withdrawal transaction at O\'Connell - Murazik using card ending with ***(...4740) for VUV 351.26 in account ***61525350',
-    145,
-    145,
-    145,
-    '9fcbd30e-c0ab-4b41-9f7c-3531d99b400d'
+    '81362762',
+    'payment transaction at Rice - Conroy using card ending with ***(...4210) for PKR 341.65 in account ***14798676',
+    20,
+    20,
+    20,
+    '7f596153-c187-4592-b6f0-e9021670479d'
   );
 INSERT INTO
   `factura_item` (
@@ -2417,16 +2651,16 @@ INSERT INTO
   )
 VALUES
   (
-    '3236e265-d48b-4e9a-9494-e696b75f7bdc',
-    '2023-06-17 00:27:43.913611',
-    '2023-06-17 00:27:43.913611',
+    '60906010-018c-45f8-a005-ca620fa712bc',
+    '2023-06-17 16:31:52.277281',
+    '2023-06-17 16:31:52.277281',
     NULL,
-    '57657015',
-    'invoice transaction at Ledner - Wuckert using card ending with ***(...6599) for LYD 723.19 in account ***78121357',
-    608,
-    608,
-    608,
-    'eef346e1-3709-4539-8ace-409257114784'
+    '28700889',
+    'payment transaction at Schuster - Parisian using card ending with ***(...2728) for NOK 820.88 in account ***49044421',
+    955,
+    955,
+    955,
+    '7f596153-c187-4592-b6f0-e9021670479d'
   );
 INSERT INTO
   `factura_item` (
@@ -2443,16 +2677,16 @@ INSERT INTO
   )
 VALUES
   (
-    '36cdb893-49a9-4661-bde9-e7023e12032d',
-    '2023-06-17 00:27:44.500937',
-    '2023-06-17 00:27:44.500937',
+    '610f9948-4b41-4db0-992b-10b426f56557',
+    '2023-06-17 16:31:52.420399',
+    '2023-06-17 16:31:52.420399',
     NULL,
-    '25237402',
-    'withdrawal transaction at Johnson, Kuhic and Johns using card ending with ***(...2029) for CAD 373.52 in account ***86495881',
-    538,
-    538,
-    538,
-    '2d0ef741-d783-4aff-b0ca-0a2f7c2c63c8'
+    '52146546',
+    'withdrawal transaction at Boyle - Waters using card ending with ***(...2916) for SZL 342.78 in account ***57439881',
+    456,
+    456,
+    456,
+    'e45eec31-79f5-42fa-beb3-6f3fc5ad7761'
   );
 INSERT INTO
   `factura_item` (
@@ -2469,16 +2703,16 @@ INSERT INTO
   )
 VALUES
   (
-    '3a4dd886-4e1a-4cf4-87ca-687cd8d1ae56',
-    '2023-06-17 00:27:44.281593',
-    '2023-06-17 00:27:44.281593',
+    '64d958a0-f66c-43ab-ab93-f0644150d379',
+    '2023-06-17 16:31:52.027928',
+    '2023-06-17 16:31:52.027928',
     NULL,
-    '75188568',
-    'withdrawal transaction at Torp and Sons using card ending with ***(...0792) for CVE 744.56 in account ***13986770',
-    622,
-    622,
-    622,
-    'd18395d0-274d-4e79-9a24-ed5e2a05baaa'
+    '45991354',
+    'payment transaction at Grimes - Keebler using card ending with ***(...8787) for INR 403.02 in account ***25886101',
+    115,
+    115,
+    115,
+    '56328160-dfeb-40bf-a497-1c39e63e2740'
   );
 INSERT INTO
   `factura_item` (
@@ -2495,16 +2729,16 @@ INSERT INTO
   )
 VALUES
   (
-    '3b151535-734f-4c5c-ba40-2688641793ec',
-    '2023-06-17 00:27:43.834763',
-    '2023-06-17 00:27:43.834763',
+    '661da9ec-afad-43d0-ac55-4976e17ac117',
+    '2023-06-17 16:31:51.853691',
+    '2023-06-17 16:31:51.853691',
     NULL,
-    '11366448',
-    'deposit transaction at Wolf, Bechtelar and Fahey using card ending with ***(...2349) for CRC 573.90 in account ***18375274',
-    431,
-    431,
-    431,
-    '7cc6cd3f-7d7a-4c4a-b4a4-7c4fa63a0386'
+    '87739603',
+    'withdrawal transaction at Ziemann, Legros and Senger using card ending with ***(...4861) for KWD 212.73 in account ***48266510',
+    150,
+    150,
+    150,
+    '7948add7-6264-42ef-b1ff-6e76b1fdea24'
   );
 INSERT INTO
   `factura_item` (
@@ -2521,16 +2755,16 @@ INSERT INTO
   )
 VALUES
   (
-    '4e1b46d7-592e-494e-8531-28db09630798',
-    '2023-06-17 00:27:43.913611',
-    '2023-06-17 00:27:43.913611',
+    '686cbc57-2b5c-4d09-8c09-81b9b92bb5a0',
+    '2023-06-17 16:31:52.027928',
+    '2023-06-17 16:31:52.027928',
     NULL,
-    '11074507',
-    'deposit transaction at Gusikowski Group using card ending with ***(...3689) for MWK 508.38 in account ***90593658',
-    173,
-    173,
-    173,
-    'eef346e1-3709-4539-8ace-409257114784'
+    '92411860',
+    'deposit transaction at Cole, Jakubowski and Flatley using card ending with ***(...6830) for CUP 589.32 in account ***47138324',
+    950,
+    950,
+    950,
+    '56328160-dfeb-40bf-a497-1c39e63e2740'
   );
 INSERT INTO
   `factura_item` (
@@ -2547,16 +2781,16 @@ INSERT INTO
   )
 VALUES
   (
-    '4f06ad8e-bc75-4957-91da-a715f1f852a6',
-    '2023-06-17 00:27:43.987089',
-    '2023-06-17 00:27:43.987089',
+    '6ff05992-7792-4e13-af22-cca365109107',
+    '2023-06-17 16:31:52.352975',
+    '2023-06-17 16:31:52.352975',
     NULL,
-    '81464675',
-    'payment transaction at Brown Group using card ending with ***(...6572) for XOF 321.75 in account ***63687141',
-    333,
-    333,
-    333,
-    '4a7c98e7-667b-4352-9085-b79f034aa08c'
+    '42573691',
+    'invoice transaction at Will, Hoppe and Bergstrom using card ending with ***(...6382) for NIO 212.29 in account ***56121356',
+    949,
+    949,
+    949,
+    '0be39f86-d96b-47d5-abf0-f420f57b22bb'
   );
 INSERT INTO
   `factura_item` (
@@ -2573,16 +2807,16 @@ INSERT INTO
   )
 VALUES
   (
-    '4fdc31ea-e193-470b-b483-c6f69b6749bb',
-    '2023-06-17 00:27:44.093775',
-    '2023-06-17 00:27:44.093775',
+    '779a934f-a0c7-4955-908a-4e0f6ff130bd',
+    '2023-06-17 16:31:51.777176',
+    '2023-06-17 16:31:51.777176',
     NULL,
-    '53003530',
-    'withdrawal transaction at Cummerata, Wyman and O\'Conner using card ending with ***(...6090) for CHF 30.35 in account ***05573185',
-    430,
-    430,
-    430,
-    '1f2bb94c-a3e7-4bfa-87e3-e06e953539b7'
+    '42019919',
+    'invoice transaction at Gleason - Miller using card ending with ***(...3922) for CDF 839.76 in account ***54055528',
+    346,
+    346,
+    346,
+    '9b9105c7-efbd-49ef-b6c7-ff5b8668a914'
   );
 INSERT INTO
   `factura_item` (
@@ -2599,16 +2833,16 @@ INSERT INTO
   )
 VALUES
   (
-    '50ff112a-da5a-4323-b528-42908bd36d7a',
-    '2023-06-17 00:27:44.371228',
-    '2023-06-17 00:27:44.371228',
+    '7f5166f4-99db-43b0-bc69-f7f6cf6fe56d',
+    '2023-06-17 16:31:51.939878',
+    '2023-06-17 16:31:51.939878',
     NULL,
-    '72637712',
-    'deposit transaction at Lemke and Sons using card ending with ***(...8480) for CRC 390.51 in account ***71157337',
-    113,
-    113,
-    113,
-    'e4c8ac4c-bf88-4f60-80b7-61ed4ce84b86'
+    '48782090',
+    'deposit transaction at Beahan - Grady using card ending with ***(...9979) for CNY 624.58 in account ***76673306',
+    452,
+    452,
+    452,
+    'f670428d-f785-4b4a-a41c-84c23200a7b2'
   );
 INSERT INTO
   `factura_item` (
@@ -2625,484 +2859,16 @@ INSERT INTO
   )
 VALUES
   (
-    '51b27d30-b480-4922-a035-197489ef5a70',
-    '2023-06-17 00:27:44.183224',
-    '2023-06-17 00:27:44.183224',
+    '875a3412-5977-4914-a41c-92e9088a6751',
+    '2023-06-17 16:31:52.103579',
+    '2023-06-17 16:31:52.103579',
     NULL,
-    '76213037',
-    'withdrawal transaction at O\'Kon - Streich using card ending with ***(...6985) for ANG 200.25 in account ***18822105',
-    601,
-    601,
-    601,
-    '7ffafadb-fa14-4d43-ac8b-73cddbbfa2da'
-  );
-INSERT INTO
-  `factura_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroFactura`,
-    `descripcion`,
-    `ventasExoneradas`,
-    `ventasExentas`,
-    `ventasGrabadas`,
-    `facturaId`
-  )
-VALUES
-  (
-    '63c825d0-021f-48df-823e-4af313a5f5d0',
-    '2023-06-17 00:27:43.987089',
-    '2023-06-17 00:27:43.987089',
-    NULL,
-    '83100069',
-    'withdrawal transaction at Murphy, Ortiz and Kassulke using card ending with ***(...6941) for BMD 406.04 in account ***98970920',
-    329,
-    329,
-    329,
-    '4a7c98e7-667b-4352-9085-b79f034aa08c'
-  );
-INSERT INTO
-  `factura_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroFactura`,
-    `descripcion`,
-    `ventasExoneradas`,
-    `ventasExentas`,
-    `ventasGrabadas`,
-    `facturaId`
-  )
-VALUES
-  (
-    '6b8ad549-a313-41f3-8f98-3bc18c3303bd',
-    '2023-06-17 00:27:43.834763',
-    '2023-06-17 00:27:43.834763',
-    NULL,
-    '11755030',
-    'payment transaction at Ebert and Sons using card ending with ***(...3078) for PEN 761.27 in account ***12240346',
-    339,
-    339,
-    339,
-    '7cc6cd3f-7d7a-4c4a-b4a4-7c4fa63a0386'
-  );
-INSERT INTO
-  `factura_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroFactura`,
-    `descripcion`,
-    `ventasExoneradas`,
-    `ventasExentas`,
-    `ventasGrabadas`,
-    `facturaId`
-  )
-VALUES
-  (
-    '7b599dd2-16d7-4aad-ba6d-679d97d613c4',
-    '2023-06-17 00:27:44.281593',
-    '2023-06-17 00:27:44.281593',
-    NULL,
-    '78027132',
-    'deposit transaction at Hodkiewicz, Daugherty and Turcotte using card ending with ***(...0237) for KZT 837.17 in account ***92808358',
-    16,
-    16,
-    16,
-    'd18395d0-274d-4e79-9a24-ed5e2a05baaa'
-  );
-INSERT INTO
-  `factura_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroFactura`,
-    `descripcion`,
-    `ventasExoneradas`,
-    `ventasExentas`,
-    `ventasGrabadas`,
-    `facturaId`
-  )
-VALUES
-  (
-    '7be21d57-9d54-48b4-a6f7-a81d8622d969',
-    '2023-06-17 00:27:43.913611',
-    '2023-06-17 00:27:43.913611',
-    NULL,
-    '68984460',
-    'invoice transaction at Zboncak LLC using card ending with ***(...1313) for ETB 52.88 in account ***85679677',
-    329,
-    329,
-    329,
-    'eef346e1-3709-4539-8ace-409257114784'
-  );
-INSERT INTO
-  `factura_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroFactura`,
-    `descripcion`,
-    `ventasExoneradas`,
-    `ventasExentas`,
-    `ventasGrabadas`,
-    `facturaId`
-  )
-VALUES
-  (
-    '83f0c880-0ec3-4b13-81c7-0939d02a4ecb',
-    '2023-06-17 00:27:44.500937',
-    '2023-06-17 00:27:44.500937',
-    NULL,
-    '05787356',
-    'deposit transaction at Keebler - Feeney using card ending with ***(...0669) for SVC 567.35 in account ***52480043',
-    815,
-    815,
-    815,
-    '2d0ef741-d783-4aff-b0ca-0a2f7c2c63c8'
-  );
-INSERT INTO
-  `factura_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroFactura`,
-    `descripcion`,
-    `ventasExoneradas`,
-    `ventasExentas`,
-    `ventasGrabadas`,
-    `facturaId`
-  )
-VALUES
-  (
-    '87ca0cab-4007-4f61-9ff6-145f2d4e31c6',
-    '2023-06-17 00:27:43.987089',
-    '2023-06-17 00:27:43.987089',
-    NULL,
-    '00106751',
-    'deposit transaction at Hyatt - Torphy using card ending with ***(...5454) for CHF 274.08 in account ***11783023',
-    745,
-    745,
-    745,
-    '4a7c98e7-667b-4352-9085-b79f034aa08c'
-  );
-INSERT INTO
-  `factura_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroFactura`,
-    `descripcion`,
-    `ventasExoneradas`,
-    `ventasExentas`,
-    `ventasGrabadas`,
-    `facturaId`
-  )
-VALUES
-  (
-    '8a69b990-2747-44eb-a58b-be6872fde281',
-    '2023-06-17 00:27:43.834763',
-    '2023-06-17 00:27:43.834763',
-    NULL,
-    '54768648',
-    'deposit transaction at Hoppe, Altenwerth and Cruickshank using card ending with ***(...3689) for PKR 51.13 in account ***27776299',
-    287,
-    287,
-    287,
-    '7cc6cd3f-7d7a-4c4a-b4a4-7c4fa63a0386'
-  );
-INSERT INTO
-  `factura_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroFactura`,
-    `descripcion`,
-    `ventasExoneradas`,
-    `ventasExentas`,
-    `ventasGrabadas`,
-    `facturaId`
-  )
-VALUES
-  (
-    '9973ee57-7c08-40e9-a6e7-eedd28f45f05',
-    '2023-06-17 00:27:44.093775',
-    '2023-06-17 00:27:44.093775',
-    NULL,
-    '36339539',
-    'deposit transaction at Gorczany - Hyatt using card ending with ***(...2209) for CAD 654.97 in account ***07963382',
-    6,
-    6,
-    6,
-    '1f2bb94c-a3e7-4bfa-87e3-e06e953539b7'
-  );
-INSERT INTO
-  `factura_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroFactura`,
-    `descripcion`,
-    `ventasExoneradas`,
-    `ventasExentas`,
-    `ventasGrabadas`,
-    `facturaId`
-  )
-VALUES
-  (
-    '9d84060d-4aa8-4f19-96ec-7009626bee55',
-    '2023-06-17 00:27:44.183224',
-    '2023-06-17 00:27:44.183224',
-    NULL,
-    '54405742',
-    'payment transaction at Feil - Herzog using card ending with ***(...2574) for XPF 129.43 in account ***43574895',
-    818,
-    818,
-    818,
-    '7ffafadb-fa14-4d43-ac8b-73cddbbfa2da'
-  );
-INSERT INTO
-  `factura_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroFactura`,
-    `descripcion`,
-    `ventasExoneradas`,
-    `ventasExentas`,
-    `ventasGrabadas`,
-    `facturaId`
-  )
-VALUES
-  (
-    'a4907cb0-074d-4ee9-9247-573031ab469e',
-    '2023-06-17 00:27:44.183224',
-    '2023-06-17 00:27:44.183224',
-    NULL,
-    '90193817',
-    'invoice transaction at Gerhold, Hammes and Hyatt using card ending with ***(...9332) for KPW 616.41 in account ***56996056',
-    256,
-    256,
-    256,
-    '7ffafadb-fa14-4d43-ac8b-73cddbbfa2da'
-  );
-INSERT INTO
-  `factura_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroFactura`,
-    `descripcion`,
-    `ventasExoneradas`,
-    `ventasExentas`,
-    `ventasGrabadas`,
-    `facturaId`
-  )
-VALUES
-  (
-    'b0d5a156-3cc1-41d9-9c9a-10172f7478df',
-    '2023-06-17 00:27:43.913611',
-    '2023-06-17 00:27:43.913611',
-    NULL,
-    '27829277',
-    'invoice transaction at Grant Inc using card ending with ***(...9846) for DZD 530.74 in account ***23280733',
-    544,
-    544,
-    544,
-    'eef346e1-3709-4539-8ace-409257114784'
-  );
-INSERT INTO
-  `factura_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroFactura`,
-    `descripcion`,
-    `ventasExoneradas`,
-    `ventasExentas`,
-    `ventasGrabadas`,
-    `facturaId`
-  )
-VALUES
-  (
-    'b3aa1200-e88f-4a88-82c3-12c50330d319',
-    '2023-06-17 00:27:43.834763',
-    '2023-06-17 00:27:43.834763',
-    NULL,
-    '62885352',
-    'invoice transaction at Will, O\'Keefe and Bednar using card ending with ***(...9029) for VUV 420.98 in account ***33636025',
-    429,
-    429,
-    429,
-    '7cc6cd3f-7d7a-4c4a-b4a4-7c4fa63a0386'
-  );
-INSERT INTO
-  `factura_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroFactura`,
-    `descripcion`,
-    `ventasExoneradas`,
-    `ventasExentas`,
-    `ventasGrabadas`,
-    `facturaId`
-  )
-VALUES
-  (
-    'baa16975-952e-4f96-9b48-88a5ac7012d6',
-    '2023-06-17 00:27:44.500937',
-    '2023-06-17 00:27:44.500937',
-    NULL,
-    '60386682',
-    'invoice transaction at Langosh - Marquardt using card ending with ***(...5293) for XBB 662.71 in account ***45512387',
-    82,
-    82,
-    82,
-    '2d0ef741-d783-4aff-b0ca-0a2f7c2c63c8'
-  );
-INSERT INTO
-  `factura_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroFactura`,
-    `descripcion`,
-    `ventasExoneradas`,
-    `ventasExentas`,
-    `ventasGrabadas`,
-    `facturaId`
-  )
-VALUES
-  (
-    'bb031811-e915-4708-bc56-40f0bddccd00',
-    '2023-06-17 00:27:44.093775',
-    '2023-06-17 00:27:44.093775',
-    NULL,
-    '11314856',
-    'payment transaction at Murphy, O\'Reilly and Crona using card ending with ***(...7447) for VES 661.40 in account ***82774013',
-    367,
-    367,
-    367,
-    '1f2bb94c-a3e7-4bfa-87e3-e06e953539b7'
-  );
-INSERT INTO
-  `factura_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroFactura`,
-    `descripcion`,
-    `ventasExoneradas`,
-    `ventasExentas`,
-    `ventasGrabadas`,
-    `facturaId`
-  )
-VALUES
-  (
-    'bf35cec7-f060-4fdd-9f41-3998864442dd',
-    '2023-06-17 00:27:44.371228',
-    '2023-06-17 00:27:44.371228',
-    NULL,
-    '36505435',
-    'withdrawal transaction at Stanton - Watsica using card ending with ***(...2531) for RON 876.02 in account ***53802884',
-    598,
-    598,
-    598,
-    'e4c8ac4c-bf88-4f60-80b7-61ed4ce84b86'
-  );
-INSERT INTO
-  `factura_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroFactura`,
-    `descripcion`,
-    `ventasExoneradas`,
-    `ventasExentas`,
-    `ventasGrabadas`,
-    `facturaId`
-  )
-VALUES
-  (
-    'bfdc0cac-0ec3-4e23-9db7-8f7456f2f277',
-    '2023-06-17 00:27:44.281593',
-    '2023-06-17 00:27:44.281593',
-    NULL,
-    '30745898',
-    'payment transaction at Feil - Okuneva using card ending with ***(...6927) for XBD 1.06 in account ***46296811',
-    437,
-    437,
-    437,
-    'd18395d0-274d-4e79-9a24-ed5e2a05baaa'
-  );
-INSERT INTO
-  `factura_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroFactura`,
-    `descripcion`,
-    `ventasExoneradas`,
-    `ventasExentas`,
-    `ventasGrabadas`,
-    `facturaId`
-  )
-VALUES
-  (
-    'c364b023-e0bd-484a-99cf-e7c988a6c651',
-    '2023-06-17 00:27:44.439697',
-    '2023-06-17 00:27:44.439697',
-    NULL,
-    '70249749',
-    'invoice transaction at Kohler - Walker using card ending with ***(...1977) for MRO 323.52 in account ***99172091',
-    803,
-    803,
-    803,
-    '9fcbd30e-c0ab-4b41-9f7c-3531d99b400d'
-  );
-INSERT INTO
-  `factura_item` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `numeroFactura`,
-    `descripcion`,
-    `ventasExoneradas`,
-    `ventasExentas`,
-    `ventasGrabadas`,
-    `facturaId`
-  )
-VALUES
-  (
-    'c4b6ee27-22d2-4c54-9e8c-b599c419708c',
-    '2023-06-17 00:27:44.371228',
-    '2023-06-17 00:27:44.371228',
-    NULL,
-    '69001769',
-    'withdrawal transaction at Hintz - Langosh using card ending with ***(...6642) for BND 255.05 in account ***72222877',
+    '02190778',
+    'payment transaction at Okuneva, Heller and Jones using card ending with ***(...2889) for QAR 101.10 in account ***26825137',
     80,
     80,
     80,
-    'e4c8ac4c-bf88-4f60-80b7-61ed4ce84b86'
+    '8f81231d-00d5-426b-8c1a-058b5e52d61f'
   );
 INSERT INTO
   `factura_item` (
@@ -3119,16 +2885,16 @@ INSERT INTO
   )
 VALUES
   (
-    'd6864565-7834-4e8e-846e-7fe8570dd837',
-    '2023-06-17 00:27:44.093775',
-    '2023-06-17 00:27:44.093775',
+    '8a37e9e7-438f-4f4d-a178-116769ef38ce',
+    '2023-06-17 16:31:52.027928',
+    '2023-06-17 16:31:52.027928',
     NULL,
-    '57320329',
-    'withdrawal transaction at Emmerich, Wolff and Lesch using card ending with ***(...5184) for SVC 382.14 in account ***24733388',
-    78,
-    78,
-    78,
-    '1f2bb94c-a3e7-4bfa-87e3-e06e953539b7'
+    '94844545',
+    'deposit transaction at Spencer Inc using card ending with ***(...5273) for GTQ 839.18 in account ***48724604',
+    940,
+    940,
+    940,
+    '56328160-dfeb-40bf-a497-1c39e63e2740'
   );
 INSERT INTO
   `factura_item` (
@@ -3145,16 +2911,16 @@ INSERT INTO
   )
 VALUES
   (
-    'd70ec835-6d04-40b8-91ce-caf34b9bf2ba',
-    '2023-06-17 00:27:44.500937',
-    '2023-06-17 00:27:44.500937',
+    '924fcd21-40ac-4ada-bfaf-febea0a6bd30',
+    '2023-06-17 16:31:52.103579',
+    '2023-06-17 16:31:52.103579',
     NULL,
-    '91525476',
-    'invoice transaction at Ankunding, Abbott and Hauck using card ending with ***(...7690) for ZMW 715.81 in account ***68244563',
-    675,
-    675,
-    675,
-    '2d0ef741-d783-4aff-b0ca-0a2f7c2c63c8'
+    '15319864',
+    'deposit transaction at Dickens - Berge using card ending with ***(...3886) for XTS 179.65 in account ***98252735',
+    276,
+    276,
+    276,
+    '8f81231d-00d5-426b-8c1a-058b5e52d61f'
   );
 INSERT INTO
   `factura_item` (
@@ -3171,16 +2937,16 @@ INSERT INTO
   )
 VALUES
   (
-    'dabfbb93-71a8-4a2a-a650-9d54b513c012',
-    '2023-06-17 00:27:43.987089',
-    '2023-06-17 00:27:43.987089',
+    '93d22fe4-d3f4-4dc8-9971-83ebbe92a1bb',
+    '2023-06-17 16:31:52.103579',
+    '2023-06-17 16:31:52.103579',
     NULL,
-    '37642378',
-    'deposit transaction at Marvin LLC using card ending with ***(...1236) for MGA 604.54 in account ***87506966',
-    204,
-    204,
-    204,
-    '4a7c98e7-667b-4352-9085-b79f034aa08c'
+    '15503823',
+    'invoice transaction at D\'Amore Inc using card ending with ***(...4767) for AOA 908.40 in account ***59857058',
+    586,
+    586,
+    586,
+    '8f81231d-00d5-426b-8c1a-058b5e52d61f'
   );
 INSERT INTO
   `factura_item` (
@@ -3197,16 +2963,16 @@ INSERT INTO
   )
 VALUES
   (
-    'daf65b43-4882-48ed-9c24-6c1ca0af7fdf',
-    '2023-06-17 00:27:44.439697',
-    '2023-06-17 00:27:44.439697',
+    'a54b0f89-7f62-4e0a-a775-afd4ca5a911f',
+    '2023-06-17 16:31:52.277281',
+    '2023-06-17 16:31:52.277281',
     NULL,
-    '10623093',
-    'invoice transaction at Langosh - McKenzie using card ending with ***(...6549) for PEN 688.06 in account ***74718551',
-    294,
-    294,
-    294,
-    '9fcbd30e-c0ab-4b41-9f7c-3531d99b400d'
+    '19928655',
+    'withdrawal transaction at Pfeffer - Bashirian using card ending with ***(...1070) for NGN 132.85 in account ***86268398',
+    62,
+    62,
+    62,
+    '7f596153-c187-4592-b6f0-e9021670479d'
   );
 INSERT INTO
   `factura_item` (
@@ -3223,16 +2989,16 @@ INSERT INTO
   )
 VALUES
   (
-    'ebfde510-a751-42d5-963d-d53aea88de39',
-    '2023-06-17 00:27:44.281593',
-    '2023-06-17 00:27:44.281593',
+    'a870cdd9-9058-4956-af17-04818b755c4a',
+    '2023-06-17 16:31:52.352975',
+    '2023-06-17 16:31:52.352975',
     NULL,
-    '87324982',
-    'invoice transaction at Kohler - O\'Reilly using card ending with ***(...4657) for KZT 198.54 in account ***11341608',
-    535,
-    535,
-    535,
-    'd18395d0-274d-4e79-9a24-ed5e2a05baaa'
+    '75117811',
+    'payment transaction at Spencer, Baumbach and Morissette using card ending with ***(...5394) for BIF 131.26 in account ***69695070',
+    131,
+    131,
+    131,
+    '0be39f86-d96b-47d5-abf0-f420f57b22bb'
   );
 INSERT INTO
   `factura_item` (
@@ -3249,16 +3015,16 @@ INSERT INTO
   )
 VALUES
   (
-    'f1a52509-5b54-43fd-866d-e5452d374fa1',
-    '2023-06-17 00:27:43.913611',
-    '2023-06-17 00:27:43.913611',
+    'a88e4ef9-8072-448e-965b-51962b4015b5',
+    '2023-06-17 16:31:52.103579',
+    '2023-06-17 16:31:52.103579',
     NULL,
-    '53585566',
-    'invoice transaction at Crist - Schowalter using card ending with ***(...4143) for MWK 702.12 in account ***39004176',
-    685,
-    685,
-    685,
-    'eef346e1-3709-4539-8ace-409257114784'
+    '12576840',
+    'withdrawal transaction at Torp LLC using card ending with ***(...2473) for KYD 417.67 in account ***47065240',
+    809,
+    809,
+    809,
+    '8f81231d-00d5-426b-8c1a-058b5e52d61f'
   );
 INSERT INTO
   `factura_item` (
@@ -3275,16 +3041,16 @@ INSERT INTO
   )
 VALUES
   (
-    'fc353b2c-f38f-4d05-9919-941031a41582',
-    '2023-06-17 00:27:44.093775',
-    '2023-06-17 00:27:44.093775',
+    'a99a6231-03ad-4a96-91d9-6826fba5389b',
+    '2023-06-17 16:31:52.180277',
+    '2023-06-17 16:31:52.180277',
     NULL,
-    '46329282',
-    'invoice transaction at Goyette, Bechtelar and Bode using card ending with ***(...3113) for KMF 439.29 in account ***43511617',
-    838,
-    838,
-    838,
-    '1f2bb94c-a3e7-4bfa-87e3-e06e953539b7'
+    '80904547',
+    'withdrawal transaction at Runte - Cartwright using card ending with ***(...3885) for SHP 110.87 in account ***14645415',
+    166,
+    166,
+    166,
+    'd34a045b-5146-4d6f-abd6-cfff53bc1dbd'
   );
 INSERT INTO
   `factura_item` (
@@ -3301,16 +3067,484 @@ INSERT INTO
   )
 VALUES
   (
-    'fcec6baf-103d-4f28-8178-106a74869e4f',
-    '2023-06-17 00:27:43.834763',
-    '2023-06-17 00:27:43.834763',
+    'ac75637c-7420-42f9-b2d5-b29649c73989',
+    '2023-06-17 16:31:52.180277',
+    '2023-06-17 16:31:52.180277',
     NULL,
-    '00496916',
-    'deposit transaction at Fritsch, Funk and Graham using card ending with ***(...7992) for SGD 217.57 in account ***09717660',
-    70,
-    70,
-    70,
-    '7cc6cd3f-7d7a-4c4a-b4a4-7c4fa63a0386'
+    '10003213',
+    'payment transaction at Gorczany - Zulauf using card ending with ***(...5917) for HTG 919.52 in account ***04292470',
+    513,
+    513,
+    513,
+    'd34a045b-5146-4d6f-abd6-cfff53bc1dbd'
+  );
+INSERT INTO
+  `factura_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroFactura`,
+    `descripcion`,
+    `ventasExoneradas`,
+    `ventasExentas`,
+    `ventasGrabadas`,
+    `facturaId`
+  )
+VALUES
+  (
+    'ad7331f7-1c60-457a-a175-694be2d9189e',
+    '2023-06-17 16:31:52.420399',
+    '2023-06-17 16:31:52.420399',
+    NULL,
+    '48944638',
+    'deposit transaction at Pfannerstill and Sons using card ending with ***(...3082) for BWP 985.29 in account ***41955861',
+    650,
+    650,
+    650,
+    'e45eec31-79f5-42fa-beb3-6f3fc5ad7761'
+  );
+INSERT INTO
+  `factura_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroFactura`,
+    `descripcion`,
+    `ventasExoneradas`,
+    `ventasExentas`,
+    `ventasGrabadas`,
+    `facturaId`
+  )
+VALUES
+  (
+    'adb73b9b-55c0-43ec-beff-c99654154f0b',
+    '2023-06-17 16:31:52.103579',
+    '2023-06-17 16:31:52.103579',
+    NULL,
+    '70978761',
+    'withdrawal transaction at Orn Group using card ending with ***(...7221) for XAU 424.30 in account ***38100039',
+    587,
+    587,
+    587,
+    '8f81231d-00d5-426b-8c1a-058b5e52d61f'
+  );
+INSERT INTO
+  `factura_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroFactura`,
+    `descripcion`,
+    `ventasExoneradas`,
+    `ventasExentas`,
+    `ventasGrabadas`,
+    `facturaId`
+  )
+VALUES
+  (
+    'b2237cac-ab46-4fc9-81c2-2b5d7131c4ef',
+    '2023-06-17 16:31:51.939878',
+    '2023-06-17 16:31:51.939878',
+    NULL,
+    '78368917',
+    'withdrawal transaction at Cruickshank Inc using card ending with ***(...6335) for BTN 768.61 in account ***85418926',
+    287,
+    287,
+    287,
+    'f670428d-f785-4b4a-a41c-84c23200a7b2'
+  );
+INSERT INTO
+  `factura_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroFactura`,
+    `descripcion`,
+    `ventasExoneradas`,
+    `ventasExentas`,
+    `ventasGrabadas`,
+    `facturaId`
+  )
+VALUES
+  (
+    'b4373c74-4fae-4df5-adfb-8bd8d791d22d',
+    '2023-06-17 16:31:52.180277',
+    '2023-06-17 16:31:52.180277',
+    NULL,
+    '62845980',
+    'payment transaction at Connelly - Conn using card ending with ***(...2005) for IDR 720.28 in account ***46509112',
+    271,
+    271,
+    271,
+    'd34a045b-5146-4d6f-abd6-cfff53bc1dbd'
+  );
+INSERT INTO
+  `factura_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroFactura`,
+    `descripcion`,
+    `ventasExoneradas`,
+    `ventasExentas`,
+    `ventasGrabadas`,
+    `facturaId`
+  )
+VALUES
+  (
+    'c5a334a1-5058-4eea-9fcd-25df628b840f',
+    '2023-06-17 16:31:51.853691',
+    '2023-06-17 16:31:51.853691',
+    NULL,
+    '10456846',
+    'payment transaction at Johns, Wilderman and Reynolds using card ending with ***(...7506) for SHP 437.04 in account ***51547566',
+    958,
+    958,
+    958,
+    '7948add7-6264-42ef-b1ff-6e76b1fdea24'
+  );
+INSERT INTO
+  `factura_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroFactura`,
+    `descripcion`,
+    `ventasExoneradas`,
+    `ventasExentas`,
+    `ventasGrabadas`,
+    `facturaId`
+  )
+VALUES
+  (
+    'd489e548-2a4a-422f-8502-40573aa03b16',
+    '2023-06-17 16:31:52.277281',
+    '2023-06-17 16:31:52.277281',
+    NULL,
+    '84386822',
+    'invoice transaction at Carroll, Effertz and Donnelly using card ending with ***(...6395) for MUR 974.79 in account ***53300026',
+    274,
+    274,
+    274,
+    '7f596153-c187-4592-b6f0-e9021670479d'
+  );
+INSERT INTO
+  `factura_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroFactura`,
+    `descripcion`,
+    `ventasExoneradas`,
+    `ventasExentas`,
+    `ventasGrabadas`,
+    `facturaId`
+  )
+VALUES
+  (
+    'd733b666-0834-44e4-86e4-85ecd34db27d',
+    '2023-06-17 16:31:52.027928',
+    '2023-06-17 16:31:52.027928',
+    NULL,
+    '87386714',
+    'deposit transaction at Stroman - Doyle using card ending with ***(...5885) for SBD 264.78 in account ***87729526',
+    599,
+    599,
+    599,
+    '56328160-dfeb-40bf-a497-1c39e63e2740'
+  );
+INSERT INTO
+  `factura_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroFactura`,
+    `descripcion`,
+    `ventasExoneradas`,
+    `ventasExentas`,
+    `ventasGrabadas`,
+    `facturaId`
+  )
+VALUES
+  (
+    'd7381933-43d3-4034-8c95-48321780d45a',
+    '2023-06-17 16:31:52.277281',
+    '2023-06-17 16:31:52.277281',
+    NULL,
+    '47973051',
+    'payment transaction at Gislason Inc using card ending with ***(...3987) for XFU 181.28 in account ***06865161',
+    448,
+    448,
+    448,
+    '7f596153-c187-4592-b6f0-e9021670479d'
+  );
+INSERT INTO
+  `factura_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroFactura`,
+    `descripcion`,
+    `ventasExoneradas`,
+    `ventasExentas`,
+    `ventasGrabadas`,
+    `facturaId`
+  )
+VALUES
+  (
+    'd7bf0734-1122-4b91-92ec-114e0fee05b8',
+    '2023-06-17 16:31:51.853691',
+    '2023-06-17 16:31:51.853691',
+    NULL,
+    '86508039',
+    'withdrawal transaction at Romaguera, Mitchell and Pagac using card ending with ***(...7888) for LYD 454.68 in account ***00909229',
+    890,
+    890,
+    890,
+    '7948add7-6264-42ef-b1ff-6e76b1fdea24'
+  );
+INSERT INTO
+  `factura_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroFactura`,
+    `descripcion`,
+    `ventasExoneradas`,
+    `ventasExentas`,
+    `ventasGrabadas`,
+    `facturaId`
+  )
+VALUES
+  (
+    'd7dd87a1-0d51-4350-b66b-126da9977495',
+    '2023-06-17 16:31:51.939878',
+    '2023-06-17 16:31:51.939878',
+    NULL,
+    '07804154',
+    'payment transaction at Ondricka, Cummerata and Muller using card ending with ***(...5029) for RUB 993.12 in account ***42770514',
+    430,
+    430,
+    430,
+    'f670428d-f785-4b4a-a41c-84c23200a7b2'
+  );
+INSERT INTO
+  `factura_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroFactura`,
+    `descripcion`,
+    `ventasExoneradas`,
+    `ventasExentas`,
+    `ventasGrabadas`,
+    `facturaId`
+  )
+VALUES
+  (
+    'da0e0d5d-603d-421a-a42d-29033037d126',
+    '2023-06-17 16:31:51.939878',
+    '2023-06-17 16:31:51.939878',
+    NULL,
+    '20930434',
+    'invoice transaction at Zboncak - White using card ending with ***(...4512) for ZMW 21.18 in account ***14724384',
+    715,
+    715,
+    715,
+    'f670428d-f785-4b4a-a41c-84c23200a7b2'
+  );
+INSERT INTO
+  `factura_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroFactura`,
+    `descripcion`,
+    `ventasExoneradas`,
+    `ventasExentas`,
+    `ventasGrabadas`,
+    `facturaId`
+  )
+VALUES
+  (
+    'da0e26a7-3577-47f1-928c-133c9692bec9',
+    '2023-06-17 16:31:51.777176',
+    '2023-06-17 16:31:51.777176',
+    NULL,
+    '34460603',
+    'payment transaction at Hintz Inc using card ending with ***(...1598) for FKP 288.46 in account ***78679251',
+    179,
+    179,
+    179,
+    '9b9105c7-efbd-49ef-b6c7-ff5b8668a914'
+  );
+INSERT INTO
+  `factura_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroFactura`,
+    `descripcion`,
+    `ventasExoneradas`,
+    `ventasExentas`,
+    `ventasGrabadas`,
+    `facturaId`
+  )
+VALUES
+  (
+    'da40eea0-fec5-403f-8573-b8d5603410c0',
+    '2023-06-17 16:31:52.027928',
+    '2023-06-17 16:31:52.027928',
+    NULL,
+    '82899913',
+    'payment transaction at Kertzmann - Murray using card ending with ***(...8396) for TOP 912.49 in account ***01813765',
+    394,
+    394,
+    394,
+    '56328160-dfeb-40bf-a497-1c39e63e2740'
+  );
+INSERT INTO
+  `factura_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroFactura`,
+    `descripcion`,
+    `ventasExoneradas`,
+    `ventasExentas`,
+    `ventasGrabadas`,
+    `facturaId`
+  )
+VALUES
+  (
+    'db5cd733-011f-49ef-bc21-fb46d20a455b',
+    '2023-06-17 16:31:51.939878',
+    '2023-06-17 16:31:51.939878',
+    NULL,
+    '68703260',
+    'invoice transaction at Homenick, Stamm and Abernathy using card ending with ***(...6217) for VES 758.02 in account ***88920197',
+    672,
+    672,
+    672,
+    'f670428d-f785-4b4a-a41c-84c23200a7b2'
+  );
+INSERT INTO
+  `factura_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroFactura`,
+    `descripcion`,
+    `ventasExoneradas`,
+    `ventasExentas`,
+    `ventasGrabadas`,
+    `facturaId`
+  )
+VALUES
+  (
+    'e235dba2-fa09-4495-b752-d1e8a7616831',
+    '2023-06-17 16:31:52.420399',
+    '2023-06-17 16:31:52.420399',
+    NULL,
+    '40012224',
+    'deposit transaction at Fahey and Sons using card ending with ***(...5976) for CUC 825.97 in account ***59283103',
+    689,
+    689,
+    689,
+    'e45eec31-79f5-42fa-beb3-6f3fc5ad7761'
+  );
+INSERT INTO
+  `factura_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroFactura`,
+    `descripcion`,
+    `ventasExoneradas`,
+    `ventasExentas`,
+    `ventasGrabadas`,
+    `facturaId`
+  )
+VALUES
+  (
+    'e3d2e9c8-b30a-47c1-93d4-673d3d285175',
+    '2023-06-17 16:31:52.352975',
+    '2023-06-17 16:31:52.352975',
+    NULL,
+    '99966905',
+    'withdrawal transaction at Bayer - Will using card ending with ***(...4278) for AWG 622.33 in account ***69473772',
+    779,
+    779,
+    779,
+    '0be39f86-d96b-47d5-abf0-f420f57b22bb'
+  );
+INSERT INTO
+  `factura_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroFactura`,
+    `descripcion`,
+    `ventasExoneradas`,
+    `ventasExentas`,
+    `ventasGrabadas`,
+    `facturaId`
+  )
+VALUES
+  (
+    'e9d4f5e7-8aaa-4de8-a998-76810736005e',
+    '2023-06-17 16:31:51.777176',
+    '2023-06-17 16:31:51.777176',
+    NULL,
+    '37756246',
+    'payment transaction at Larkin, Maggio and Crona using card ending with ***(...2284) for PGK 322.46 in account ***16575015',
+    512,
+    512,
+    512,
+    '9b9105c7-efbd-49ef-b6c7-ff5b8668a914'
+  );
+INSERT INTO
+  `factura_item` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `numeroFactura`,
+    `descripcion`,
+    `ventasExoneradas`,
+    `ventasExentas`,
+    `ventasGrabadas`,
+    `facturaId`
+  )
+VALUES
+  (
+    'eba54012-6a83-4617-bc54-adfdda3bd605',
+    '2023-06-17 16:31:51.777176',
+    '2023-06-17 16:31:51.777176',
+    NULL,
+    '25266999',
+    'invoice transaction at Kulas Group using card ending with ***(...2862) for ALL 903.41 in account ***09167251',
+    833,
+    833,
+    833,
+    '9b9105c7-efbd-49ef-b6c7-ff5b8668a914'
   );
 
 # ------------------------------------------------------------
@@ -3321,9 +3555,29 @@ INSERT INTO
   `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
 VALUES
   (
+    '0291eeaf-b733-4090-b7fb-004245a60d89',
+    '2023-06-17 16:31:51.636705',
+    '2023-06-17 16:31:51.636705',
+    NULL,
+    'Modulo comprobantes'
+  );
+INSERT INTO
+  `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
+VALUES
+  (
+    '0a63e2d5-f65f-4db8-ac30-be2972786e56',
+    '2023-06-17 16:31:51.636705',
+    '2023-06-17 16:31:51.636705',
+    NULL,
+    'Modulo facturas'
+  );
+INSERT INTO
+  `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
+VALUES
+  (
     '15982359-8228-4328-a483-5f61727f32bc',
-    '2023-06-17 00:27:43.671587',
-    '2023-06-17 00:27:43.671587',
+    '2023-06-17 16:31:51.636705',
+    '2023-06-17 16:31:51.636705',
     NULL,
     'Editar clientes'
   );
@@ -3331,29 +3585,9 @@ INSERT INTO
   `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
 VALUES
   (
-    '20529a5d-d8ec-4670-b2c9-d76a63c91f68',
-    '2023-06-17 00:27:43.671587',
-    '2023-06-17 00:27:43.671587',
-    NULL,
-    'Borrar facturas'
-  );
-INSERT INTO
-  `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
-VALUES
-  (
-    '2660dcb9-2d2b-4eab-b4e2-a09d5c05e77c',
-    '2023-06-17 00:27:43.671587',
-    '2023-06-17 00:27:43.671587',
-    NULL,
-    'Visualizar facturas'
-  );
-INSERT INTO
-  `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
-VALUES
-  (
     '403488fe-2ab4-4781-bbfc-2829cc019811',
-    '2023-06-17 00:27:43.671587',
-    '2023-06-17 00:27:43.671587',
+    '2023-06-17 16:31:51.636705',
+    '2023-06-17 16:31:51.636705',
     NULL,
     'Crear clientes'
   );
@@ -3362,8 +3596,8 @@ INSERT INTO
 VALUES
   (
     '4678f211-508c-4731-8da6-10f3acca120d',
-    '2023-06-17 00:27:43.671587',
-    '2023-06-17 00:27:43.671587',
+    '2023-06-17 16:31:51.636705',
+    '2023-06-17 16:31:51.636705',
     NULL,
     'Historial clientes'
   );
@@ -3372,8 +3606,8 @@ INSERT INTO
 VALUES
   (
     '5881dd7e-870a-4078-9699-869f05c7e153',
-    '2023-06-17 00:27:43.671587',
-    '2023-06-17 00:27:43.671587',
+    '2023-06-17 16:31:51.636705',
+    '2023-06-17 16:31:51.636705',
     NULL,
     'Visualizar clientes'
   );
@@ -3381,69 +3615,9 @@ INSERT INTO
   `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
 VALUES
   (
-    '5bbfa1ce-9dc2-4855-8160-026cd759e5dd',
-    '2023-06-17 00:27:43.671587',
-    '2023-06-17 00:27:43.671587',
-    NULL,
-    'Visualizar comprobantes'
-  );
-INSERT INTO
-  `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
-VALUES
-  (
-    '674e81f8-7221-4e5c-aba2-7738bff69c72',
-    '2023-06-17 00:27:43.671587',
-    '2023-06-17 00:27:43.671587',
-    NULL,
-    'Crear comprobantes'
-  );
-INSERT INTO
-  `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
-VALUES
-  (
-    '6b1022c8-7712-4d7b-8b3e-a6435d6761df',
-    '2023-06-17 00:27:43.671587',
-    '2023-06-17 00:27:43.671587',
-    NULL,
-    'Historial facturas'
-  );
-INSERT INTO
-  `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
-VALUES
-  (
-    '8a88e564-3b74-4fd1-94c9-46d411cbe012',
-    '2023-06-17 00:27:43.671587',
-    '2023-06-17 00:27:43.671587',
-    NULL,
-    'Editar facturas'
-  );
-INSERT INTO
-  `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
-VALUES
-  (
-    'abc052ff-6384-4ef4-a5ae-6581ab5da7e3',
-    '2023-06-17 00:27:43.671587',
-    '2023-06-17 00:27:43.671587',
-    NULL,
-    'Modulo comprobantes'
-  );
-INSERT INTO
-  `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
-VALUES
-  (
-    'ceeb1485-67a1-47c4-af5d-071edf94d378',
-    '2023-06-17 00:27:43.671587',
-    '2023-06-17 00:27:43.671587',
-    NULL,
-    'Editar comprobantes'
-  );
-INSERT INTO
-  `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
-VALUES
-  (
-    'd8492376-40bf-4b8b-8455-c3345f6a1a13',
-    '2023-06-17 00:27:43.671587',
-    '2023-06-17 00:27:43.671587',
+    '591d00a4-230e-4eaa-8073-7cfeb10586b3',
+    '2023-06-17 16:31:51.636705',
+    '2023-06-17 16:31:51.636705',
     NULL,
     'Crear facturas'
   );
@@ -3451,29 +3625,59 @@ INSERT INTO
   `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
 VALUES
   (
-    'e6404fdb-406d-4e97-b5d5-d5bef524354a',
-    '2023-06-17 00:27:43.671587',
-    '2023-06-17 00:27:43.671587',
+    '737e21bf-98d7-4039-a2a2-26d687132e31',
+    '2023-06-17 16:31:51.636705',
+    '2023-06-17 16:31:51.636705',
     NULL,
-    'Modulo facturas'
+    'Visualizar facturas'
   );
 INSERT INTO
   `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
 VALUES
   (
-    'ec968710-290f-4054-b31b-dc3478a8ec56',
-    '2023-06-17 00:27:43.671587',
-    '2023-06-17 00:27:43.671587',
+    '7d8fcb68-b1fd-4dd0-996e-4232e4c33f72',
+    '2023-06-17 16:31:51.636705',
+    '2023-06-17 16:31:51.636705',
     NULL,
-    'Modulo clientes'
+    'Borrar facturas'
   );
 INSERT INTO
   `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
 VALUES
   (
-    'ee88cd98-0acf-488c-8496-65f9caffaae7',
-    '2023-06-17 00:27:43.671587',
-    '2023-06-17 00:27:43.671587',
+    '81f3c1c7-721d-4db2-8e7a-b7a955600ad2',
+    '2023-06-17 16:31:51.636705',
+    '2023-06-17 16:31:51.636705',
+    NULL,
+    'Editar comprobantes'
+  );
+INSERT INTO
+  `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
+VALUES
+  (
+    '8da55776-ab96-4c40-ab76-8e752ac3a0a0',
+    '2023-06-17 16:31:51.636705',
+    '2023-06-17 16:31:51.636705',
+    NULL,
+    'Editar facturas'
+  );
+INSERT INTO
+  `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
+VALUES
+  (
+    '9476888e-1bbf-4bf7-b033-9898ca96d463',
+    '2023-06-17 16:31:51.636705',
+    '2023-06-17 16:31:51.636705',
+    NULL,
+    'Crear comprobantes'
+  );
+INSERT INTO
+  `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
+VALUES
+  (
+    'a2b28c5e-29ec-4cec-bc8f-0279d7b87e83',
+    '2023-06-17 16:31:51.636705',
+    '2023-06-17 16:31:51.636705',
     NULL,
     'Borrar comprobantes'
   );
@@ -3481,21 +3685,51 @@ INSERT INTO
   `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
 VALUES
   (
-    'f5cf4a65-8244-440b-82f6-daf7d7ffa816',
-    '2023-06-17 00:27:43.671587',
-    '2023-06-17 00:27:43.671587',
+    'bb1391b0-12ef-4751-8616-1a8093b7a3a4',
+    '2023-06-17 16:31:51.636705',
+    '2023-06-17 16:31:51.636705',
     NULL,
-    'Borrar clientes'
+    'Historial facturas'
   );
 INSERT INTO
   `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
 VALUES
   (
-    'fddf556c-7142-4536-bc91-612b5152f840',
-    '2023-06-17 00:27:43.671587',
-    '2023-06-17 00:27:43.671587',
+    'c58dc9c5-ca87-4b3c-a657-3eb31ed83d33',
+    '2023-06-17 16:31:51.636705',
+    '2023-06-17 16:31:51.636705',
+    NULL,
+    'Visualizar comprobantes'
+  );
+INSERT INTO
+  `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
+VALUES
+  (
+    'e0263abf-9661-43fe-924c-a2a5213a25c3',
+    '2023-06-17 16:31:51.636705',
+    '2023-06-17 16:31:51.636705',
     NULL,
     'Historial comprobantes'
+  );
+INSERT INTO
+  `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
+VALUES
+  (
+    'ec968710-290f-4054-b31b-dc3478a8ec56',
+    '2023-06-17 16:31:51.636705',
+    '2023-06-17 16:31:51.636705',
+    NULL,
+    'Modulo clientes'
+  );
+INSERT INTO
+  `feature_flag` (`id`, `createdAt`, `updatedAt`, `deletedAt`, `name`)
+VALUES
+  (
+    'f5cf4a65-8244-440b-82f6-daf7d7ffa816',
+    '2023-06-17 16:31:51.636705',
+    '2023-06-17 16:31:51.636705',
+    NULL,
+    'Borrar clientes'
   );
 
 # ------------------------------------------------------------
@@ -3513,12 +3747,12 @@ INSERT INTO
   )
 VALUES
   (
-    '0df93750-f3d8-40b2-95fe-b5151d15d457',
-    '2023-06-17 00:27:43.697728',
-    '2023-06-17 00:27:43.697728',
+    '252a3cb4-ed4e-46bd-9560-38561456b2ee',
+    '2023-06-17 16:31:51.661641',
+    '2023-06-17 16:31:51.661641',
     NULL,
     '713debe4-737a-457d-b06c-d88dcdd505d5',
-    '5881dd7e-870a-4078-9699-869f05c7e153'
+    'ec968710-290f-4054-b31b-dc3478a8ec56'
   );
 INSERT INTO
   `feature_flag_user` (
@@ -3531,9 +3765,9 @@ INSERT INTO
   )
 VALUES
   (
-    '5541c038-49e0-4893-bbc7-cd62910fd57c',
-    '2023-06-17 00:27:43.697728',
-    '2023-06-17 00:27:43.697728',
+    '3059961f-9606-4c6e-8bff-7b489465a608',
+    '2023-06-17 16:31:51.661641',
+    '2023-06-17 16:31:51.661641',
     NULL,
     '915e2e99-7c70-4761-a407-75f4e733195f',
     'ec968710-290f-4054-b31b-dc3478a8ec56'
@@ -3549,30 +3783,30 @@ INSERT INTO
   )
 VALUES
   (
-    '6523420a-e0be-4656-b251-490435084dd0',
-    '2023-06-17 00:27:43.697728',
-    '2023-06-17 00:27:43.697728',
-    NULL,
-    '713debe4-737a-457d-b06c-d88dcdd505d5',
-    'ec968710-290f-4054-b31b-dc3478a8ec56'
-  );
-INSERT INTO
-  `feature_flag_user` (
-    `id`,
-    `createdAt`,
-    `updatedAt`,
-    `deletedAt`,
-    `usuarioId`,
-    `featureFlagId`
-  )
-VALUES
-  (
-    '99b6bdc6-0eb5-45a3-b370-0ae657669ae5',
-    '2023-06-17 00:27:43.697728',
-    '2023-06-17 00:27:43.697728',
+    '44db26e5-eba2-4ca4-a137-c992eeac7486',
+    '2023-06-17 16:31:51.661641',
+    '2023-06-17 16:31:51.661641',
     NULL,
     '915e2e99-7c70-4761-a407-75f4e733195f',
     '403488fe-2ab4-4781-bbfc-2829cc019811'
+  );
+INSERT INTO
+  `feature_flag_user` (
+    `id`,
+    `createdAt`,
+    `updatedAt`,
+    `deletedAt`,
+    `usuarioId`,
+    `featureFlagId`
+  )
+VALUES
+  (
+    'f6b350bd-994b-4572-99ac-9d5dbe0870f8',
+    '2023-06-17 16:31:51.661641',
+    '2023-06-17 16:31:51.661641',
+    NULL,
+    '713debe4-737a-457d-b06c-d88dcdd505d5',
+    '5881dd7e-870a-4078-9699-869f05c7e153'
   );
 
 # ------------------------------------------------------------
@@ -3627,8 +3861,8 @@ INSERT INTO
 VALUES
   (
     '0c479969-1356-44cf-93b7-0adf9ff9332d',
-    '2023-06-17 00:27:43.445238',
-    '2023-06-17 00:27:43.445238',
+    '2023-06-17 16:31:51.330649',
+    '2023-06-17 16:31:51.330649',
     NULL,
     'Usuario'
   );
@@ -3643,8 +3877,8 @@ INSERT INTO
 VALUES
   (
     '9cf17f36-1924-4a19-a556-79b5c59f2d99',
-    '2023-06-17 00:27:43.445238',
-    '2023-06-17 00:27:43.445238',
+    '2023-06-17 16:31:51.330649',
+    '2023-06-17 16:31:51.330649',
     NULL,
     'Administrador'
   );
@@ -3668,12 +3902,12 @@ INSERT INTO
 VALUES
   (
     '713debe4-737a-457d-b06c-d88dcdd505d5',
-    '2023-06-17 00:27:43.643304',
-    '2023-06-17 00:27:43.643304',
+    '2023-06-17 16:31:51.602952',
+    '2023-06-17 16:31:51.602952',
     NULL,
     'Luis',
     'luis@gmail.com',
-    '$2b$10$uQZNivnSvI.jB0YV.xI.q.3n.mUotHYv6F5n2bSiF9ZnqLAoWnvVK',
+    '$2b$10$kmLijmkyywI.6o2MHx6GdesIYPkFzsUgP4nPhyzptryxTpBxB5rDK',
     '0c479969-1356-44cf-93b7-0adf9ff9332d',
     1
   );
@@ -3692,12 +3926,12 @@ INSERT INTO
 VALUES
   (
     '915e2e99-7c70-4761-a407-75f4e733195f',
-    '2023-06-17 00:27:43.643304',
-    '2023-06-17 00:27:43.643304',
+    '2023-06-17 16:31:51.602952',
+    '2023-06-17 16:31:51.602952',
     NULL,
     'Fernanda',
     'fernanda@gmail.com',
-    '$2b$10$or7NARF98Quo0quuaiBPBe0Op4qJOV5cOgoJh704kWHQXx67QUEnG',
+    '$2b$10$swqgNBHywXK1GmepXLNTDu9Hu9QcsUcodwIkQ6SVV7Z5InvjYD4/u',
     '0c479969-1356-44cf-93b7-0adf9ff9332d',
     1
   );
@@ -3716,12 +3950,12 @@ INSERT INTO
 VALUES
   (
     'a14e0116-2132-403e-92f3-d6a01e1c6b5c',
-    '2023-06-17 00:27:43.643304',
-    '2023-06-17 00:27:43.643304',
+    '2023-06-17 16:31:51.602952',
+    '2023-06-17 16:31:51.602952',
     NULL,
     'Josue Lopez',
     'josue@gmail.com',
-    '$2b$10$rguHY0nhI85I4nE9HQ6EU.4IY78C4B3fUCaoDpy.e5Na9T58M.Fxm',
+    '$2b$10$mObIwxHzo7npqTAA1Hl8EuZ5ahFxHPM.lkdjFxxpvcArMshBOLOuq',
     '9cf17f36-1924-4a19-a556-79b5c59f2d99',
     1
   );
