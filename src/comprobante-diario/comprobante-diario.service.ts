@@ -97,7 +97,7 @@ export class ComprobanteDiarioService {
     await Promise.all(promises);
   }
 
-  async findAll(skip = 1, take = 10) {
+  async findAll(skip = 1, take = 10, empresa = null) {
     const connection = getConnection();
     let query = connection
       .getRepository(ComprobanteDiario)
@@ -105,6 +105,9 @@ export class ComprobanteDiarioService {
       .innerJoinAndSelect('comprobanteDiario.estatico', 'estatico')
       .innerJoinAndSelect('estatico.documento', 'documento')
       .innerJoinAndSelect('documento.empresa', 'empresa')
+    if (empresa) {
+      query.where('empresa.id = :id', { id: empresa })
+    }
     if (take) {
       query.take(take)
     }

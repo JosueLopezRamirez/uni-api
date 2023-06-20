@@ -79,7 +79,7 @@ export class FacturasService {
     }
   }
 
-  async findAll(skip = 1, take = 10) {
+  async findAll(skip = 1, take = 10, empresa = null) {
     const connection = getConnection();
     let query = connection
       .getRepository(Factura)
@@ -88,6 +88,9 @@ export class FacturasService {
       .innerJoinAndSelect('estatico.documento', 'documento')
       .innerJoinAndSelect('documento.empresa', 'empresa')
 
+      if (empresa) {
+        query.where('empresa.id = :id', { id: empresa })
+      }
     if (take) {
       query.take(take)
     }

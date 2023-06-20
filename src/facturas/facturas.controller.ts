@@ -32,7 +32,7 @@ export class FacturasController {
 
   @Get()
   findAll(@Query() query) {
-    return this.facturasService.findAll(parseInt(query.skip), parseInt(query.take));
+    return this.facturasService.findAll(parseInt(query.skip), parseInt(query.take), query.empresa);
   }
 
   @Get(':id')
