@@ -7,6 +7,9 @@ import { HistorialComprobanteDiario } from '../historial-comprobante-diario/enti
 import { getConnection, Repository } from 'typeorm';
 import { DetalleComprobanteDto } from './dto/create-comprobante-diario.dto';
 import { ComprobanteDiario } from './entities/comprobante-diario.entity';
+import * as handlebars from "handlebars";
+import fs from "fs";
+import { join } from 'path';
 
 @Injectable()
 export class ComprobanteDiarioService {
@@ -207,5 +210,43 @@ export class ComprobanteDiarioService {
 
   remove(id: string) {
     return this.repository.softDelete(id);
+  }
+
+
+  async generateReport(id: string) {
+    // Define the invoice data
+    const invoiceData = {
+      invoiceNumber: 'INV-12345',
+      invoiceDate: '2023-06-23',
+      customerName: 'John Doe',
+      customerEmail: 'john.doe@example.com',
+      customerAddress: '123 Main Street, City, Country',
+      items: [
+        {
+          name: 'Item 1',
+          description: 'Description for Item 1',
+          quantity: 2,
+          price: 10,
+          total: 20,
+        },
+        {
+          name: 'Item 2',
+          description: 'Description for Item 2',
+          quantity: 1,
+          price: 15,
+          total: 15,
+        },
+      ],
+      totalAmount: 35,
+    };
+
+    // Read the Handlebars template file
+    const templateFile = fs.readFileSync(join(process.cwd(), './templates/comprobante.hbs'), 'utf-8');
+
+    // Compile the Handlebars template
+    const template = handlebars.compile(templateFile);
+
+    // Render the template with the data
+    return template(invoiceData);
   }
 }
