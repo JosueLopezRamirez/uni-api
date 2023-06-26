@@ -10,7 +10,7 @@ import { ComprobanteDiario } from './entities/comprobante-diario.entity';
 import * as handlebars from "handlebars";
 import fs from "fs";
 import { join } from 'path';
-
+import day from "dayjs";
 @Injectable()
 export class ComprobanteDiarioService {
   constructor(
@@ -100,7 +100,7 @@ export class ComprobanteDiarioService {
     await Promise.all(promises);
   }
 
-  async findAll(skip = 1, take = 10, empresa = null) {
+  async findAll(skip = 1, take = 10, empresa = null, text = "") {
     const connection = getConnection();
     let query = connection
       .getRepository(ComprobanteDiario)
@@ -110,6 +110,10 @@ export class ComprobanteDiarioService {
       .innerJoinAndSelect('documento.empresa', 'empresa')
     if (empresa) {
       query.where('empresa.id = :id', { id: empresa })
+    }
+    if (text) {
+      query.orWhere("comprobanteDiario.nombre like :text", { text: `%${text}%` })
+      query.orWhere("empresa.nombre like :text", { text: `%${text}%` })
     }
     if (take) {
       query.take(take)
@@ -214,30 +218,32 @@ export class ComprobanteDiarioService {
 
 
   async generateReport(id: string) {
+
+    const data = await this.findOne(id);
+
+    const items = data.comprobanteDiarioItem.map((item => ({
+      numeroCuenta: item.numeroCuenta,
+      debito: item.debito,
+      parcial: item.parcial,
+      descripcion: item.descripcion,
+      haber: item.debito - item.parcial,
+    })))
+
+    const totalDebito = data.comprobanteDiarioItem.reduce((acumulador, actual) => acumulador + actual.debito, 0);
+    const totalParcial = data.comprobanteDiarioItem.reduce((acumulador, actual) => acumulador + actual.parcial, 0);
+    const totalHaber = data.comprobanteDiarioItem.reduce((acumulador, actual) => acumulador + (actual.debito - actual.parcial), 0);
+
     // Define the invoice data
     const invoiceData = {
-      invoiceNumber: 'INV-12345',
-      invoiceDate: '2023-06-23',
-      customerName: 'John Doe',
-      customerEmail: 'john.doe@example.com',
-      customerAddress: '123 Main Street, City, Country',
-      items: [
-        {
-          name: 'Item 1',
-          description: 'Description for Item 1',
-          quantity: 2,
-          price: 10,
-          total: 20,
-        },
-        {
-          name: 'Item 2',
-          description: 'Description for Item 2',
-          quantity: 1,
-          price: 15,
-          total: 15,
-        },
-      ],
-      totalAmount: 35,
+      comprobanteDiario: data.nombre,
+      invoiceDate: day(data.createdAt).format("MM/DD/YYYY"),
+      customerName: data.estatico.documento.empresa.nombre,
+      customerRuc: data.estatico.documento.empresa.ruc,
+      customerPhone: data.estatico.documento.empresa.telefono,
+      items: [...items],
+      totalDebito,
+      totalParcial,
+      totalHaber
     };
 
     // Read the Handlebars template file

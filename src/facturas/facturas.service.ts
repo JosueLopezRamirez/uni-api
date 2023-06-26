@@ -7,6 +7,10 @@ import { Documento } from '../documento/entities/documento.entity';
 import { Estatico } from '../estaticos/entities/estatico.entity';
 import { FacturaItem } from '../factura-item/entities/factura-item.entity';
 import { HistorialFactura } from '../historial-facturas/entities/historial-factura.entity';
+import * as handlebars from "handlebars";
+import fs from "fs";
+import { join } from 'path';
+import day from "dayjs";
 
 @Injectable()
 export class FacturasService {
@@ -79,7 +83,7 @@ export class FacturasService {
     }
   }
 
-  async findAll(skip = 1, take = 10, empresa = null) {
+  async findAll(skip = 1, take = 10, empresa = null, text = "") {
     const connection = getConnection();
     let query = connection
       .getRepository(Factura)
@@ -88,9 +92,13 @@ export class FacturasService {
       .innerJoinAndSelect('estatico.documento', 'documento')
       .innerJoinAndSelect('documento.empresa', 'empresa')
 
-      if (empresa) {
-        query.where('empresa.id = :id', { id: empresa })
-      }
+    if (empresa) {
+      query.where('empresa.id = :id', { id: empresa })
+    }
+    if (text) {
+      query.orWhere("factura.nombre like :text", { text: `%${text}%` })
+      query.orWhere("empresa.nombre like :text", { text: `%${text}%` })
+    }
     if (take) {
       query.take(take)
     }
@@ -104,7 +112,7 @@ export class FacturasService {
 
   findOne(id: string) {
     return this.repository.findOneOrFail(id, {
-      relations: ['facturasItems', 'estatico', 'estatico.documento'],
+      relations: ['facturasItems', 'estatico', 'estatico.documento', 'estatico.documento.empresa'],
     });
   }
 
@@ -187,5 +195,45 @@ export class FacturasService {
 
   remove(id: string) {
     return this.repository.softDelete(id);
+  }
+
+  async generateReport(id: string) {
+
+    const data = await this.findOne(id);
+
+    const items = data.facturasItems.map((item => {
+      const ventas = item.ventasExentas + item.ventasExoneradas + item.ventasGrabadas;
+      const iva = item.ventasGrabadas * 0.15;
+      const total = ventas + iva;
+      return {
+        numeroFactura: item.numeroFactura,
+        descripcion: item.descripcion,
+        // ventasExentas: item.ventasExentas,
+        // ventasExoneradas: item.ventasExoneradas,
+        // ventasGrabadas: item.ventasGrabadas,
+        ventas: ventas.toFixed(2),
+        iva: iva.toFixed(2),
+        total: total.toFixed(2),
+      }
+    }));
+
+    // Define the invoice data
+    const invoiceData = {
+      // comprobanteDiario: data.nombre,
+      invoiceDate: day(data.createdAt).format("MM/DD/YYYY"),
+      customerName: data.estatico.documento.empresa.nombre,
+      customerRuc: data.estatico.documento.empresa.ruc,
+      customerPhone: data.estatico.documento.empresa.telefono,
+      items: [...items],
+    };
+
+    // Read the Handlebars template file
+    const templateFile = fs.readFileSync(join(process.cwd(), './templates/facturas.hbs'), 'utf-8');
+
+    // Compile the Handlebars template
+    const template = handlebars.compile(templateFile);
+
+    // Render the template with the data
+    return template(invoiceData);
   }
 }

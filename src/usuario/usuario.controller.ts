@@ -15,7 +15,7 @@ import * as bcrypt from 'bcrypt';
 
 @Controller('usuario')
 export class UsuarioController {
-  constructor(private readonly usuarioService: UsuarioService) {}
+  constructor(private readonly usuarioService: UsuarioService) { }
 
   @Post()
   async create(@Body() createUsuarioDto: CreateUsuarioDto) {
@@ -30,7 +30,7 @@ export class UsuarioController {
 
   @Get('/')
   find(@Query() query) {
-    return this.usuarioService.findAll(parseInt(query.skip), parseInt(query.take));
+    return this.usuarioService.findAll(parseInt(query.skip), parseInt(query.take), query.text);
   }
 
   @Get(':id')

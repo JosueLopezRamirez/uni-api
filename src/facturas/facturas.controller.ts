@@ -8,12 +8,13 @@ import {
   Delete,
   Req,
   Query,
+  Res,
 } from '@nestjs/common';
 import { FacturasService } from './facturas.service';
-import { CreateFacturaDto, DetalleFacturaDto } from './dto/create-factura.dto';
-import { UpdateFacturaDto } from './dto/update-factura.dto';
-import { Request } from 'express';
+import { DetalleFacturaDto } from './dto/create-factura.dto';
+import { Request, Response } from 'express';
 import { JwtService } from '@nestjs/jwt';
+import pdf from "html-pdf";
 
 @Controller('facturas')
 export class FacturasController {
@@ -32,7 +33,7 @@ export class FacturasController {
 
   @Get()
   findAll(@Query() query) {
-    return this.facturasService.findAll(parseInt(query.skip), parseInt(query.take), query.empresa);
+    return this.facturasService.findAll(parseInt(query.skip), parseInt(query.take), query.empresa, query.text);
   }
 
   @Get(':id')
@@ -55,5 +56,21 @@ export class FacturasController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.facturasService.remove(id);
+  }
+
+  @Get("/generate-report/:id")
+  async generateReport(@Param('id') id: string, @Res() res: Response) {
+    const pdfFile = await this.facturasService.generateReport(id);
+
+    pdf.create(pdfFile).toBuffer((err, buffer) => {
+      if (err) {
+        // some code
+      } else {
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename=invoice.pdf');
+
+        res.send(buffer);
+      }
+    });
   }
 }

@@ -66,30 +66,36 @@
           </td>
         </tr>
         <tr class='heading'>
-          <td>No. Cuenta</td>
+          <td>No. Factura</td>
           <td>Descripcion</td>
-          <td>Debito</td>
-          <td>Parcial</td>
-          <td>Haber</td>
+          {{! <td>Ventas Exentas</td>
+          <td>Vetnas Exoneradas</td>
+          <td>Ventas Grabadas</td> }}
+          <td>Ventas</td>
+          <td>15 % IVA</td>
+          <td>Monto Total</td>
         </tr>
 
         {{#each items}}
           <tr class='item'>
-            <td>{{numeroCuenta}}</td>
+            <td>{{numeroFactura}}</td>
             <td>{{descripcion}}</td>
-            <td>{{debito}}</td>
-            <td>{{parcial}}</td>
-            <td>{{haber}}</td>
+            {{!-- <td>{{ventasExentas}}</td>
+            <td>{{ventasExoneradas}}</td>
+            <td>{{ventasGrabadas}}</td> --}}
+            <td>{{ventas}}</td>
+            <td>{{iva}}</td>
+            <td>{{total}}</td>
           </tr>
         {{/each}}
 
-        <tr class='total'>
+        {{!-- <tr class='total'>
           <td></td>
           <td>Total</td>
           <td>{{totalDebito}}</td>
           <td>{{totalParcial}}</td>
           <td>{{totalHaber}}</td>
-        </tr>
+        </tr> --}}
       </table>
     </div>
   </body>

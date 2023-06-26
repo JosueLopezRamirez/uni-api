@@ -39,7 +39,7 @@ export class ComprobanteDiarioController {
 
   @Get()
   findAll(@Query() query) {
-    return this.comprobanteDiarioService.findAll(parseInt(query.skip), parseInt(query.take), query.empresa);
+    return this.comprobanteDiarioService.findAll(parseInt(query.skip), parseInt(query.take), query.empresa, query.text);
   }
 
   @Get(':id')

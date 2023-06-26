@@ -110,7 +110,7 @@ export class InitDbSeed implements Seeder {
                     nombre: faker.company.name(),
                     descripcion: faker.company.catchPhraseDescriptor(),
                     ruc: faker.random.numeric(13),
-                    telefono: faker.phone.number(),
+                    telefono: faker.phone.number('+505-###-###'),
                 })
                 .execute();
 
@@ -164,7 +164,7 @@ export class InitDbSeed implements Seeder {
 
                                 return {
                                     comprobanteDiarioId,
-                                    numeroCuenta: faker.finance.account(),
+                                    numeroCuenta: faker.finance.account(5),
                                     descripcion: faker.finance.transactionDescription(),
                                     debito: amount,
                                     parcial: amount

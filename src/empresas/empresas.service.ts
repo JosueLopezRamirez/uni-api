@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { CreateEmpresaDto } from './dto/create-empresa.dto';
 import { UpdateEmpresaDto } from './dto/update-empresa.dto';
 import { Empresa } from './entities/empresa.entity';
@@ -16,9 +16,17 @@ export class EmpresasService {
     return this.repository.save(createEmpresaDto);
   }
 
-  async findAll(skip = 1, take = 10) {
-    const [result, count] = await this.repository.findAndCount({ take, skip: (skip - 1) * take });
-    return { data: result, count }
+  async findAll(skip = 1, take = 10, text = "") {
+    const [result, count] = await this.repository.findAndCount({
+      take,
+      skip: (skip - 1) * take,
+      where: [
+        { nombre: ILike(`%${text}%`) },
+        { ruc: ILike(`%${text}%`) },
+        { telefono: ILike(`%${text}%`) },
+      ],
+    });
+    return { data: result, count };
   }
 
   findOne(id: string) {

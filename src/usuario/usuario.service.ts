@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { CreateUsuarioDto, FilterOptionsDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { Usuario } from './entities/usuario.entity';
@@ -30,11 +30,20 @@ export class UsuarioService {
     return this.repository.save(createUsuarioDto);
   }
 
-  async findAll(skip = 1, take = 10) {
+  async findAll(skip = 1, take = 10, text = "") {
     const [result, count] = await this.repository.findAndCount({
       relations: ['rol'],
       take,
-      skip: (skip - 1) * take
+      skip: (skip - 1) * take,
+      where: [
+        { nombre: ILike(`%${text}%`) },
+        { correo: ILike(`%${text}%`) },
+        {
+          rol: {
+            nombre: ILike(`%${text}%`)
+          }
+        }
+      ],
     });
     return { data: result, count }
   }
